@@ -7,8 +7,8 @@ This browser based web application to ...
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
 * Hi, my name is Heesun! I can't wait to see what great ideas comes out of this project journey.
-* ...
 * Hi, my name is Daniel! I'm looking forward to seeing what we are able to achieve!
+* Hi, my name is Leroy! I am excited to start this journey of creating a web application!
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
