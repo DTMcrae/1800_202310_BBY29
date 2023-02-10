@@ -1,1 +1,8 @@
+/* Call To Action Buttons */
+.btn-primary {
+  background-color: #27187E;
+}
 
+.btn-outline.secondary {
+  background-color: #F1F2F6;
+}
