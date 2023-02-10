@@ -1,0 +1,42 @@
+[33mcommit a98371beee019a52c2f5bdaeeafc5f408f726b53[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Leroy Lau <llau65@my.bcit.ca>
+Date:   Thu Jan 19 10:09:28 2023 -0800
+
+    Removed a line from Features for Future.
+
+[33mcommit b7d882fd541a1c7d652a8978df860e27a1110e60[m
+Author: Leroy Lau <llau65@my.bcit.ca>
+Date:   Thu Jan 19 10:07:26 2023 -0800
+
+    Added a line in Features for Future.
+
+[33mcommit 7866dd279da52911c621849a9bd12190f5747b86[m
+Merge: b57d917 8ac1e32
+Author: Daniel McRae <dtmcrae0@gmail.com>
+Date:   Thu Jan 19 10:02:15 2023 -0800
+
+    Adjusted the README to line up our intro
+
+[33mcommit b57d917dedbbc4410b8d4e2d5ca3d1a9325f0370[m
+Author: Daniel McRae <dtmcrae0@gmail.com>
+Date:   Thu Jan 19 09:58:05 2023 -0800
+
+    Added one line intro to README file for daniel
+
+[33mcommit 8ac1e320759a9e4d0d1bb545c844231b9b7b9a4b[m
+Author: Leroy Lau <llau65@my.bcit.ca>
+Date:   Thu Jan 19 09:55:09 2023 -0800
+
+    Added one line intro to README file for Leroy.
+
+[33mcommit 24438270173db5afbd840ebe464ef7c44a623749[m
+Author: Heesun Lee <hlee532@my.bcit.ca>
+Date:   Thu Jan 19 09:50:50 2023 -0800
+
+    Added one line intro to README file for Heesun
+
+[33mcommit d3dbc1b6c8ef9cc30bb5e4279652570e7444138e[m
+Author: DTMcrae <122425406+DTMcrae@users.noreply.github.com>
+Date:   Thu Jan 19 09:41:16 2023 -0800
+
+    Initial commit
