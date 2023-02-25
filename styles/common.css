@@ -22,3 +22,9 @@
 .btn-outline.secondary {
   background-color: #F1F2F6;
 }
+
+
+/* request */
+.request-short{
+  max-width: 60vw;
+}
