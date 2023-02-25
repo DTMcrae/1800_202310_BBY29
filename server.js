@@ -20,7 +20,7 @@ app.get("/:id", function (req, res) {
 });
 
 app.get("/", function (req, res) {
-  console.log(process.env);
+  //console.log(process.env);
   let doc = fs.readFileSync(routePath + "/index.html", "utf8");
   res.send(doc);
 });
