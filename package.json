@@ -1,0 +1,21 @@
+{
+  "name": "1800_202310_bby29",
+  "version": "1.0.0",
+  "description": "## 1. Project Description State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.   This browser based web application to ...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js -- chrome"
+  },
+  "author": "BBY-29",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap-icons": "^1.10.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
+  }
+}
