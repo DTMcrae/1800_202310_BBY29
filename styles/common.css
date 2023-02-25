@@ -1,0 +1,24 @@
+/* Common css files */
+:root {
+  --color-primary: #EB6424;
+  --color-secondary: #FA9500;
+
+  --color-darkblue: #27187E;
+}
+
+/* Nav bar */
+.navbar.bg-light {
+  background-color: var(--color-primary) !important;
+}
+.navbar-brand {
+  color: #FFF;
+}
+
+/* buttons */
+.btn-primary {
+  background-color: #27187E;
+}
+
+.btn-outline.secondary {
+  background-color: #F1F2F6;
+}

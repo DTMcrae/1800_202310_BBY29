@@ -1,23 +1,7 @@
-/* Call To Action Buttons */
-:root {
-  --color-primary: #EB6424;
-  --color-secondary: #FA9500;
+/* Home page */
 
-  --color-darkblue: #27187E;
-}
-/* Nav bar */
-.navbar.bg-light {
-  background-color: var(--color-primary) !important;
-}
-.navbar-brand {
-  color: #FFF;
-}
+/* Browse */
 
-/* buttons */
-.btn-primary {
-  background-color: #27187E;
-}
+/* Add requests */
 
-.btn-outline.secondary {
-  background-color: #F1F2F6;
-}
+/* Profile */
