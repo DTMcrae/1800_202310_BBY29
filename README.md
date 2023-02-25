@@ -20,9 +20,12 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
 Here are the steps ...
-* ...
-* ...
-* ...
+1. type this commands on your cmd
+```
+npm i
+npm start
+```
+2. open 8000 server in your browser
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
@@ -42,19 +45,21 @@ Content of the project folder:
 ```
  Top level of project folder: 
 ├── .gitignore               # Git ignore file
-├── index.html               # landing HTML file, this is what users see when you come to url
+├── app                      # Folder for main app features
+├── public                   # Folder that contains public resources
+├── server.json              # Script file to initiate node
+├── package.json             
 └── README.md
 
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo
-├── images                   # Folder for images
-    /blah.jpg                # Acknowledge source
-├── scripts                  # Folder for scripts
-    /blah.js                 # 
-├── styles                   # Folder for styles
-    /blah.css                # 
-
-
+├── app                      # 
+    /html                    # Folder for htmls
+├── public                   #
+    /css                     # Folder for styles
+    /font                    # Folder for font files
+    /img                     # Folder for images
+    /js                      # Folder for scripts
 
 ```
 

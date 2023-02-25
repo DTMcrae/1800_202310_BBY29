@@ -12,16 +12,16 @@ app.use("/img", express.static("./public/img"));
 app.use("/font", express.static("./public/font"));
 
 // Pages
-const routePath = "app/html";
+const routePath = "./app/html";
 
 app.get("/:id", function (req, res) {
-  let doc = fs.readFileSync(`./app/html/${req.params.id}.html`, "utf8");
+  let doc = fs.readFileSync(`${routePath}/${req.params.id}.html`, "utf8");
   res.send(doc);
 });
 
 app.get("/", function (req, res) {
   console.log(process.env);
-  let doc = fs.readFileSync("./app/html/index.html", "utf8");
+  let doc = fs.readFileSync(routePath + "/index.html", "utf8");
   res.send(doc);
 });
 
