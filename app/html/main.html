@@ -25,14 +25,14 @@
 
 <body>
   <!-- Header -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/main">Re-Quest</a>
     </div>
   </nav>
 
   <!-- Main -->
-  <div id="main-container"><br>
+  <div id="container"><br>
     <div id="user-welcome">
       <div id="profile-image">
         <img src="img/placeholder-profile.png" height="100" width="100" alt="profile image">
@@ -322,19 +322,39 @@
       </div>
     </div>
   </div>
-  <!-- Footer -->
-  <div class="container">
-    <footer class="py-3 my-4">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-      </ul>
-      <p class="text-center text-muted">&copy; 2023 BBY-29, Inc</p>
-    </footer>
-  </div>
 
+  <!-- Navigation -->
+  <nav id="navigation" class="fixed-bottom">
+    <ul id="navigation-list">
+      <li>
+        <a href="/main">
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/post-select-type">
+          Post
+        </a>
+      </li>
+      <li>
+        <a href="/browse">
+          Browse
+        </a>
+      </li>
+      <li>
+        <a href="/chat">
+          Chat
+        </a>
+      </li>
+      <li>
+        <a href="/profile">
+          Profile
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Scripts -->
   <script src="/js/main.js"></script>
 
 </body>

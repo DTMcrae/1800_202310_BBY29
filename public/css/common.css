@@ -25,6 +25,9 @@
   --color-darkblue: #27187E;
   
   --color-divider: #eee;
+
+  --header-height: 50px;
+  --nav-height: 60px;
 }
 html, body, div, span,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -49,6 +52,10 @@ a, a:hover {
 	text-decoration: none;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input {
 	all: unset;
 }
@@ -57,6 +64,13 @@ body {
   font-family: 'Open Sans', serif;
   line-height: 1.2;
 }
+
+#container {
+  margin-top: var(--header-height);
+  margin-bottom: var(--header-height);
+  padding-bottom: 40px;
+}
+
 
 /* Header */
 .navbar {
@@ -70,13 +84,10 @@ body {
 }
 
 /* Navigation */
-#navigation {
-
-}
 #navigation-list {
   display: flex;
   justify-content: space-around;
-  height: 60px;
+  height: var(--nav-height);
   color: #fff;
   background-color: var(--color-primary);
 }
