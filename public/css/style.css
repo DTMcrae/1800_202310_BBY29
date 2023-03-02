@@ -1,7 +1,19 @@
 /* Home page */
 
 /* Browse */
+.detailNav {
+  width: 50%;
+  margin: auto;
+}
 
+.requestButton {
+  background-color: #EB6424;
+  color: white;
+}
+
+.request-urgency {
+  color: limegreen;
+}
 
 /* Add requests */
 .container-post-select-type {
