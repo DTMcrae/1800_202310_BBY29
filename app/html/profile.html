@@ -21,6 +21,7 @@
   <!-- Link to styles -->
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/profile.css">
 </head>
 
 <body>
@@ -41,7 +42,14 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
-                  <img src="img/placeholder-profile.png" alt="Admin" class="rounded-circle" width="150">
+                  <img src="img/placeholder-profile.png" alt="profle image" class="rounded-circle" id="profile-image" width="150">
+                  <form action="">
+                    <label for="img-upload"><span class="material-symbols-outlined">
+                      add_a_photo
+                      </span> </label>
+                    <input type="file" name="filename" id="img-upload" hidden/>
+                    
+                  </form>
                   <div class="mt-3">
                     <h4 class ="username">User Name</h4>
                     <p class="text-muted font-size-sm location">Burnaby, BC</p>
@@ -60,7 +68,7 @@
                   <div class="col-sm-3">
                     <h6 class="mb-0">Full Name</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary username">
+                  <div class="col-sm-9 text-secondary" id="username"">
                     User Name
                   </div>
                 </div>
@@ -69,7 +77,7 @@
                   <div class="col-sm-3">
                     <h6 class="mb-0">Email</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary email">
+                  <div class="col-sm-9 text-secondary" id="email">
                     username@email.com
                   </div>
                 </div>
@@ -78,7 +86,7 @@
                   <div class="col-sm-3">
                     <h6 class="mb-0">Phone</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary phone-number">
+                  <div class="col-sm-9 text-secondary" id="phone-number">
                     (604) 123-4567
                   </div>
                 </div>
@@ -87,7 +95,7 @@
                   <div class="col-sm-3">
                     <h6 class="mb-0">Location</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary location">
+                  <div class="col-sm-9 text-secondary" id="location">
                     Burnaby, BC
                   </div>
                 </div>

@@ -1,0 +1,14 @@
+label {
+  position: relative;
+  top: -60px;
+  left: 50px;
+  background-color:white;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid black;
+  cursor: pointer;
+  margin-top: 1rem;
+  text-align: center;
+
+}
