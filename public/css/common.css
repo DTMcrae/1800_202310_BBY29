@@ -177,10 +177,12 @@ h2 {
   padding: 30px var(--padding-body-horizontal) 80px;
 }
 .container-padding-vertical {
-  padding: 30px 0 80px;
+  padding-top: 30px;
+  padding-bottom: 80px;
 }
 .container-padding-horizontal {
-  padding: 0 var(--padding-body-horizontal);
+  padding-right: var(--padding-body-horizontal);
+  padding-left: var(--padding-body-horizontal);
 }
 
 .flex-center {
