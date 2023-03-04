@@ -29,10 +29,12 @@
 
   --color-divider: #eee;
 
+  --color-text-gray: rgb(147, 147, 147);
+
   --height-header: 50px;
   --height-nav: 60px;
 
-  --padding-body-horizontal: 30px;
+  --padding-body-horizontal: 20px;
 }
 
 html, body, div, span,
@@ -104,11 +106,17 @@ input {
 body {
   font-family: 'Open Sans', serif;
   line-height: 1.2;
+  background-color: #fff;
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 400;
+}
+h2 + p {
+  margin-top: .5em;
+  font-size: 15px;
+  color: var(--color-text-gray);
 }
 
 /* Header */
@@ -157,6 +165,9 @@ h2 {
 }
 
 /* request card */
+#requests {
+  padding: 0 0 80px;
+}
 .card~.card {
   margin-top: 30px;
 }
@@ -167,19 +178,56 @@ h2 {
 
 .request-detail {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.request {
+  display: block;
+  font-size: 0.8rem;
+  border: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+.request .container-text {
+  line-height: 1.4;
+}
+.request .request-detail {
+  margin-bottom: 5px;
+}
+.request .card-body {
+  position: relative;
+  padding: .5em 0 .5em 1em;
+}
+.request .card-title {
+  font-size: 1.2em;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .request .img {
   flex-shrink: 0;
+  position: relative;
+  display: block;
+  width: 30%;
+  min-width:120px;
+  min-height: 100%;
+}
+.request .img:after{
+  content:'';
+  display: block;
+  width: 100%;
+  padding-top: 100%;
 }
 .request img {
-  height: 120px;
-  min-height: 100%;
-  aspect-ratio: 1.3;
-  flex-shrink: 0;
+  position: absolute;
+  left: 0;right: 0;top: 0;bottom: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 .request .card-container {
@@ -187,6 +235,17 @@ h2 {
 }
 .request .container-text {
   flex: 1
+}
+.requests-tab {
+  margin-top: 20px;
+}
+.request-tab-content {
+  margin-top: 10px;
+}
+.request-bottom{
+  position: absolute;
+  right: 0;
+  bottom: 5px;
 }
 
 
@@ -200,6 +259,9 @@ h2 {
   overflow: hidden;
   z-index: -1;
   opacity: 0;
+}
+.block {
+  display: block;
 }
 
 #container {
@@ -244,12 +306,10 @@ h2 {
     'opsz'48
 }
 
-#user-welcome {
-  text-align: center;
-  padding: 5%;
-}
-
 /* bootstrap */
 .img-thumbnail {
   padding: 0 !important;
 }
+/* .shadow {
+  box-shadow: .1em .1em  0.2em rgba(0,0,0,.1)!important;
+} */

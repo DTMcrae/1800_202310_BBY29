@@ -1,4 +1,79 @@
 /* Home page */
+#user-welcome {
+  padding-top: 20px;
+}
+#user-welcome > a{
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: all .3s;
+}
+#user-welcome> a:hover {
+  box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+}
+#profile-image {
+  display: block;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--color-divider);
+}
+#profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-name {
+  display: block;
+  margin-left: 1em;
+  font-size: 1.2rem;
+}
+.request-tab-content .accordion > .card {
+  border: 0;
+}
+#requests .btn-link {
+  color: inherit ;
+  text-decoration: none;
+}
+#requests .nav-tabs {
+  border: 0;
+  gap: 10px;
+}
+#requests .nav-link {
+  padding: 14px 5px;
+  color: var(--color-text-gray);
+  border-radius: 10px !important;
+}
+#requests .nav-link.active {
+  color: var(--color-primary);
+  border-color:var(--color-lightgray);
+}
+#requests .card-header {
+  padding: 0;
+  background-color: transparent;
+  border-bottom: 2px solid var(--color-primary);
+}
+#requests .card-header .btn-link {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 0;
+  text-align: left;
+  color: #000;
+  font-size: .8em;
+  font-weight: 400;
+  transition: all .3s;
+}
+#requests .card-header .btn-link:hover{
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
 
 /* Browse */
 .detailNav {
@@ -40,6 +115,7 @@
   font-size: 24px;
   border: 1px solid var(--color-divider);
   background-color: #fff;
+  transition: all .3s;
 }
 .button-select-type:hover {
   background-color: var(--color-primary);
