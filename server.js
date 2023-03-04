@@ -1,11 +1,12 @@
 // REQUIRES
 const express = require("express");
 const app = express();
-app.use(express.json());
 const fs = require("fs");
+const open = require("open");
 
-// just like a simple web server like Apache web server
-// we are mapping file system paths to the app's virtual paths
+app.use(express.json());
+
+// mapping file system paths to the app's virtual paths
 app.use("/js", express.static("./public/js"));
 app.use("/css", express.static("./public/css"));
 app.use("/img", express.static("./public/img"));
@@ -39,6 +40,7 @@ app.use(function (req, res, next) {
 
 // RUN SERVER
 let port = 8000;
-app.listen(port, function () {
-  // console.log("Example app listening on port " + port + "!");
+app.listen(port, function (err) {
+  if (err) console.log(err);
+  else open(`http://localhost:${port}`, { app: "google chrome" });
 });
