@@ -14,7 +14,7 @@ function insertNameFromFirestore() {
                 var userName = userDoc.data().name;
                 console.log(userName);
                 //$("#name-goes-here").text(userName); //jquery
-                document.getElementById("username").innerText = userName.split(' ')[0];;
+                document.getElementById("username").innerText = userName.split(' ')[0] + '!';;
             })
         }
     })
