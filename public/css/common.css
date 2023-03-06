@@ -131,6 +131,10 @@ h2 + p {
 .navbar-brand {
   color: var(--color-primary) !important;
 }
+.navbar .logo {
+  display: block;
+  width: 120px;
+}
 
 /* Navigation */
 #navigation-list {
