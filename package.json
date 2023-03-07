@@ -17,5 +17,8 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "open": "^8.4.2"
   }
 }
