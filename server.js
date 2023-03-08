@@ -1,8 +1,8 @@
 // REQUIRES
-const express = require("express");
+import express from 'express';
+import fs from 'fs';
+import open from 'open';
 const app = express();
-const fs = require("fs");
-const open = require("open");
 
 app.use(express.json());
 

@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js -- chrome"
   },
+  "type": "module",
   "author": "BBY-29",
   "license": "ISC",
   "dependencies": {

@@ -1,8 +1,8 @@
-import { PopUp } from "./app/popup";
-import * as request from "./app/request";
+import { PopUp } from "./app/popup.js";
+import * as request from "./app/request.js";
 
 // initializer
 window.onload = function() {
-
+  loadSkeleton();
 };
 
