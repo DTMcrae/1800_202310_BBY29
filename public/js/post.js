@@ -6,6 +6,8 @@ window.onload = function() {
 function onClickSubmitPost() {
   const formDom = document.getElementById("form-post-request");
 
+  console.log(formDom.getElementsByClassName("input"));
+
   const isValid = postingValidation({
     title: "",
     location: "",
@@ -26,7 +28,6 @@ const postingValidation = (({
   urgency
 })=> {
 
-  console.log(formDom.getElementsByClassName("input"));
   let isValid = false;
 
   return isValid;
