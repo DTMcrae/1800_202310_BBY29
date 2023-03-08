@@ -91,10 +91,10 @@
 }
 
 /* Add requests */
-.container-post-select-type {
+.container-post-step1 {
   padding-bottom: 100px;
 }
-.container-post-select-type h2 {
+.container-post-step1 h2 {
   text-align: center;
 }
 #list-request-type {

@@ -20,47 +20,50 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-   <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-   
+  <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+
   <!-- Link to styles -->
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <!-- Header -->
-  <nav class="navbar fixed-top navbar-back">
-    <div class="container-fluid">
-      <a href="/post-select-type">
-        <button type="button" class="btn" aria-label="Back">
-          <span class="material-symbols-outlined">
-            arrow_back_ios
-          </span>
-        </button>
-      </a>
-      <button type="button" class="btn btn-dark">Submit</button>
-    </div>
-  </nav>
+  <!-- TODO: form action -->
+  <form id="form-post-request">
+  <!-- <form action="/request-detail"method="post" id="form-post-request" onsubmit="submitPost"> -->
+    <!-- Header -->
+    <nav class="navbar fixed-top navbar-back">
+      <div class="container-fluid">
+        <a href="/post-select-type">
+          <button type="button" class="btn" aria-label="Back">
+            <span class="material-symbols-outlined">
+              arrow_back_ios
+            </span>
+          </button>
+        </a>
+        <button type="button" class="btn btn-dark" onclick="onClickSubmitPost()">Submit</button>
+      </div>
+    </nav>
 
-  <!-- Main -->
-  <div id="container" class="container-padding-vertical">
-    <h2 class="container-padding-horizontal">
-      <span class="material-symbols-outlined">
-        front_hand
-      </span>
-      Request for Help
-    </h2>
-    <div class="form">
-      <form action="">
+    <!-- Main -->
+    <div id="container" class="container-padding-vertical">
+      <h2 class="container-padding-horizontal">
+        <span class="material-symbols-outlined">
+          front_hand
+        </span>
+        Request for Help
+      </h2>
+      <div class="form">
         <fieldset>
           <legend class="hidden">Request for help</legend>
+          <!-- TODO: -->
           <div class="add-photo">
             <button type="button" class="btn btn-add-photo" aria-label="Back">
               <span class="material-symbols-outlined">
@@ -80,15 +83,15 @@
           <div class="container-padding-horizontal">
             <div class="item">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="">
+              <input type="text" class="form-control input" id="title" placeholder="" min="10" max="99">
             </div>
             <div class="item">
               <label for="location" class="form-label">Location</label>
-              <input type="text" class="form-control" id="location" placeholder="">
+              <input type="text" class="form-control input"  id="location" placeholder="">
             </div>
             <div class="item">
               <label for="urgency" class="form-label">Urgency</label>
-              <select class="form-select" aria-label="urgency" id="urgency">
+              <select class="form-select input" aria-label="urgency" id="urgency">
                 <option selected>Select the Urgency</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -97,7 +100,7 @@
             </div>
             <div class="item">
               <label for="category" class="form-label">Category</label>
-              <select class="form-select" aria-label="category" id="category">
+              <select class="form-select input" aria-label="category" id="category">
                 <option selected>Select the Category</option>
                 <option value="supplies">Supplies</option>
                 <option value="physicalHelp">Physical Help</option>
@@ -106,17 +109,17 @@
             </div>
             <div class="item">
               <label for="detail" class="form-label">Describe detail</label>
-              <textarea class="form-control" id="detail" rows="5"></textarea>
+              <textarea class="form-control input" id="detail" rows="5"></textarea>
             </div>
             <div class="item">
               <label for="whereToMeet" class="form-label">Describe where to meet</label>
-              <textarea class="form-control" id="whereToMeet" rows="5"></textarea>
+              <textarea class="form-control input" id="meetup" rows="5"></textarea>
             </div>
           </div>
         </fieldset>
-      </form>
+      </div>
     </div>
-  </div>
+  </form>
 
   <!-- Navigation -->
   <nav id="navigation" class="fixed-bottom">
@@ -157,7 +160,8 @@
 
 
   <!-- scripts -->
-  <script src="/js/main.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/post.js"></script>
 
 </body>
 
