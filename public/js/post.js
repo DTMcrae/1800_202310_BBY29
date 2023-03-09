@@ -1,5 +1,6 @@
 import { addOptions, isValidLength } from "./app/form.js";
 import { CATEGORY, URGENCY } from "./app/request.js";
+import rest from "./firebase.js";
 
 // initializer
 const init = () => {
@@ -29,8 +30,11 @@ function onClickSubmitPost() {
 
   const isValid = checkValidation(data);
 
-  if (isValid) {
+  // if (isValid) {
+  if (true) {
     submitPost(data);
+  } else {
+    alert("check validation : in dev")
   }
 }
 
@@ -102,7 +106,7 @@ const checkValidation = ({
   if (!isValidLength(title,2,50)) {
     return false;
   }
-  if (!location(title,1,20)) {
+  if (!isValidLength(location,1,20)) {
     return false;
   }
 
@@ -112,51 +116,7 @@ const checkValidation = ({
 };
 
 // TODO
-const submitPost = ({
-  images,
-  title,
-  location,
-  urgency,
-  category,
-  detail,
-  meetup,
-}) => {
-  console.log(
-    images,
-    title,
-    location,
-    urgency,
-    category,
-    detail,
-    meetup);
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      var currentUser = db.collection("users").doc(user.uid);
-      var userID = user.uid;
-      //get the document for current user.
-      currentUser.get().then((userDoc) => {
-        db.collection("requests")
-          .add({
-            images: images,
-            title: title,
-            location: location,
-            urgency: urgency,
-            category: category,
-            detail: detail,
-            meetup: meetup,
-          })
-          .then(() => {
-            alert("Submit, popup in dev");
-            // const popUp = new popUpClass();
-            // console.log("submit");
-            // window.location.href = "/request-detail.html"; 
-          });
-      });
-    } else {
-      console.log("No user is signed in");
-      window.location.href = "review.html";
-    }
-  });
-
+const submitPost = (data) => {
+  console.log(firebase,data);
+  rest.postRequest(data);
 };
