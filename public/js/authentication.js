@@ -16,11 +16,13 @@ var uiConfig = {
           //optional default profile info      
         }).then(function () {
           console.log("New user added to firestore");
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
           window.location.assign("main");       //re-direct to main.html after signup
         }).catch(function (error) {
           console.log("Error adding new user: " + error);
         });
       } else {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         return true;
       }
       return false;
@@ -49,4 +51,14 @@ var uiConfig = {
   privacyPolicyUrl: '<your-privacy-policy-url>'
 };
 
-ui.start('#firebaseui-auth-container', uiConfig);
+// ui.start('#firebaseui-auth-container', uiConfig);
+
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    window.location.assign("main"); 
+  } else {
+    console.log("No user detected");
+    ui.start('#firebaseui-auth-container', uiConfig);
+  }
+});
