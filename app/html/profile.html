@@ -39,7 +39,7 @@
   <!-- Header -->
   <nav class="navbar fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/main">Re-Quest</a>
+      <img src="/img/logo.png" alt="ReQuest"/>  
       <button class="btn btn-primary" onclick="logout()">Logout</button>
     </div>
   </nav>
@@ -119,40 +119,7 @@
   </div>
 
   <!-- Navigation -->
-  <nav id="navigation" class="fixed-bottom">
-    <ul id="navigation-list">
-      <li>
-        <a href="/main">
-          <span class="material-icons">home</span>
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="/post-select-type">
-          <span class="material-symbols-outlined">add_box</span>
-          Post
-        </a>
-      </li>
-      <li>
-        <a href="/browse">
-          <span class="material-icons">manage_search</span>
-          Browse
-        </a>
-      </li>
-      <li>
-        <a href="/chat">
-          <span class="material-symbols-outlined">sms</span>
-          Chat
-        </a>
-      </li>
-      <li>
-        <a href="/profile">
-          <span class="material-symbols-outlined">person</span>
-          Profile
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <div class="main-nav"></div>
 
 
 
@@ -160,6 +127,7 @@
   <script src="/js/firebaseAPI_BBY29.js"></script>
   <script src="/js/profile.js"></script>
   <script src="/js/app/logout.js"></script>
+  <script type="module" src="/js/common.js"></script>
 
 </body>
 
