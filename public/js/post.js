@@ -2,7 +2,7 @@ import { addOptions, isValidLength } from "./app/form.js";
 import { CATEGORY, URGENCY } from "./app/request.js";
 
 // initializer
-window.onload = function () {
+const init = () => {
   addOptions("select-urgency", URGENCY);
   addOptions("select-category", CATEGORY);
 
@@ -11,7 +11,8 @@ window.onload = function () {
     ?.addEventListener("click", onClickSubmitPost);
 
   initAddPhoto();
-};
+}
+window.addEventListener("load", init);
 
 function onClickSubmitPost() {
   const formDom = document.querySelector("form");

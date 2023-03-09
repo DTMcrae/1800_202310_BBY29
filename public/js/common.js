@@ -1,11 +1,9 @@
 import { loadSkeleton } from './requestSkeleton.js'
-import { loadNav } from "./standardized.js";
-import { loadHeader } from "./standardized.js";
-
+import { loadNav, loadHeader} from "./standardized.js";
 // initializer
-window.onload = function() {
+const init = () => {
   loadSkeleton();
   loadNav();
   loadHeader();
-};
-
+}
+window.addEventListener("load", init);
