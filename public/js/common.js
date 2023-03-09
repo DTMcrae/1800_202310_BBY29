@@ -1,5 +1,4 @@
-import { PopUp } from "./app/popup.js";
-import * as request from "./app/request.js";
+// import { PopUp } from "./app/popup.js";
 import { loadSkeleton } from "./requestSkeleton.js"
 
 // initializer

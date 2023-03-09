@@ -1,8 +1,8 @@
 // let request = {
 //   title: "",
 //   location: "",
-//   urgency: 0,
-//   categoty: 0,
+//   urgency: "",
+//   categoty: "",
 //   detail: "",
 //   meetup: ""
 // };
@@ -13,7 +13,7 @@ export const URGENCY = [
   "High"
 ];
 
-export const requestCategory = [
+export const CATEGORY = [
   "Supplies",
   "Physical",
   "Informative",

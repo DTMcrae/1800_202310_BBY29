@@ -37,7 +37,7 @@
 <body>
   <!-- TODO: form action -->
   <form id="form-post-request">
-  <!-- <form action="/request-detail"method="post" id="form-post-request" onsubmit="submitPost"> -->
+    <!-- <form action="/request-detail"method="post" id="form-post-request" onsubmit="submitPost"> -->
     <!-- Header -->
     <nav class="navbar fixed-top navbar-back">
       <div class="container-fluid">
@@ -48,7 +48,7 @@
             </span>
           </button>
         </a>
-        <button type="button" class="btn btn-dark" onclick="onClickSubmitPost()">Submit</button>
+        <button id="submit-post" type="button" class="btn btn-dark">Submit</button>
       </div>
     </nav>
 
@@ -63,57 +63,52 @@
       <div class="form">
         <fieldset>
           <legend class="hidden">Request for help</legend>
-          <!-- TODO: -->
           <div class="add-photo">
-            <button type="button" class="btn btn-add-photo" aria-label="Back">
-              <span class="material-symbols-outlined">
-                add_a_photo
-              </span>
-            </button>
-            <button class="thumbnail">
-              <img src="/img/snow1.jpg" class="thumbnail-img" alt="help">
-            </button>
-            <button class="thumbnail">
-              <img src="/img/snow1.jpg" class="thumbnail-img" alt="help">
-            </button>
-            <button class="thumbnail">
-              <img src="/img/snow1.jpg" class="thumbnail-img" alt="help">
-            </button>
+            <input id="upload-images" type="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" hidden>
+            <label for="upload-images">
+              <a type="button" class="btn btn-add-photo" aria-label="add photos">
+                <span class="material-symbols-outlined">
+                  add_a_photo
+                </span>
+                <p>
+                  Add Photos <br />
+                  (<i class="add-photo-number">0</i>/5)
+                </p>
+              </a>
+            </label>
+            <output id="upload-output">
+            </output>
           </div>
           <div class="container-padding-horizontal">
             <div class="item">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control input" id="title" placeholder="" min="10" max="99">
+              <input type="text" class="form-control" id="title" placeholder="" min="10" max="99">
             </div>
             <div class="item">
               <label for="location" class="form-label">Location</label>
-              <input type="text" class="form-control input"  id="location" placeholder="">
+              <input type="text" class="form-control" id="location" placeholder="">
             </div>
             <div class="item">
               <label for="urgency" class="form-label">Urgency</label>
-              <select class="form-select input" aria-label="urgency" id="urgency">
-                <option selected>Select the Urgency</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+              <select class="form-select select-urgency" aria-label="urgency" id="urgency">
+                <option value="" disabled selected>Select the Urgency</option>
+                <!-- options -->
               </select>
             </div>
             <div class="item">
               <label for="category" class="form-label">Category</label>
-              <select class="form-select input" aria-label="category" id="category">
-                <option selected>Select the Category</option>
-                <option value="supplies">Supplies</option>
-                <option value="physicalHelp">Physical Help</option>
-                <option value="pet">Pet</option>
+              <select class="form-select select-category" aria-label="category" id="category">
+                <option value="" disabled selected>Select the Category</option>
+                <!-- options -->
               </select>
             </div>
             <div class="item">
               <label for="detail" class="form-label">Describe detail</label>
-              <textarea class="form-control input" id="detail" rows="5"></textarea>
+              <textarea class="form-control" id="detail" rows="5"></textarea>
             </div>
             <div class="item">
-              <label for="whereToMeet" class="form-label">Describe where to meet</label>
-              <textarea class="form-control input" id="meetup" rows="5"></textarea>
+              <label for="meetup" class="form-label">Describe where to meet</label>
+              <textarea class="form-control" id="meetup" rows="5"></textarea>
             </div>
           </div>
         </fieldset>
@@ -162,7 +157,7 @@
   <!-- scripts -->
   <script src="/js/firebaseAPI_BBY29.js"></script>
   <script type="module" src="/js/common.js"></script>
-  <script src="/js/post.js"></script>
+  <script type="module" src="/js/post.js"></script>
 
 </body>
 
