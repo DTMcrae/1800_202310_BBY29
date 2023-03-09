@@ -39,7 +39,7 @@ let imagesArray = [];
 
 const initAddPhoto = () => {
   if (!input || !output) {
-    console.log(input, output);
+    console.warn("initAddPhoto: ", input, output);
     return false;
   }
   const container = document.getElementsByClassName("add-photo");
@@ -57,8 +57,6 @@ const initAddPhoto = () => {
     document.getElementsByClassName("add-photo-number")[0].innerHTML =
       imagesArray.length;
 
-      console.log(imagesArray[0].name)
-      console.log(imagesArray[0].fullPath)
   });
 };
 
