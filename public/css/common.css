@@ -166,7 +166,12 @@ h2 + p {
 
 /* buttons */
 .btn-primary {
-  background-color: #27187E;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-highlight {
+  background-color: var(--color-highlight);
+  border-color: var(--color-highlight);
 }
 
 .btn-outline.secondary {
