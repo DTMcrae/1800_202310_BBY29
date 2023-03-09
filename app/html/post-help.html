@@ -36,31 +36,31 @@
 
 <body>
   <!-- TODO: form action -->
-  <form id="form-post-request">
-    <!-- <form action="/request-detail"method="post" id="form-post-request" onsubmit="submitPost"> -->
-    <!-- Header -->
-    <nav class="navbar fixed-top navbar-back">
-      <div class="container-fluid">
-        <a href="/post-select-type">
-          <button type="button" class="btn" aria-label="Back">
-            <span class="material-symbols-outlined">
-              arrow_back_ios
-            </span>
-          </button>
-        </a>
-        <button id="submit-post" type="button" class="btn btn-dark">Submit</button>
-      </div>
-    </nav>
+  <!-- <form action="/request-detail"method="post" id="form-post-request" onsubmit="submitPost"> -->
+  <!-- Header -->
+  <nav class="navbar fixed-top navbar-back">
+    <div class="container-fluid">
+      <a href="/post-select-type">
+        <button type="button" class="btn" aria-label="Back">
+          <span class="material-symbols-outlined">
+            arrow_back_ios
+          </span>
+        </button>
+      </a>
+      <button id="submit-post" type="button" class="btn btn-primary">Submit</button>
+    </div>
+  </nav>
 
-    <!-- Main -->
-    <div id="container" class="container-padding-vertical">
-      <h2 class="container-padding-horizontal">
-        <span class="material-symbols-outlined">
-          front_hand
-        </span>
-        Request for Help
-      </h2>
-      <div class="form">
+  <!-- Main -->
+  <div id="container" class="container-padding-vertical">
+    <h2 class="container-padding-horizontal">
+      <span class="material-symbols-outlined">
+        front_hand
+      </span>
+      Request for Help
+    </h2>
+    <div class="form">
+      <form action="">
         <fieldset>
           <legend class="hidden">Request for help</legend>
           <div class="add-photo">
@@ -104,17 +104,17 @@
             </div>
             <div class="item">
               <label for="detail" class="form-label">Describe detail</label>
-              <textarea class="form-control" id="detail" rows="5"></textarea>
+              <textarea class="form-control" id="detail" maxlength="800" rows="8"></textarea>
             </div>
             <div class="item">
               <label for="meetup" class="form-label">Describe where to meet</label>
-              <textarea class="form-control" id="meetup" rows="5"></textarea>
+              <textarea class="form-control" id="meetup" maxlength="300" rows="4"></textarea>
             </div>
           </div>
         </fieldset>
-      </div>
+      </form>
     </div>
-  </form>
+  </div>
 
   <!-- Navigation -->
   <nav id="navigation" class="fixed-bottom">
@@ -151,8 +151,6 @@
       </li>
     </ul>
   </nav>
-
-
 
   <!-- scripts -->
   <script src="/js/firebaseAPI_BBY29.js"></script>

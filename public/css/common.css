@@ -165,14 +165,19 @@ h2 + p {
 
 
 /* buttons */
-.btn-primary {
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
-.btn-highlight {
+.btn-highlight,
+.btn-highlight:hover,
+.btn-highlight:focus {
   background-color: var(--color-highlight);
   border-color: var(--color-highlight);
 }
+
 
 .btn-outline.secondary {
   background-color: #F1F2F6;

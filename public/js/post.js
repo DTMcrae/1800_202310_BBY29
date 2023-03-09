@@ -3,36 +3,33 @@ import { CATEGORY, URGENCY } from "./app/request.js";
 
 // initializer
 window.onload = function () {
-  // update htmls
   addOptions("select-urgency", URGENCY);
   addOptions("select-category", CATEGORY);
 
   document
     .getElementById("submit-post")
-    .addEventListener("click", onClickSubmitPost);
+    ?.addEventListener("click", onClickSubmitPost);
 
   initAddPhoto();
 };
 
 function onClickSubmitPost() {
-  const formDom = document.getElementById("form-post-request");
+  const formDom = document.querySelector("form");
 
-  const elements = {
-    images: [],
-    title: formDom.elements["title"],
-    location: formDom.elements["location"],
-    urgency: formDom.elements["urgency"],
-    category: formDom.elements["category"],
-    detail: formDom.elements["detail"],
-    meetup: formDom.elements["meetup"],
+  const data = {
+    images: imagesArray,
+    title: formDom.elements["title"]?.value,
+    location: formDom.elements["location"]?.value,
+    urgency: formDom.elements["urgency"]?.value,
+    category: formDom.elements["category"]?.value,
+    detail: formDom.elements["detail"]?.value,
+    meetup: formDom.elements["meetup"]?.value,
   };
 
-  const isValid = postingValidation(elements);
+  const isValid = checkValidation(data);
 
   if (isValid) {
-    submitPost();
-  } else {
-    // TODO
+    submitPost(data);
   }
 }
 
@@ -41,23 +38,24 @@ const output = document.getElementById("upload-output");
 let imagesArray = [];
 
 const initAddPhoto = () => {
+  if(!input || !output) {
+    console.log(input, output)
+    return false;
+  }
   const container = document.getElementsByClassName("add-photo");
   const btn = document.getElementById("btn-add-photo");
 
   input.addEventListener("change", () => {
     // Update imagesArray from selected images data
-    const files = [...input.files].slice(0, 5);
-    for (let i = 0; i < files.length; i++) {
-      imagesArray.push(files[i]);
-    }
+    imagesArray = [...imagesArray,...input.files].slice(0,5);
+    console.log("imagesArray",imagesArray)
 
     // Show previews
     displayImages();
 
     // Update added photos number
-    document
-      .getElementsByClassName("add-photo-number")[0]
-      .innerHTML = imagesArray.length;
+    document.getElementsByClassName("add-photo-number")[0].innerHTML =
+      imagesArray.length;
   });
 };
 
@@ -88,7 +86,23 @@ function deleteImage(index) {
   displayImages();
 }
 
-const postingValidation = ({
+// TODO
+const checkValidation = ({
+  images = [],
+  title = "",
+  location = "",
+  urgency = "",
+  category = "",
+  detail = "",
+  meetup = "",
+}) => {
+  let isValid = true;
+
+  return isValid;
+};
+
+// TODO
+const submitPost = ({
   images,
   title,
   location,
@@ -97,12 +111,10 @@ const postingValidation = ({
   detail,
   meetup,
 }) => {
-  let isValid = false;
+  console.log(images,title,location)
 
-  return isValid;
-};
 
-const submitPost = () => {
-  const popUp = new popUpClass();
-  console.log("submit");
+  // alert("Submit, popup in dev");
+  // const popUp = new popUpClass();
+  // console.log("submit");
 };
