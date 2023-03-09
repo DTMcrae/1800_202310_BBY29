@@ -20,7 +20,7 @@ const addOptions = (selectClassName, optionsArray) => {
 
 const isValidLength = (x, min, max) => {
   if (!x || x.length === 0) return null;
-  return !(x.length > max || x.length < min) ? 'ok' : 'error';
+  return !(x.length > max || x.length < min);
 };
 
 
