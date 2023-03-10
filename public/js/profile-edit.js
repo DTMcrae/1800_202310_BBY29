@@ -50,7 +50,7 @@ populateUserInfo();
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     
-    var ok = document.getElementById("ok-button");
+    var ok = document.getElementById("modal-ok-button");
     // When the user clicks the button, open the modal 
     btn.onclick = function () {
         modal.style.display = "block";
@@ -86,7 +86,7 @@ function saveUserInfoAndRedirect() {
     currentUser.update({
         name: userFirstName + " " + userLastName,
         email: userEmail,
-        phone: userPhone,
+        number: userPhone,
         city: userCity
     })
         .then(() => {
