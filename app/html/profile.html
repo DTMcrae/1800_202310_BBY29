@@ -59,12 +59,12 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
-                  <img src="img/placeholder-profile.png" alt="profle image" class="rounded-circle" id="profile-image" width="150">
+                  <img src="img/placeholder-profile.png" alt="profle image" class="rounded-circle" id="profile-image">
                   <form action="">
                     <label for="img-upload"><span class="material-symbols-outlined">
                       add_a_photo
                       </span> </label>
-                    <input type="file" name="filename" id="img-upload" hidden/>
+                    <input type="file" name="filename" onchange="loadFile(event)" id="img-upload" hidden/>
                     
                   </form>
                   <div class="mt-3">

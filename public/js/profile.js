@@ -41,3 +41,8 @@ function populateUserInfo() {
 
 //call the function to run it 
 populateUserInfo();
+
+var loadFile = function (event) {
+  var image = document.getElementById("profile-image");
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
