@@ -12,9 +12,13 @@ function insertNameFromFirestore() {
             currentUser.get().then(userDoc => {
                 //get the user name
                 var userName = userDoc.data().name;
+                var userPicURL = userDoc.data().pfpURL;
                 console.log(userName);
                 //$("#name-goes-here").text(userName); //jquery
                 document.getElementById("username").innerText = userName.split(' ')[0] + '!';;
+                var image = document.getElementById("profile-image");
+                image.setAttribute('src', userPicURL);
+
             })
         }
     })
