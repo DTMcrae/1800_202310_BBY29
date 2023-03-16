@@ -15,6 +15,7 @@ function populateUserInfo() {
           var userEmail = userDoc.data().email;
           var userCity = userDoc.data().city;
           var userPhone = userDoc.data().number;
+          var userPicURL = userDoc.data().pfpURL;
 
           //if the data fields are not empty, then write them in to the form.
           if (userName != null) {
@@ -30,6 +31,10 @@ function populateUserInfo() {
           }
           if (userPhone != null) {
             document.getElementById("phone").innerHTML = userPhone;
+          }
+          if (userPicURL != null){
+            var image = document.getElementById("profile-image");
+            image.setAttribute('src', userPicURL);
           }
         })
     } else {
