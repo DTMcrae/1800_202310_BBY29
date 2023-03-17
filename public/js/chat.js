@@ -6,12 +6,12 @@ firebase.auth().onAuthStateChanged((user) => {
     let cardTemplate = document.getElementById("chatTemplate"); //Load the request card template
     var userid = user.uid;
 
-    db.collection("chatrooms").get()   //the collection called "hikes"
+    db.collection("chatrooms").get()
         .then(chatrooms=> {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
             chatrooms.forEach(doc => { //iterate thru each doc
 
-                //Check if the chat applies to the user
+                //Check if the user is a part of the chatroom.
+                //Possible switch to saving the chatID's to the user at some point for high-traffic performance.
                 if(doc.data().userID.includes(userid))
                 {
 
@@ -27,6 +27,9 @@ firebase.auth().onAuthStateChanged((user) => {
 
 });
 
+//Sets the needed information to the local storage.
+//This must be done as getting information from multiple documents simultaneously can result in overwriting
+//and incorrectly displaying data.
 async function SetLocalData(doc, userid)
 {
     var recipientID = doc.data().userID[0];
@@ -34,13 +37,14 @@ async function SetLocalData(doc, userid)
 
     if(recipientID == userid) recipientID = doc.data().userID[1];
 
+    //Get the required request information from the database
     await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
         sessionStorage.setItem("requestName" + docID,requestDoc.data().title);
         sessionStorage.setItem("location" + docID,requestDoc.data().location);
         sessionStorage.setItem("category" + docID,requestDoc.data().category);
     });
 
-    //Get the required user information from the dataBase;
+    //Get the required user information from the database
     await db.collection("users").doc(recipientID).get().then(userDoc => {
         sessionStorage.setItem("recipientName" + docID, userDoc.data().name);
         console.log("Recipient: " + sessionStorage.getItem("recipientName"));
@@ -61,7 +65,7 @@ async function CreateNode(doc, userid, cardTemplate)
     var docID = doc.id;
     let newcard = cardTemplate.content.cloneNode(true);
 
-    //update title and text and image
+    //update title and text
     newcard.querySelector('.msg-recipient').innerHTML = sessionStorage.getItem("recipientName" + docID);
     newcard.querySelector('.latest-message').innerHTML = ApplyLimiter(150,sessionStorage.getItem("latestMessage" + docID).toString());
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName" + docID);
@@ -74,6 +78,8 @@ async function CreateNode(doc, userid, cardTemplate)
     document.getElementById("chatrooms-go-here").appendChild(newcard);
 }
 
+//Limits the number of characters in a string of text.
+//Cuts the text off at the end of the previous word if it is too large.
 function ApplyLimiter(maxChar, text) {
     console.log("Function Called:")
     console.log("Max: " + Number(Number(maxChar) - Number(3)));

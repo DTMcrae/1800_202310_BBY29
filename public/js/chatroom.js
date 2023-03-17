@@ -22,11 +22,14 @@ firebase.auth().onAuthStateChanged((user) => {
 
                 UpdateHeader(doc, recipientID, userid);
 
+                //Created a card for each message in the database. Runs each time the database is updated
                 db.collection("chatrooms").doc(ID).collection("messages").orderBy("time").onSnapshot(messages => {
                     messages.forEach(message => {
 
+                        //If the message already exists on the page, ignore it
                         if(document.getElementById(message.id) != null) return;
 
+                        //Create a received message card if the message is not from the user
                         if(message.data().sender == recipientID)
                         {
                             let newcard = receivedTemplate.content.cloneNode(true);
@@ -38,6 +41,7 @@ firebase.auth().onAuthStateChanged((user) => {
                             document.getElementById("messages-go-here").appendChild(newcard)
                         }
 
+                        //Create a sent message card
                         else
                         {
                             let newcard = sentTemplate.content.cloneNode(true);
@@ -61,6 +65,7 @@ async function SetLocalData(doc, recipientID)
 {
     var docID = doc.id;
 
+    //Get the required request information from the database
     await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
         sessionStorage.setItem("requestName",requestDoc.data().title);
         sessionStorage.setItem("requestDetails",requestDoc.data().details);
@@ -80,7 +85,7 @@ async function UpdateHeader(doc, recipientid, userid)
     var docID = doc.id;
     let newcard = document.getElementById("message-details");
 
-    //update title and text and image
+    //update the name and request details in the header
     newcard.querySelector('.recipient').innerHTML = sessionStorage.getItem("recipientName");
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName");
     newcard.querySelector('.request-details').innerHTML = sessionStorage.getItem("requestDetails");
@@ -97,8 +102,8 @@ function SubmitMessage(userID) {
 
     if(messageToSend == null || ID == null) return;
 
-
-    db.collection("chatrooms").doc(ID).collection("messages").add({         //write to firestore. We are using the UID for the ID in users collection
+    //Write the message to the database, and assign its id as the latest message
+    db.collection("chatrooms").doc(ID).collection("messages").add({ 
         message: messageToSend,
         sender: userID,              
         time: new Date().toLocaleString()    
