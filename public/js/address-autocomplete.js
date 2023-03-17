@@ -1,6 +1,6 @@
 function addressAutocomplete(containerElement, callback, options) {
 
-    const MIN_ADDRESS_LENGTH = 30;
+    const MIN_ADDRESS_LENGTH = 6;
     const DEBOUNCE_DELAY = 500;
 
     // create container for input element
