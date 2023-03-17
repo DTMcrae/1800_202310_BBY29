@@ -17,8 +17,12 @@ window.addEventListener("load", init);
 
 function onClickSubmitPost() {
   const formDom = document.querySelector("form");
+  const uid = rest.getUserID();
 
   const data = {
+    user: {
+      uid: uid,
+    },
     images: imagesArray,
     title: formDom.elements["title"]?.value,
     location: formDom.elements["location"]?.value,
@@ -29,9 +33,8 @@ function onClickSubmitPost() {
   };
 
   const isValid = checkValidation(data);
-
-  // if (isValid) {
-  if (true) {
+  
+  if (isValid) {
     submitPost(data);
   } else {
     alert("check validation : in dev")
