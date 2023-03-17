@@ -463,6 +463,25 @@ h2+p {
 
 
 
+.mdl-card {
+  border-radius: 1em;
+}
+
+#firebaseui-auth-container h1 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+#firebaseui-auth-container button {
+  font-size: 16px;
+  background-color: #db7500;
+  border-radius: 0.5em;
+}
+
+#firebaseui-auth-container button:hover {
+  background-color: #FF8600;
+}
+
 @media only screen and (min-width : 580px) {
   .request {
     font-size: 1em;
