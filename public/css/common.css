@@ -38,13 +38,50 @@
   --padding-body-horizontal: 20px;
 }
 
-html, body, div, span,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, img, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, figure, figcaption, footer, header, hgroup,
-menu, nav, section, summary {
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+img,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
   margin: 0;
   padding: 0;
   border: 0;
@@ -57,11 +94,13 @@ i {
   font-style: normal;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-a, a:hover {
+a,
+a:hover {
   color: inherit;
   text-decoration: none;
 }
@@ -118,7 +157,8 @@ h2 {
   font-size: 26px;
   font-weight: 400;
 }
-h2 + p {
+
+h2+p {
   margin-top: .5em;
   font-size: 15px;
   color: var(--color-text-gray);
@@ -136,6 +176,7 @@ h2 + p {
 .navbar-brand {
   color: var(--color-primary) !important;
 }
+
 .navbar .logo {
   display: block;
   width: 120px;
@@ -171,6 +212,7 @@ h2 + p {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
+
 .btn-highlight,
 .btn-highlight:hover,
 .btn-highlight:focus {
@@ -187,6 +229,7 @@ h2 + p {
 #requests {
   padding: 0 0 80px;
 }
+
 .card~.card {
   margin-top: 30px;
 }
@@ -202,9 +245,11 @@ h2 + p {
   padding: 10px 0;
   border-bottom: 1px solid var(--color-divider);
 }
+
 .request .container-text {
   line-height: 1.4;
 }
+
 .request .request-detail {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -214,11 +259,13 @@ h2 + p {
   height: 2.8em;
   margin-bottom: 5px;
 }
+
 .request .card-body {
   position: relative;
   height: 100%;
   padding: .5em 0 .5em 1em;
 }
+
 .request .card-title {
   font-size: 1.2em;
   display: -webkit-box;
@@ -233,35 +280,45 @@ h2 + p {
   position: relative;
   display: block;
   width: 30%;
-  min-width:120px;
+  min-width: 120px;
   min-height: 100%;
 }
-.request .img:after{
-  content:'';
+
+.request .img:after {
+  content: '';
   display: block;
   width: 100%;
   padding-top: 100%;
 }
+
 .request img {
   position: absolute;
-  left: 0;right: 0;top: 0;bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .request .card-container {
   display: flex;
 }
+
 .request .container-text {
   flex: 1
 }
+
 .requests-tab {
   margin-top: 20px;
 }
+
 .request-tab-content {
   margin-top: 10px;
 }
-.request-bottom{
+
+.request-bottom {
   position: absolute;
   right: 0;
   bottom: 5px;
@@ -279,6 +336,7 @@ h2 + p {
   z-index: -1;
   opacity: 0;
 }
+
 .block {
   display: block;
 }
@@ -319,26 +377,116 @@ h2 + p {
 
 .material-symbols-outlined {
   font-variation-settings:
-    'FILL'1,
-    'wght'400,
-    'GRAD'0,
-    'opsz'48
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+/* Geoapify Address Autocomplete */
+.autocomplete-container {
+  margin-bottom: 20px;
+}
+
+.location-input-container {
+  display: flex;
+  position: relative;
+}
+
+.location-input-container input {
+  flex: 1;
+  outline: none;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  padding-right: 31px;
+  font-size: 16px;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  border-top: none;
+  background-color: #fff;
+
+  z-index: 99;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-items .autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.clear-button {
+  color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+
+  position: absolute;
+  right: 5px;
+  top: 0;
+
+  height: 100%;
+  display: none;
+  align-items: center;
+}
+
+.clear-button.visible {
+  display: flex;
+}
+
+.clear-button:hover {
+  color: rgba(0, 0, 0, 0.6);
 }
 
 /* bootstrap */
 .img-thumbnail {
   padding: 0 !important;
 }
+
 /* .shadow {
   box-shadow: .1em .1em  0.2em rgba(0,0,0,.1)!important;
 } */
 
 
 
+.mdl-card {
+  border-radius: 1em;
+}
+
+#firebaseui-auth-container h1 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+#firebaseui-auth-container button {
+  font-size: 16px;
+  background-color: #db7500;
+  border-radius: 0.5em;
+}
+
+#firebaseui-auth-container button:hover {
+  background-color: #FF8600;
+}
+
 @media only screen and (min-width : 580px) {
   .request {
     font-size: 1em;
   }
+
   .request-detail {
     -webkit-line-clamp: 3;
     height: 4.2em;

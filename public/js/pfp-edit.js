@@ -15,13 +15,16 @@ var loadFile = function (event) {
       if (user) {
         let userID = user.uid;
         currentUser = db.collection("users").doc(user.uid);
+        //Creates a new field for pfpURL
         currentUser.set({
           pfpURL: ""
         }, {merge: true})
         .then(()=>{ console.log("New field for pfpURL added!");
       })
+      //Uploads file to Firebase storage under userID/images/filename
         storageRef.child(`${userID}/images/${fileName}`).put(file).then((snapshot) => {
           console.log("Uploaded a file!");
+          //Grabs download URL of image and stores it under pfpURL field in userDoc
           storageRef.child(`${userID}/images/${fileName}`).getDownloadURL().then((url) => {
             currentUser.update({         
               pfpURL: url
