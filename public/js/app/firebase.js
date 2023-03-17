@@ -21,7 +21,7 @@ const getUserID = () => {
 };
 
 const onAuthChanged = (
-  callback = (uid) => {}
+  callback = (user) => {}
 ) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
