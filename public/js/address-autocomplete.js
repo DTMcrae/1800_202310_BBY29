@@ -11,7 +11,7 @@ function addressAutocomplete(containerElement, callback, options) {
     // create input element
     const inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
-    inputElement.setAttribute("id", "location" );
+    inputElement.setAttribute("id", "location");
     inputElement.setAttribute("placeholder", options.placeholder);
     inputContainerElement.appendChild(inputElement);
 
@@ -44,6 +44,9 @@ function addressAutocomplete(containerElement, callback, options) {
     inputElement.addEventListener("input", function (e) {
         const currentValue = this.value;
 
+        /* Close any already open dropdown list */
+        closeDropDownList();
+        
         // Cancel previous timeout
         if (currentTimeout) {
             clearTimeout(currentTimeout);
