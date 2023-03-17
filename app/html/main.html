@@ -84,10 +84,7 @@
               </div>
               <div id="posted-request-collapse" class="collapse show" aria-labelledby="my-post-help"
                 data-parent="#postedAccordion">
-                <div class="card-list">
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
+                <div class="card-list" id="request-help-list">
                 </div>
               </div>
             </section>
@@ -105,9 +102,7 @@
               <div id="posted-volunteering-collapse" class="" aria-labelledby="my-post-volunteering"
                 data-parent="#postedAccordion">
                 <div class="card-list">
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
+                  <p>In Development</p>
                 </div>
               </div>
             </section>
@@ -130,10 +125,8 @@
               </div>
               <div id="accepted-request-collapse" class="collapse show" aria-labelledby="others-post-help"
                 data-parent="#acceptedAccordion">
-                <div class="card-list">
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
+                <div class="card-list" id="helping-others-list">
+
                 </div>
               </div>
             </section>
@@ -151,9 +144,7 @@
               <div id="accepted-volunteering-collapse" class="" aria-labelledby="others-post-volunteering"
                 data-parent="#acceptedAccordion">
                 <div class="card-list">
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
-                  <article class="requestPlaceholder"></article>
+                  <p>In Development</p>
                 </div>
               </div>
             </section>
@@ -163,6 +154,9 @@
     </section>
   </main>
 
+  <template id = "requestTemplate">
+  </template>
+
   <!-- Navigation -->
   <div class="main-nav"></div>
 
@@ -170,6 +164,7 @@
   <script src="/js/firebaseAPI_BBY29.js"></script>
   <script type="module" src="/js/common.js"></script>
   <script src="/js/main.js"></script>
+  <script src="/js/user-requests.js"></script>
 </body>
 
 </html>
