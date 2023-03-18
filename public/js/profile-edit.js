@@ -75,13 +75,52 @@ window.onclick = function (event) {
 
 function saveUserInfoAndRedirect() {
     //enter code here
-
+    var nameReg = /^[A-Za-z',-]+$/;
+    var emailReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    var phoneReg = /^([0-9]{3})+\-([0-9]{3})+\-([0-9]{4})$/;
     //a) get user entered values
     userFirstName = document.getElementById('first-name').value;
-    userLastName = document.getElementById('last-name').value;    //get the value of the field with id="nameInput"
-    userEmail = document.getElementById('email').value;     //get the value of the field with id="schoolInput"
-    userPhone = document.getElementById('phone').value;       //get the value of the field with id="cityInput"
+    userLastName = document.getElementById('last-name').value;    
+    userEmail = document.getElementById('email').value;     
+    userPhone = document.getElementById('phone').value;       
     userCity = document.getElementById('location').value;
+
+    if (!userFirstName){
+        alert("Please input a name!");
+        return;
+    } else if (userFirstName.length < 2) {
+        alert ("Please complete your entry!");
+        return;
+    }else if (!nameReg.test(userFirstName)) {
+        alert ("Please input alphabetical characters only!");
+        return;
+    }
+
+    if (!userLastName){
+        alert("Please input a name!");
+        return;
+    } else if (userLastName.length < 2) {
+        alert ("Minimum 2 characters!");
+        return;
+    } else if (!nameReg.test(userLastName)) {
+        alert ("Please input alphabetical characters only!");
+        return;
+    }
+
+    if (!userEmail){
+        alert("Please enter an email!");
+        return;
+    } else if (!emailReg.test(userEmail)) {
+        alert ("Please enter a valid email!");
+        return;
+    }
+
+    if (!phoneReg.test(userPhone)){
+        alert ("Please enter your phone number in the format XXX-XXX-XXXX");
+        return;
+    }
+
+
     //b) update user's document in Firestore
     currentUser.update({
         name: userFirstName + " " + userLastName,
