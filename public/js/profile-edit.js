@@ -87,37 +87,54 @@ function saveUserInfoAndRedirect() {
 
     if (!userFirstName){
         alert("Please input a name!");
+        document.getElementById('first-name').style.borderColor = "red";
         return;
     } else if (userFirstName.length < 2) {
         alert ("Please complete your entry!");
+        document.getElementById('first-name').style.borderColor = "red";
         return;
     }else if (!nameReg.test(userFirstName)) {
         alert ("Please input alphabetical characters only!");
+        document.getElementById('first-name').style.borderColor = "red";
         return;
+    } else {
+        document.getElementById('first-name').style.borderColor = "green";
     }
 
     if (!userLastName){
         alert("Please input a name!");
+        document.getElementById('last-name').style.borderColor = "red";
         return;
     } else if (userLastName.length < 2) {
         alert ("Minimum 2 characters!");
+        document.getElementById('last-name').style.borderColor = "red";
         return;
     } else if (!nameReg.test(userLastName)) {
         alert ("Please input alphabetical characters only!");
+        document.getElementById('last-name').style.borderColor = "red";
         return;
+    } else {
+        document.getElementById('last-name').style.borderColor = "green";
     }
 
     if (!userEmail){
         alert("Please enter an email!");
+        document.getElementById('email').style.borderColor = "red";
         return;
     } else if (!emailReg.test(userEmail)) {
         alert ("Please enter a valid email!");
+        document.getElementById('email').style.borderColor = "red";
         return;
+    } else {
+        document.getElementById('email').style.borderColor = "green";
     }
 
     if (!phoneReg.test(userPhone)){
         alert ("Please enter your phone number in the format XXX-XXX-XXXX");
+        document.getElementById('phone').style.borderColor = "red";
         return;
+    } else {
+        document.getElementById('phone').style.borderColor = "green";
     }
 
 
