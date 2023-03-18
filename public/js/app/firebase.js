@@ -84,3 +84,12 @@ export default {
   post,
   postRequest,
 };
+
+export {
+  getUser,
+  getUserID,
+  onAuthChanged,
+  post,
+  postRequest,
+};
+

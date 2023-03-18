@@ -1,6 +1,7 @@
 import { addOptions, isValidLength } from "./app/form.js";
 import { CATEGORY, URGENCY } from "./app/request.js";
 import rest from "./app/firebase.js";
+import { uploadImage } from "./app/image.js";
 
 // initializer
 const init = () => {
@@ -17,32 +18,53 @@ window.addEventListener("load", init);
 
 
 // event function when clicks "Submit" button on the posting page.
-function onClickSubmitPost() {
-  const formDom = document.querySelector("form");
-  const uid = rest.getUserID();
-
-  const data = {
-    user: {
-      uid: uid,
-    },
-    images: imagesArray,
-    title: formDom.elements["title"]?.value,
-    location: formDom.elements["location"]?.value,
-    urgency: formDom.elements["urgency"]?.value,
-    category: formDom.elements["category"]?.value,
-    detail: formDom.elements["detail"]?.value,
-    meetup: formDom.elements["meetup"]?.value,
-    createdDate: new Date().toLocaleString(),
-  };
-
-  const isValid = checkValidation(data);
+const onClickSubmitPost = async (event) => {
+  let data;
+  try {
+    const formDom = document.querySelector("form");
+    const uid = rest.getUserID();
   
-  if (isValid) {
-    submitPost(data);
-  } else {
-    alert("check validation : in dev")
-  }
-}
+    data = {
+      images: [],
+      user: {
+        uid: uid,
+      },
+      title: formDom.elements["title"]?.value,
+      location: formDom.elements["location"]?.value,
+      urgency: formDom.elements["urgency"]?.value,
+      category: formDom.elements["category"]?.value,
+      detail: formDom.elements["detail"]?.value,
+      meetup: formDom.elements["meetup"]?.value,
+      createdDate: new Date().toLocaleString(),
+    };
+  
+    const isValid = checkValidation(data);
+
+    if (true) {
+    // if (isValid) {
+      let newImagesArray = [];
+
+      if (imagesArray.length > 0) {
+        newImagesArray = await Promise.all(
+          imagesArray.map(async (file, index) => {
+            const imageUrl = await uploadImage(file);
+            return imageUrl;
+          })
+        );
+      }
+
+      data = {...data, images: newImagesArray};
+
+      console.log('data', data);
+      // submitPost(finalData);
+    } else {
+      alert("check validation : in dev")
+    }
+
+  } catch(e) {
+    console.error(e);
+  } 
+};
 
 /* post images
  * functions that need to select, preview, and upload 5 images.
@@ -69,7 +91,6 @@ const initAddPhoto = () => {
   input.addEventListener("change", () => {
     // Update imagesArray from selected images data
     imagesArray = [...imagesArray, ...input.files].slice(0, 5);
-    console.log("imagesArray", imagesArray);
 
     // Show previews
     displayImages();
@@ -135,6 +156,6 @@ const checkValidation = ({
 
 // TODO
 const submitPost = (data) => {
-  console.log(firebase,data);
+  console.log('submitPost', firebase,data);
   rest.postRequest(data);
 };
