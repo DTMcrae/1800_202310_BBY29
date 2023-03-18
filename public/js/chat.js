@@ -15,6 +15,10 @@ firebase.auth().onAuthStateChanged((user) => {
                 if(doc.data().userID.includes(userid))
                 {
 
+                    let segment = document.querySelector(".no-chatrooms");
+                    console.log(segment);
+                    if(segment != null) segment.remove();
+
                 var recipientID = doc.data().userID[0];
                 if(recipientID == userid) recipientID = doc.data().userID[1];
 
