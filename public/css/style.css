@@ -226,6 +226,10 @@
   text-align: right;
 }
 
+.sub-text {
+  margin-left: 13%;
+}
+
 .received-message {
   width: 50%;
 }
