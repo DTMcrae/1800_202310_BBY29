@@ -2,7 +2,8 @@
 #user-welcome {
   padding-top: 20px;
 }
-#user-welcome > a{
+
+#user-welcome>a {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
@@ -12,9 +13,11 @@
   border-radius: 10px;
   transition: all .3s;
 }
-#user-welcome> a:hover {
-  box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+
+#user-welcome>a:hover {
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.15);
 }
+
 .profile-pic {
   display: block;
   flex-shrink: 0;
@@ -24,41 +27,50 @@
   overflow: hidden;
   border: 1px solid var(--color-divider);
 }
+
 .profile-pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .profile-name {
   display: block;
   margin-left: 1em;
   font-size: 1.2rem;
 }
-.request-tab-content .accordion > .card {
+
+.request-tab-content .accordion>.card {
   border: 0;
 }
+
 #requests .btn-link {
-  color: inherit ;
+  color: inherit;
   text-decoration: none;
 }
+
 #requests .nav-tabs {
   border: 0;
   gap: 10px;
 }
+
 #requests .nav-link {
   padding: 14px 5px;
   color: var(--color-text-gray);
   border-radius: 10px !important;
 }
+
 #requests .nav-link.active {
   color: var(--color-primary);
-  border-color:var(--color-lightgray);
+  border-color: var(--color-lightgray);
 }
+
 #requests .card-header {
   padding: 0;
   background-color: transparent;
   border-bottom: 2px solid var(--color-primary);
 }
+
 #requests .card-header .btn-link {
   width: 100%;
   padding: 10px 15px;
@@ -69,7 +81,8 @@
   font-weight: 400;
   transition: all .3s;
 }
-#requests .card-header .btn-link:hover{
+
+#requests .card-header .btn-link:hover {
   color: #fff;
   background-color: var(--color-primary);
 }
@@ -94,15 +107,18 @@
 .container-post-step1 {
   padding-bottom: 100px;
 }
+
 .container-post-step1 h2 {
   text-align: center;
 }
+
 #list-request-type {
   margin-top: 40px;
   width: 100%;
   max-width: 400px;
 }
-#list-request-type li ~ li {
+
+#list-request-type li~li {
   margin-top: 40px;
 }
 
@@ -117,9 +133,11 @@
   background-color: #fff;
   transition: all .3s;
 }
+
 .button-select-type:hover {
   background-color: var(--color-primary);
 }
+
 .button-select-type:hover * {
   color: #fff !important;
 }
@@ -129,6 +147,7 @@
   flex: 1;
   text-align: center;
 }
+
 .button-select-type .material-symbols-outlined {
   font-size: 50px;
   margin-right: 16px;
@@ -142,6 +161,7 @@
   padding: 10px 30px;
   margin: 20px 0;
 }
+
 .btn-add-photo {
   display: flex;
   align-items: center;
@@ -153,22 +173,26 @@
   background-color: var(--color-lightgray);
   flex-shrink: 0;
 }
+
 .btn-add-photo span {
   font-size: 40px;
 }
+
 .btn-add-photo p {
   margin-top: 4px;
   font-size: 0.9rem;
   line-height: 1;
 }
-.btn-add-photo p i{
+
+.btn-add-photo p i {
   color: var(--color-primary);
 }
+
 #upload-output {
   display: flex;
 }
 
-.thumbnail{
+.thumbnail {
   position: relative;
   width: 120px;
   height: 120px;
@@ -178,11 +202,13 @@
   margin-left: 20px;
   border: 1px solid var(--color-lightgray);
 }
+
 .thumbnail-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .thumbnail-delete {
   display: flex;
   align-items: center;
@@ -198,11 +224,19 @@
   background-color: var(--color-primary);
   padding: 0 0 2px 0;
 }
+
 .thumbnail-delete:hover {
   background-color: var(--color-highlight)
 }
 
+/* Profile Edit */
 
+.text-error {
+  width: 200px;
+  font-size: 8pt;
+  color: red;
+  margin-left: 5px;
+}
 
 /* Chat */
 #message {
@@ -244,7 +278,7 @@
   padding-right: 5%;
 }
 
-.profile-container img{
+.profile-container img {
   width: 100%;
   height: 75%;
 }
