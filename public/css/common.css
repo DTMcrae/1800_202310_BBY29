@@ -31,6 +31,7 @@
   --color-divider: #eee;
 
   --color-text-gray: rgb(147, 147, 147);
+  --color-placeholder: rgb(172, 172, 172);
 
   --height-header: 50px;
   --height-nav: 60px;
@@ -162,6 +163,12 @@ h2+p {
   margin-top: .5em;
   font-size: 15px;
   color: var(--color-text-gray);
+}
+
+input::placeholder,
+textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-placeholder) !important;
+  opacity: 1; /* Firefox */
 }
 
 /* Header */
@@ -482,6 +489,28 @@ h2+p {
   background-color: #FF8600;
 }
 
+/* modals */
+#success-modal {
+  padding: 30px;
+}
+#success-modal .modal-dialog{
+  display: flex;
+  justify-content: center;
+}
+#success-modal .modal-content {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 280px;
+  padding: 50px 30px;
+  font-size: 24px;
+  border-radius: 30px;
+}
+#success-modal .img {
+  width: 80px;
+  margin-bottom: 16px;
+}
+
 @media only screen and (min-width : 580px) {
   .request {
     font-size: 1em;
@@ -492,3 +521,4 @@ h2+p {
     height: 4.2em;
   }
 }
+
