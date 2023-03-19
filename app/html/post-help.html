@@ -45,7 +45,13 @@
           </span>
         </button>
       </a>
-      <button id="submit-post" type="button" class="btn btn-primary">Submit</button>
+      <button
+        id="submit-post"
+        type="button"
+        class="btn btn-primary"
+      >
+        Submit
+      </button>
     </div>
   </nav>
 
@@ -80,7 +86,7 @@
           <div class="container-padding-horizontal">
             <div class="item">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="" min="10" max="99">
+              <input type="text" class="form-control" id="title" placeholder="10 ~ 80" min="10" max="80">
             </div>
             <div class="item">
               <label for="location" class="form-label">Location</label>
@@ -102,11 +108,11 @@
             </div>
             <div class="item">
               <label for="detail" class="form-label">Describe detail</label>
-              <textarea class="form-control" id="detail" maxlength="800" rows="8"></textarea>
+              <textarea class="form-control" id="detail" maxlength="800" rows="8" placeholder="20 ~ 800"></textarea>
             </div>
             <div class="item">
               <label for="meetup" class="form-label">Describe where to meet</label>
-              <textarea class="form-control" id="meetup" maxlength="300" rows="4"></textarea>
+              <textarea class="form-control" id="meetup" maxlength="300" rows="4" placeholder="10 ~ 300"></textarea>
             </div>
           </div>
         </fieldset>

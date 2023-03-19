@@ -2,6 +2,7 @@ import { addOptions, isValidLength } from "./app/form.js";
 import { CATEGORY, URGENCY } from "./app/request.js";
 import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
+import { showSuccessModal } from "./modal.js";
 
 // initializer
 const init = () => {
@@ -25,7 +26,7 @@ const onClickSubmitPost = async (event) => {
     const uid = rest.getUserID();
   
     data = {
-      images: [],
+      images: imagesArray,
       user: {
         uid: uid,
       },
@@ -40,8 +41,8 @@ const onClickSubmitPost = async (event) => {
   
     const isValid = checkValidation(data);
 
-    if (true) {
-    // if (isValid) {
+    if (isValid) {
+      // upload photos on the server and get returned url addresses
       let newImagesArray = [];
 
       if (imagesArray.length > 0) {
@@ -55,8 +56,7 @@ const onClickSubmitPost = async (event) => {
 
       data = {...data, images: newImagesArray};
 
-      console.log('data', data);
-      // submitPost(finalData);
+      submitPost(data);
     } else {
       alert("check validation : in dev")
     }
@@ -131,7 +131,7 @@ function deleteImage(index) {
   displayImages();
 }
 
-// TODO
+// Checks validation before posting
 const checkValidation = ({
   images = [],
   title = "",
@@ -141,21 +141,57 @@ const checkValidation = ({
   detail = "",
   meetup = "",
 }) => {
-  let isValid = false;
-  if (!isValidLength(title,2,50)) {
-    return false;
+  let el = "";
+  let isValid = true;
+  
+  if (images.length < 1) {
+    el = "images"
+    console.log(images)
+    isValid = false;
   }
-  if (!isValidLength(location,1,20)) {
+  if (!isValidLength(title,10, 80)) {
+    el = "title"
+    isValid = false;
+  }
+  if (location.length < 1) {
+    el = "location"
+    isValid = false;
+  }
+  if (!urgency) {
+    el = "urgency"
+    isValid = false;
+  }
+  if (!category) {
+    el = "category";
+    console.log(category)
+    isValid = false;
+  }
+  if (!isValidLength(detail, 20)) {
+    el = "detail"
+    isValid = false;
+  }
+  if (!isValidLength(meetup, 10)) {
+    el = "meetup"
+    isValid = false;
+  }
+  if (!isValid) {
+    console.warn(el);
     return false;
   }
 
-
-  isValid = true;
   return isValid;
 };
 
-// TODO
 const submitPost = (data) => {
-  console.log('submitPost', firebase,data);
+  console.log('submitPost', data);
   rest.postRequest(data);
+
+  // show Success modal
+  showSuccessModal({
+    onShow: () => {
+      setTimeout(() => {
+        window.location.href = `/request-details`;
+      }, 2000)
+    }
+  });
 };
