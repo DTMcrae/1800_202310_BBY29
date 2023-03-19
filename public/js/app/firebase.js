@@ -37,7 +37,7 @@ const onAuthChanged = (
   
 }
 
-// Post
+// Post and return docID 
 const post = async (
   collection = "",
   data = {},
@@ -48,14 +48,25 @@ const post = async (
       throw "collection is empty";
     }
 
-    onAuthChanged((user) => {
-      const currentUser = db.collection("users").doc(user.uid);
-      const result = currentUser.get().then((userDoc) => {
-        db.collection(collection)
-          .add(data)
-          .then(() => callback);
+    let refID;
+
+    return new Promise((resolve, reject) => {
+      onAuthChanged((user) => {
+        const currentUser = db.collection("users").doc(user.uid);
+        currentUser.get().then((userDoc) => {
+          db.collection(collection)
+            .add(data)
+            .then((docRef) => {
+              const refID = docRef.id;
+              console.log("Document written with ID: ", refID);
+              resolve(refID);
+            })
+            .catch((error) => {
+              console.error("Error adding document: ", error);
+              reject(error);
+            });
+        });
       });
-      console.log("post", result);
     });
   } catch (e) {
     console.error(e);
@@ -64,17 +75,12 @@ const post = async (
 
 
 /* === Request === */
+// post a request and return docID
 const postRequest = (data, callback) => {
-  post("requests", data, () => {
-    if (!!callback) {
-      callback?.();
-    } else {
-      // TODO:
-      alert("Complete, popup in dev");
-      // const popUp = new popUpClass();
-      // window.location.href = "/request-detail.html";
-    }
+  const docID = post("requests", data, () => {
+    callback?.();
   });
+  return docID;
 };
 
 export default {

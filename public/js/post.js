@@ -182,16 +182,17 @@ const checkValidation = ({
   return isValid;
 };
 
-const submitPost = (data) => {
+const submitPost = async (data) => {
   console.log('submitPost', data);
-  rest.postRequest(data);
+  const docID = await rest.postRequest(data);
+  console.log('docID',docID)
 
   // show Success modal
   showSuccessModal({
     onShow: () => {
       setTimeout(() => {
-        window.location.href = `/request-details`;
-      }, 2000)
+        window.location.href = `/request-details?docID=${docID}`;
+      }, 1200)
     }
   });
 };
