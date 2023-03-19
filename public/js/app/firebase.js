@@ -37,34 +37,28 @@ const onAuthChanged = (
   
 }
 
-// Post and return docID 
-const post = async (
+// Common
+const add = async (
   collection = "",
   data = {},
-  ) => {
+) => {
   try {
     if (collection?.length < 1) {
       throw "collection is empty";
     }
 
-    let refID;
-
     return new Promise((resolve, reject) => {
       onAuthChanged((user) => {
-        const currentUser = db.collection("users").doc(user.uid);
-        currentUser.get().then((userDoc) => {
-          db.collection(collection)
-            .add(data)
-            .then((docRef) => {
-              const refID = docRef.id;
-              console.log("Document written with ID: ", refID);
-              resolve(refID);
-            })
-            .catch((error) => {
-              console.error("Error adding document: ", error);
-              reject(error);
-            });
-        });
+        db.collection(collection).add(data)
+          .then((docRef) => {
+            const refID = docRef.id;
+            console.log("Document written with ID: ", refID);
+            resolve(refID);
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+            reject(error);
+          });
       });
     });
   } catch (e) {
@@ -76,22 +70,53 @@ const post = async (
 /* === Request === */
 // post a request and return docID
 const postRequest = (data, callback) => {
-  return post("requests", data);
+  // save docID to return
+  const docID = add("requests", data);
+  console.log('sfsfs',docID)
+
+  return docID;
 };
+
+const updateRequests = async (docID) => {
+  try {
+    const currentUserID = getUserID();
+
+    const userRef = db.collection("users").doc(currentUserID);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User does not exist");
+      return;
+    }
+
+    const userData = userDoc.data();
+    let requests = userData.requests || [];
+
+    if (!requests.includes(docID)) {
+      requests.push(docID);
+    }
+
+    await userRef.update({ requests });
+    console.log("User requests updated successfully");
+  } catch (error) {
+    console.error("Error updating user requests", error);
+  }
+};
+
 
 export default {
   getUser,
   getUserID,
   onAuthChanged,
-  post,
   postRequest,
+  updateRequests,
 };
 
 export {
   getUser,
   getUserID,
   onAuthChanged,
-  post,
   postRequest,
+  updateRequests,
 };
 

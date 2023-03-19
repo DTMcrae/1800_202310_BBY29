@@ -182,9 +182,11 @@ const checkValidation = ({
 };
 
 const submitPost = async (data) => {
-  console.log('submitPost', data);
+  // post
   const docID = await rest.postRequest(data);
-  // console.log('docID',docID)
+
+  // update requests to user
+  await rest.updateRequests(docID);
 
   // show Success modal
   showSuccessModal({
