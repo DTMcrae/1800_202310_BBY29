@@ -78,48 +78,77 @@ function saveUserInfoAndRedirect() {
     var nameReg = /^[A-Za-z',-]+$/;
     var emailReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     var phoneReg = /^([0-9]{3})+\-([0-9]{3})+\-([0-9]{4})$/;
+    var locationReg = /^[A-Za-z0-9',-\s]+$/;
     //a) get user entered values
     userFirstName = document.getElementById('first-name').value;
-    userLastName = document.getElementById('last-name').value;    
-    userEmail = document.getElementById('email').value;     
-    userPhone = document.getElementById('phone').value;       
+    userLastName = document.getElementById('last-name').value;
+    userEmail = document.getElementById('email').value;
+    userPhone = document.getElementById('phone').value;
     userCity = document.getElementById('location').value;
 
-    if (!userFirstName){
-        alert("Please input a name!");
-        return;
-    } else if (userFirstName.length < 2) {
-        alert ("Please complete your entry!");
-        return;
-    }else if (!nameReg.test(userFirstName)) {
-        alert ("Please input alphabetical characters only!");
-        return;
-    }
+    var firstNameValid = true;
+    var lastNameValid = true;
+    var emailValid = true;
+    var phoneValid = true;
+    var locationValid = true;
 
-    if (!userLastName){
-        alert("Please input a name!");
-        return;
-    } else if (userLastName.length < 2) {
-        alert ("Minimum 2 characters!");
-        return;
+    if (userFirstName.length < 2) {
+        document.getElementById('first-name').style.borderColor = "red";
+        document.getElementById('first-name-error').innerHTML = "Please enter 2 characters minimum";
+        firstNameValid = false;
+    } else if (!nameReg.test(userFirstName)) {
+        document.getElementById('first-name').style.borderColor = "red";
+        document.getElementById('first-name-error').innerHTML = "Please enter a valid name";
+        firstNameValid = false;
+    } else {
+        document.getElementById('first-name').style.borderColor = "green";
+    };
+
+    if (userLastName.length < 2) {
+        document.getElementById('last-name').style.borderColor = "red";
+        document.getElementById('last-name-error').innerHTML = "Please enter 2 characters minimum";
+        lastNameValid = false;
     } else if (!nameReg.test(userLastName)) {
-        alert ("Please input alphabetical characters only!");
-        return;
-    }
+        document.getElementById('last-name').style.borderColor = "red";
+        document.getElementById('last-name-error').innerHTML = "Please enter a valid name";
+        lastNameValid = false;
+    } else {
+        document.getElementById('last-name').style.borderColor = "green";
+    };
 
-    if (!userEmail){
-        alert("Please enter an email!");
-        return;
+    if (!userEmail) {
+        document.getElementById('email').style.borderColor = "red";
+        document.getElementById('email-error').innerHTML = "Please fill in this field";
+        emailValid = false;
     } else if (!emailReg.test(userEmail)) {
-        alert ("Please enter a valid email!");
+        document.getElementById('email').style.borderColor = "red";
+        document.getElementById('email-error').innerHTML = "Please enter a valid email";
+        emailValid = false;
+    } else {
+        document.getElementById('email').style.borderColor = "green";
+    };
+
+    if (!phoneReg.test(userPhone)) {
+        document.getElementById('phone').style.borderColor = "red";
+        document.getElementById('phone-error').innerHTML = "Please enter a phone number in the format xxx-xxx-xxxx";
+        phoneValid = false;
+    } else {
+        document.getElementById('phone').style.borderColor = "green";
+    };
+
+    if (!userCity.match(locationReg)){
+        document.getElementById('location').style.borderColor = "red";
+        document.getElementById('location-error').innerHTML = "Please enter a valid address";
+        document.getElementById('autocomplete-container').appendChild(document.getElementById('location-error'));
+        locationValid = false;
+    }else {
+        document.getElementById('location').style.borderColor = "green";
+    };
+
+    if (!firstNameValid || !lastNameValid || !emailValid || !phoneValid || !locationValid) {
+        alert("Please correct the fields in red!");
         return;
     }
-
-    if (!phoneReg.test(userPhone)){
-        alert ("Please enter your phone number in the format XXX-XXX-XXXX");
-        return;
-    }
-
 
     //b) update user's document in Firestore
     currentUser.update({
