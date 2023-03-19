@@ -41,7 +41,6 @@ const onAuthChanged = (
 const post = async (
   collection = "",
   data = {},
-  callback = () => {}
   ) => {
   try {
     if (collection?.length < 1) {
@@ -77,10 +76,7 @@ const post = async (
 /* === Request === */
 // post a request and return docID
 const postRequest = (data, callback) => {
-  const docID = post("requests", data, () => {
-    callback?.();
-  });
-  return docID;
+  return post("requests", data);
 };
 
 export default {

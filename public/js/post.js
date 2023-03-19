@@ -163,7 +163,6 @@ const checkValidation = ({
   }
   if (!category) {
     el = "category";
-    console.log(category)
     isValid = false;
   }
   if (!isValidLength(detail, 20)) {
@@ -185,7 +184,7 @@ const checkValidation = ({
 const submitPost = async (data) => {
   console.log('submitPost', data);
   const docID = await rest.postRequest(data);
-  console.log('docID',docID)
+  // console.log('docID',docID)
 
   // show Success modal
   showSuccessModal({
