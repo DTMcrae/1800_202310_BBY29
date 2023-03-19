@@ -148,6 +148,8 @@ function saveUserInfoAndRedirect() {
     if (!firstNameValid || !lastNameValid || !emailValid || !phoneValid || !locationValid) {
         alert("Please correct the fields in red!");
         return;
+    } else {
+        document.getElementById('phone').style.borderColor = "green";
     }
 
     //b) update user's document in Firestore
