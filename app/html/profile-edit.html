@@ -75,29 +75,36 @@
     <div class="form">
       <form action="">
         <fieldset>
-          <legend class="hidden">Request for help</legend>
+          <legend class="hidden">Profile Details</legend>
           <div class="container-padding-horizontal">
             <div class="item">
               <label for="first-name" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="first-name" placeholder="">
+              <input type="text" class="form-control" id="first-name" placeholder="" required>
+              <span class="text-error" id="first-name-error"></span>
             </div>
             <div class="item">
               <label for="last-name" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="last-name" placeholder="">
+              <input type="text" class="form-control" id="last-name" placeholder="" required>
+              <span class="text-error" id="last-name-error"></span>
             </div>
             <div class="item">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="">
+              <input type="email" class="form-control" id="email" placeholder="" required>
+              <span class="text-error" id="email-error"></span>
             </div>
             <div class="item">
               <label for="phone-number" class="form-label">Phone</label>
               <input type="tel" class="form-control" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                placeholder="xxx-xxx-xxxx">
+                placeholder="" required>
+                <span class="text-error" id="phone-error"></span>
             </div>
             <div class="item">
               <label for="location" class="form-label">Location</label>
               <div class="autocomplete-container" id="autocomplete-container"></div>
+              <span class="text-error" id="location-error"></span>
+              
             </div>
+            
           </div>
         </fieldset>
       </form>
