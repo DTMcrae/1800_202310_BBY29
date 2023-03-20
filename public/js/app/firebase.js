@@ -4,8 +4,16 @@
 // User
 const getUser = () => {
   try {
-    const currentUser = firebase.auth().currentUser;
-    return currentUser;
+    
+    let currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      return currentUser
+    }
+
+    onAuthChanged((user) => {
+      currentUser = user;
+      console.log(user.uid);
+    });
   } catch (e) {
     console.error(e);
   }
@@ -13,7 +21,7 @@ const getUser = () => {
 
 const getUserID = () => {
   try {
-    const currentUserID = firebase.auth().currentUser.uid;
+    const currentUserID = getUser().uid;
     return currentUserID;
   } catch (e) {
     console.error(e);

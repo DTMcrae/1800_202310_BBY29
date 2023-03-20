@@ -15,7 +15,7 @@ const init = () => {
     ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.HELP));
   document
     .getElementById("submit-volunteer-post")
-    ?.addEventListener("click", onClickSubmitPost(REQUEST_TYPE.VOLUNTEER));
+    ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.VOLUNTEER));
 
   initAddPhoto();
 }
