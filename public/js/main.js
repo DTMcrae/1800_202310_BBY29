@@ -16,9 +16,10 @@ function insertNameFromFirestore() {
                 console.log(userName);
                 //$("#name-goes-here").text(userName); //jquery
                 document.getElementById("username").innerText = userName.split(' ')[0] + '!';;
-                var image = document.getElementById("profile-image");
-                image.setAttribute('src', userPicURL);
-
+                if (userPicURL != null) {
+                    var image = document.getElementById("profile-image");
+                    image.setAttribute('src', userPicURL);
+                }
             })
         }
     })
