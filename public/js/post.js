@@ -1,17 +1,21 @@
 import { addOptions, isValidLength } from "./app/form.js";
-import { CATEGORY, URGENCY } from "./app/request.js";
+import { CATEGORY, URGENCY, REQUEST_TYPE } from "./app/request.js";
 import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
 import { showSuccessModal } from "./modal.js";
 
 // initializer
 const init = () => {
+  // init select options html
   addOptions("select-urgency", URGENCY);
   addOptions("select-category", CATEGORY);
 
   document
-    .getElementById("submit-post")
-    ?.addEventListener("click", onClickSubmitPost);
+    .getElementById("submit-help-post")
+    ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.HELP));
+  document
+    .getElementById("submit-volunteer-post")
+    ?.addEventListener("click", onClickSubmitPost(REQUEST_TYPE.VOLUNTEER));
 
   initAddPhoto();
 }
@@ -19,7 +23,7 @@ window.addEventListener("load", init);
 
 
 // event function when clicks "Submit" button on the posting page.
-const onClickSubmitPost = async (event) => {
+const onClickSubmitPost = async (requestType) => {
   let data;
   try {
     const formDom = document.querySelector("form");
@@ -37,6 +41,7 @@ const onClickSubmitPost = async (event) => {
       detail: formDom.elements["detail"]?.value,
       meetup: formDom.elements["meetup"]?.value,
       createdDate: new Date().toLocaleString(),
+      requestType: requestType
     };
   
     const isValid = checkValidation(data);

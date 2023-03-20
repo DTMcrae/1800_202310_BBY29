@@ -21,3 +21,8 @@ export const CATEGORY = [
   "Pet-Related",
   "Others"
 ]
+
+export const REQUEST_TYPE = {
+  HELP: 'help',
+  VOLUNTEER: 'volunteer'
+}
