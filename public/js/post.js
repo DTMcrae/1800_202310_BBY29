@@ -2,7 +2,7 @@ import { addOptions, isValidLength } from "./app/form.js";
 import { CATEGORY, URGENCY, REQUEST_TYPE } from "./app/request.js";
 import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
-import { showSuccessModal } from "./modal.js";
+import { showSuccessModal } from "./app/modal.js";
 
 // initializer
 const init = () => {
@@ -61,7 +61,7 @@ const onClickSubmitPost = async (requestType) => {
 
       data = {...data, images: newImagesArray};
 
-      submitPost(data);
+      submitPost(data, requestType);
     } else {
       alert("check validation : in dev")
     }
@@ -186,12 +186,16 @@ const checkValidation = ({
   return isValid;
 };
 
-const submitPost = async (data) => {
+const submitPost = async (data, requestType) => {
   // post
   const docID = await rest.postRequest(data);
 
   // update requests to user
-  await rest.updateRequests(docID);
+  if (requestType == REQUEST_TYPE.HELP) {
+    await rest.updateHelpRequest(docID);
+  } else {
+    await rest.updateVolunteerRequest(docID);
+  }
 
   // show Success modal
   showSuccessModal({

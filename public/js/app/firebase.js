@@ -85,7 +85,7 @@ const postRequest = (data, callback) => {
   return docID;
 };
 
-const updateRequests = async (docID) => {
+const updateHelpRequest = async (docID) => {
   try {
     const currentUserID = getUserID();
 
@@ -98,13 +98,38 @@ const updateRequests = async (docID) => {
     }
 
     const userData = userDoc.data();
-    let requests = userData.requests || [];
+    let helpRequests = userData.helpRequests || [];
 
-    if (!requests.includes(docID)) {
-      requests.push(docID);
+    if (!helpRequests.includes(docID)) {
+      helpRequests.push(docID);
     }
 
-    await userRef.update({ requests });
+    await userRef.update({ helpRequests });
+    console.log("User requests updated successfully");
+  } catch (error) {
+    console.error("Error updating user requests", error);
+  }
+};
+const updateVolunteerRequest = async (docID) => {
+  try {
+    const currentUserID = getUserID();
+
+    const userRef = db.collection("users").doc(currentUserID);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User does not exist");
+      return;
+    }
+
+    const userData = userDoc.data();
+    let volunteerRequests = userData.volunteerRequests || [];
+
+    if (!volunteerRequests.includes(docID)) {
+      volunteerRequests.push(docID);
+    }
+
+    await userRef.update({ volunteerRequests });
     console.log("User requests updated successfully");
   } catch (error) {
     console.error("Error updating user requests", error);
@@ -117,7 +142,8 @@ export default {
   getUserID,
   onAuthChanged,
   postRequest,
-  updateRequests,
+  updateHelpRequest,
+  updateVolunteerRequest,
 };
 
 export {
@@ -125,6 +151,7 @@ export {
   getUserID,
   onAuthChanged,
   postRequest,
-  updateRequests,
+  updateHelpRequest,
+  updateVolunteerRequest,
 };
 
