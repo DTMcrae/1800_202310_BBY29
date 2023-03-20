@@ -12,12 +12,13 @@ var uiConfig = {
           country: "Canada",
           city: "Burnaby",
           address: "1234 Main St",
-          number: "123-456-7890"
+          number: "123-456-7890",
+          pfpURL: ""
           //optional default profile info      
         }).then(function () {
           console.log("New user added to firestore");
-          window.location.assign("main");       //re-direct to main.html after signup
           firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          window.location.assign("main");       //re-direct to main.html after signup
         }).catch(function (error) {
           console.log("Error adding new user: " + error);
         });
@@ -52,13 +53,3 @@ var uiConfig = {
 };
 
 ui.start('#firebaseui-auth-container', uiConfig);
-
-
-// firebase.auth().onAuthStateChanged((user) => {
-//   if (!user) {
-//     console.log("No user detected");
-//     ui.start('#firebaseui-auth-container', uiConfig);
-//   } else {
-//     window.location.assign("main");
-//   }
-// });
