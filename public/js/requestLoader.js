@@ -7,7 +7,7 @@ function displayCardsDynamically(collection) {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
             requests.forEach(doc => { //iterate thru each doc
                 var title = doc.data().title;       // get value of the "title" key
-                var details = doc.data().details;   // get value of the "details" key
+                var details = doc.data().detail;   // get value of the "details" key
                 var category = doc.data().category; // get value of the "category" key
                 var location = doc.data().location; // get value of the "location" key
                 var urgency = doc.data().urgency;   // get value of the "urgency" key
