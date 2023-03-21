@@ -16,7 +16,6 @@ firebase.auth().onAuthStateChanged((user) => {
                 {
 
                     let segment = document.querySelector(".no-chatrooms");
-                    console.log(segment);
                     if(segment != null) segment.remove();
 
                 var recipientID = doc.data().userID[0];
@@ -24,6 +23,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
                 var docID = doc.id;
 
+                if(doc == null || userid == null) return;
                 CreateNode(doc, userid, cardTemplate);
             }
             })
@@ -42,11 +42,31 @@ async function SetLocalData(doc, userid)
     if(recipientID == userid) recipientID = doc.data().userID[1];
 
     //Get the required request information from the database
-    await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
+    console.log("Chatroom for request: " + doc.data().requestID);
+
+    try
+    {
+    db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
+        if(requestDoc.data() != null)
+        {
         sessionStorage.setItem("requestName" + docID,requestDoc.data().title);
         sessionStorage.setItem("location" + docID,requestDoc.data().location);
         sessionStorage.setItem("category" + docID,requestDoc.data().category);
+        }
+        else
+        {
+            sessionStorage.setItem("requestName" + docID,"Request Closed");
+            sessionStorage.setItem("location" + docID," ");
+            sessionStorage.setItem("category" + docID," ");
+        }
     });
+    }
+    catch
+    {
+        sessionStorage.setItem("requestName" + docID,"Request Closed");
+        sessionStorage.setItem("location" + docID," ");
+        sessionStorage.setItem("category" + docID," ");
+    }
 
     //Get the required user information from the database
     await db.collection("users").doc(recipientID).get().then(userDoc => {
@@ -55,11 +75,19 @@ async function SetLocalData(doc, userid)
     });
 
     //Get the required message information from the database
+    try
+    {
     await db.collection("chatrooms").doc(doc.id).collection("messages").doc(doc.data().latestMessageID).get()
     .then(messageDoc => {
         sessionStorage.setItem("latestMessage" + docID, messageDoc.data().message);
         sessionStorage.setItem("latestMessageTime" + docID, messageDoc.data().time);
     });
+    }
+    catch
+    {
+        sessionStorage.setItem("latestMessage" + docID, "No Messages");
+        sessionStorage.setItem("latestMessageTime" + docID, " ");
+    }
 }
 
 async function CreateNode(doc, userid, cardTemplate)
@@ -100,6 +128,11 @@ function ApplyLimiter(maxChar, text) {
         i++;
     }
     if(result.length < text.length) result += "...";
+
+    if(result.length >= Number(Number(maxChar) - Number(3)))
+    {
+        return (result.substring(0, Number(Number(maxChar) - Number(3))) + "...");
+    }
 
     return result;
 }
