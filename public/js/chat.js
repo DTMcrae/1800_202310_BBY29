@@ -113,9 +113,6 @@ async function CreateNode(doc, userid, cardTemplate)
 //Limits the number of characters in a string of text.
 //Cuts the text off at the end of the previous word if it is too large.
 function ApplyLimiter(maxChar, text) {
-    console.log("Function Called:")
-    console.log("Max: " + Number(Number(maxChar) - Number(3)));
-    console.log("Text: " + text);
     var result = "";
     var segments = text.split(' ');
     var i = 0;
@@ -127,12 +124,13 @@ function ApplyLimiter(maxChar, text) {
         result += " " + segments[i];
         i++;
     }
-    if(result.length < text.length) result += "...";
 
-    if(result.length >= Number(Number(maxChar) - Number(3)))
+    if(result.length >= Number(Number(maxChar) - Number(3)) || result.length <= 0)
     {
-        return (result.substring(0, Number(Number(maxChar) - Number(3))) + "...");
+        return (text.substring(0, Number(Number(maxChar) - Number(3))) + "...");
     }
+
+    if(result.length < text.length) result += "...";
 
     return result;
 }
