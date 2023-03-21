@@ -15,9 +15,9 @@ function displayCardsDynamically(collection) {
                 let newcard = cardTemplate.content.cloneNode(true);
 
                 //update title and text and image
-                newcard.querySelector('.request-title').innerHTML = title;
-                newcard.querySelector('.request-details').innerHTML = details;
-                newcard.querySelector('.request-location').innerHTML = location;
+                newcard.querySelector('.request-title').innerHTML = ApplyLimiter(40, title);
+                newcard.querySelector('.request-details').innerHTML = ApplyLimiter(40,details);
+                newcard.querySelector('.request-location').innerHTML = ApplyLimiter(40,location);
                 newcard.querySelector('.request-category').innerHTML = category;
                 newcard.querySelector('.request-urgency').innerHTML = urgency;
                 //newcard.querySelector('.request-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
@@ -30,3 +30,29 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("requests");  //input param is the name of the collection
+
+//Limits the number of characters in a string of text.
+//Cuts the text off at the end of the previous word if it is too large.
+function ApplyLimiter(maxChar, text) {
+    var result = "";
+    var segments = text.split(' ');
+    var i = 0;
+
+    while(result.length < Number(Number(maxChar) - Number(3)))
+    {
+        if(result.length >= text.length) break;
+        if(result.length + (segments[i]).length + Number(1) >= Number(Number(maxChar) - Number(3))) break;
+        result += " " + segments[i];
+        i++;
+    }
+
+    if(result.length >= Number(Number(maxChar) - Number(3)) || result.length <= 0)
+    {
+        console.log("too long")
+        return (text.substring(0, Number(Number(maxChar) - Number(3))) + "...");
+    }
+
+    if(result.length < text.length) result += "...";
+
+    return result;
+}
