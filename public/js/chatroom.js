@@ -29,6 +29,11 @@ firebase.auth().onAuthStateChanged((user) => {
                         //If the message already exists on the page, ignore it
                         if(document.getElementById(message.id) != null) return;
 
+                        if(message.sender == null) return;
+
+                        let segment = document.querySelector(".no-chatrooms");
+                        if(segment != null) segment.remove();
+
                         //Create a received message card if the message is not from the user
                         if(message.data().sender == recipientID)
                         {
@@ -68,7 +73,7 @@ async function SetLocalData(doc, recipientID)
     //Get the required request information from the database
     await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
         sessionStorage.setItem("requestName",requestDoc.data().title);
-        sessionStorage.setItem("requestDetails",requestDoc.data().details);
+        sessionStorage.setItem("requestDetails",requestDoc.data().detail);
     });
 
     //Get the required user information from the dataBase;
