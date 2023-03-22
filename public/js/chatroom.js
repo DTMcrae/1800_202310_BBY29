@@ -97,15 +97,33 @@ async function UpdateHeader(doc, recipientid, userid)
     newcard.querySelector('button').href = "/html/request-details.html?docID="+doc.data().requestID;
 
     document.querySelector(".send-message").setAttribute("onclick","SubmitMessage(\"" + userid + "\")");
+    var input = document.getElementById("message");
+
+    //Stop the form from refreshing the page
+    input.addEventListener("submit", function(e) {
+        e.preventDefault();
+    })
+
+    document.getElementById("inputMessage").addEventListener("keydown", function(key) {
+        if(key.code == "Enter")
+        {
+            SubmitMessage(userid);
+        }
+    })
+    
 }
 
 function SubmitMessage(userID) {
+
+    //Prevent messages from being sent multiple times
+    if(sessionStorage.getItem("sendProcessing") == "true") return;
+    sessionStorage.setItem("sendProcessing",true);
 
     var messageToSend = document.getElementById("inputMessage").value;
     let params = new URL( window.location.href ); //get URL of search bar
     let ID = params.searchParams.get( "docID" ); //get value for key "id"
 
-    if(messageToSend == null || ID == null) return;
+    if(messageToSend == null || messageToSend == "" || ID == null) return;
 
     //Write the message to the database, and assign its id as the latest message
     db.collection("chatrooms").doc(ID).collection("messages").add({ 
@@ -115,10 +133,12 @@ function SubmitMessage(userID) {
       }).then(newDoc => {
         console.log("Created new message with id: " + newDoc.id);
         document.getElementById("inputMessage").value = "";
+        sessionStorage.setItem("sendProcessing",false);
         db.collection("chatrooms").doc(ID).update({
             latestMessageID: newDoc.id
         })
       }).catch(function (error) {
         console.log("Error sending message " + error);
+        sessionStorage.setItem("sendProcessing",false);
       });
     }
