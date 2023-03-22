@@ -1,3 +1,5 @@
+import { showSuccessModal } from "./app/modal.js";
+
 var currentUser;   //put this right after you start script tag before writing any functions.
 
 function populateUserInfo() {
@@ -40,38 +42,9 @@ function populateUserInfo() {
 //call the function to run it 
 populateUserInfo();
 
+var btn = document.getElementById("save-changes");
 
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-var ok = document.getElementById("modal-ok-button");
-// When the user clicks the button, open the modal 
-btn.onclick = function () {
-    modal.style.display = "block";
-}
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
-    saveUserInfoAndRedirect();
-}
-ok.onclick = function () {
-    modal.style.display = "none";
-    saveUserInfoAndRedirect();
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        saveUserInfoAndRedirect();
-    }
-}
-
+btn.addEventListener('click', saveUserInfoAndRedirect);
 
 function saveUserInfoAndRedirect() {
     //enter code here
@@ -80,11 +53,11 @@ function saveUserInfoAndRedirect() {
     var phoneReg = /^([0-9]{3})+\-([0-9]{3})+\-([0-9]{4})$/;
     var locationReg = /^[A-Za-z0-9',-\s]+$/;
     //a) get user entered values
-    userFirstName = document.getElementById('first-name').value;
-    userLastName = document.getElementById('last-name').value;
-    userEmail = document.getElementById('email').value;
-    userPhone = document.getElementById('phone').value;
-    userCity = document.getElementById('location').value;
+    let userFirstName = document.getElementById('first-name').value;
+    let userLastName = document.getElementById('last-name').value;
+    let userEmail = document.getElementById('email').value;
+    let userPhone = document.getElementById('phone').value;
+    let userCity = document.getElementById('location').value;
 
     var firstNameValid = true;
     var lastNameValid = true;
@@ -159,7 +132,12 @@ function saveUserInfoAndRedirect() {
     })
         .then(() => {
             console.log("Document updated");
-            window.location.href = 'profile';
+            showSuccessModal({
+                onShow: () => {
+                  setTimeout(() => {
+                    window.location.href = 'profile';
+                  }, 1200)
+                }
+              },);
         })
-
 }
