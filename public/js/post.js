@@ -4,18 +4,58 @@ import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
 import { showSuccessModal } from "./app/modal.js";
 
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation');
+
+  const inputElement = document.createElement("input");
+  inputElement.setAttribute("type", "text");
+  inputElement.setAttribute("id", "location");
+  inputElement.setAttribute("class", "form-control");
+  inputElement.setAttribute("required", true);
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+
+
+
+
+
+
+
+
+
+
+
 // initializer
 const init = () => {
   // init select options html
   addOptions("select-urgency", URGENCY);
   addOptions("select-category", CATEGORY);
 
-  document
-    .getElementById("submit-help-post")
-    ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.HELP));
-  document
-    .getElementById("submit-volunteer-post")
-    ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.VOLUNTEER));
+  // document
+  //   .getElementById("submit-help-post")
+  //   ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.HELP));
+  // document
+  //   .getElementById("submit-volunteer-post")
+  //   ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.VOLUNTEER));
 
   initAddPhoto();
 }
@@ -63,7 +103,7 @@ const onClickSubmitPost = async (requestType) => {
 
       submitPost(data, requestType);
     } else {
-      alert("check validation : in dev")
+      // alert("check validation : in dev")
     }
 
   } catch(e) {

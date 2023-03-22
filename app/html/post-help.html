@@ -36,89 +36,85 @@
 
 <body>
   <!-- Header -->
-  <nav class="navbar fixed-top navbar-back">
-    <div class="container-fluid">
-      <a href="/post-select-type">
-        <button type="button" class="btn" aria-label="Back">
-          <span class="material-symbols-outlined">
-            arrow_back_ios
-          </span>
+  <form class="needs-validation" novalidate>
+    <nav class="navbar fixed-top navbar-back">
+      <div class="container-fluid">
+        <a href="/post-select-type">
+          <button type="button" class="btn" aria-label="Back">
+            <span class="material-symbols-outlined">
+              arrow_back_ios
+            </span>
+          </button>
+        </a>
+        <button id="submit-help-post" type="submit" class="btn btn-primary">
+          Submit
         </button>
-      </a>
-      <button
-        id="submit-help-post"
-        type="button"
-        class="btn btn-primary"
-      >
-        Submit
-      </button>
-    </div>
-  </nav>
+      </div>
+    </nav>
 
-  <!-- Main -->
-  <div id="container" class="container-padding-vertical">
-    <h2 class="container-padding-horizontal">
-      <span class="material-symbols-outlined">
-        front_hand
-      </span>
-      Request for Help
-    </h2>
-    <div class="form">
-      <form action="">
-        <fieldset>
-          <legend class="hidden">Request for help</legend>
-          <div class="add-photo">
-            <input id="upload-images" type="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" hidden>
-            <label for="upload-images">
-              <a type="button" class="btn btn-add-photo" aria-label="add photos">
-                <span class="material-symbols-outlined">
-                  add_a_photo
-                </span>
-                <p>
-                  Add Photos <br />
-                  (<i class="add-photo-number">0</i>/5)
-                </p>
-              </a>
-            </label>
-            <output id="upload-output">
-            </output>
-          </div>
-          <div class="container-padding-horizontal">
-            <div class="item">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="10 ~ 80" min="10" max="80">
-            </div>
-            <div class="item">
-              <label for="location" class="form-label">Location</label>
-              <div class="autocomplete-container location" id="autocomplete-container"></div>
-            </div>
-            <div class="item">
-              <label for="urgency" class="form-label">Urgency</label>
-              <select class="form-select select-urgency" aria-label="urgency" id="urgency">
-                <option value="" disabled selected>Select the Urgency</option>
-                <!-- options -->
-              </select>
-            </div>
-            <div class="item">
-              <label for="category" class="form-label">Category</label>
-              <select class="form-select select-category" aria-label="category" id="category">
-                <option value="" disabled selected>Select the Category</option>
-                <!-- options -->
-              </select>
-            </div>
-            <div class="item">
-              <label for="detail" class="form-label">Describe detail</label>
-              <textarea class="form-control" id="detail" maxlength="800" rows="8" placeholder="20 ~ 800"></textarea>
-            </div>
-            <div class="item">
-              <label for="meetup" class="form-label">Describe where to meet</label>
-              <textarea class="form-control" id="meetup" maxlength="300" rows="4" placeholder="10 ~ 300"></textarea>
+    <!-- Main -->
+    <div id="container" class="container-padding-vertical">
+      <h2 class="container-padding-horizontal">
+        <span class="material-symbols-outlined">
+          front_hand
+        </span>
+        Request for Help
+      </h2>
+      <div class="form">
+        <div class="add-photo">
+          <input id="upload-images" type="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" hidden>
+          <label for="upload-images">
+            <a type="button" class="btn btn-add-photo" aria-label="add photos">
+              <span class="material-symbols-outlined">
+                add_a_photo
+              </span>
+              <p>
+                Add Photos <br />
+                (<i class="add-photo-number">0</i>/5)
+              </p>
+            </a>
+          </label>
+          <output id="upload-output">
+          </output>
+        </div>
+        <div class="container-padding-horizontal">
+          <div class="item">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="10 ~ 80" min="10" max="80" pattern=".{10, 80}" required>
+            <div class="invalid-feedback">
+              Please enter a title between 10 and 80 characters in length.
             </div>
           </div>
-        </fieldset>
-      </form>
+          <div class="item">
+            <label for="location" class="form-label">Location</label>
+            <div class="autocomplete-container location" id="autocomplete-container"></div>
+          </div>
+          <div class="item">
+            <label for="urgency" class="form-label">Urgency</label>
+            <select class="form-select select-urgency" aria-label="urgency" id="urgency">
+              <option value="" disabled selected>Select the Urgency</option>
+              <!-- options -->
+            </select>
+          </div>
+          <div class="item">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select select-category" aria-label="category" id="category">
+              <option value="" disabled selected>Select the Category</option>
+              <!-- options -->
+            </select>
+          </div>
+          <div class="item">
+            <label for="detail" class="form-label">Describe detail</label>
+            <textarea class="form-control" id="detail" maxlength="800" rows="8" placeholder="20 ~ 800"></textarea>
+          </div>
+          <div class="item">
+            <label for="meetup" class="form-label">Describe where to meet</label>
+            <textarea class="form-control" id="meetup" maxlength="300" rows="4" placeholder="10 ~ 300"></textarea>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </form>
 
   <!-- Navigation -->
   <div class="main-nav"></div>
