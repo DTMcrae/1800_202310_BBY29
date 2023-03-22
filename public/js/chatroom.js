@@ -94,7 +94,7 @@ async function UpdateHeader(doc, recipientid, userid)
     newcard.querySelector('.recipient').innerHTML = sessionStorage.getItem("recipientName");
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName");
     newcard.querySelector('.request-details').innerHTML = sessionStorage.getItem("requestDetails");
-    newcard.querySelector('button').href = "/html/request-details.html?docID="+doc.data().requestID;
+    newcard.querySelector('.request-link').setAttribute("href","/html/request-details.html?docID="+doc.data().requestID);
 
     document.querySelector(".send-message").setAttribute("onclick","SubmitMessage(\"" + userid + "\")");
     var input = document.getElementById("message");
