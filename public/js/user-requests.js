@@ -4,7 +4,7 @@ firebase.auth().onAuthStateChanged((user) => {
   if (!user) return;
 
   db.collection("users").doc(user.uid).get().then((userdoc) => {
-    userdoc.data().requestsAccepted.forEach(requestID => {
+    userdoc.data().requestsAccepted?.forEach(requestID => {
         db.collection("requests").doc(requestID).get().then(requestDoc => {
 
             if(requestDoc.data() == null) return;
@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged((user) => {
         })
     });
 
-    userdoc.data().requestsCreated.forEach(requestID => {
+    userdoc.data().requestsCreated?.forEach(requestID => {
         db.collection("requests").doc(requestID).get().then(requestDoc => {
 
             if(requestDoc.data() == null) return;

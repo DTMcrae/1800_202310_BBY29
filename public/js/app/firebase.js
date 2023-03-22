@@ -168,7 +168,6 @@ export default {
   onAuthChanged,
   postRequest,
   updateRequestCreated,
-
 };
 
 export {

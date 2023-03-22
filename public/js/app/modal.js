@@ -37,7 +37,13 @@ const createSuccessModal = (message) => {
   box.setAttribute('id', "success-modal-wrapper");
 
   box.innerHTML = `
-    <div class="modal fade" id="success-modal" role="dialog" aria-labelledby="success-modal" aria-hidden="false">
+    <div
+      id="success-modal"
+      class="modal fade"
+      role="dialog"
+      aria-labelledby="success-modal"
+      aria-hidden="false"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="img">
@@ -58,7 +64,7 @@ export const showSuccessModal = ({
   onClose = () => {},
 } = {}) => {
   //initialize modal
-  console.log(message)
+  // console.log(message)
   createSuccessModal(message);
   $('#success-modal').modal('toggle');
 
