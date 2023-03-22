@@ -29,7 +29,7 @@ firebase.auth().onAuthStateChanged((user) => {
                         //If the message already exists on the page, ignore it
                         if(document.getElementById(message.id) != null) return;
 
-                        if(message.data().sender == null || message.data().sender == "") return;
+                        if(message.sender == null) return;
 
                         let segment = document.querySelector(".no-chatrooms");
                         if(segment != null) segment.remove();

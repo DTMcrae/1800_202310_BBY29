@@ -23,7 +23,6 @@ firebase.auth().onAuthStateChanged((user) => {
         })
     });
 
-    console.log(userdoc.data())
     userdoc.data().requestsCreated?.forEach(requestID => {
         db.collection("requests").doc(requestID).get().then(requestDoc => {
 

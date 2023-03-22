@@ -9,7 +9,10 @@ function displayRequestInfo() {
         .get()
         .then( doc => {
             thisRequest = doc.data();
+            const {code, title, category, location, urgency, detail, images} = thisRequest;
+
             requestCode = thisRequest.code;
+
             requestTitle = thisRequest.title;
             requestCategory = thisRequest.category;
             requestLocation = thisRequest.location;
@@ -25,6 +28,7 @@ function displayRequestInfo() {
             
             // only populate title, and image
             document.getElementById( "request-title" ).innerHTML = requestTitle;
+            document.getElementById( "request-image").setAttribute("src", images?.[0]);
             document.getElementById( "request-category" ).innerHTML = requestCategory;
             document.getElementById( "request-location" ).innerHTML = requestLocation;
             document.getElementById( "request-urgency" ).innerHTML = requestUrgency;
