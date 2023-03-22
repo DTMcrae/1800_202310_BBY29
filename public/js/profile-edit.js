@@ -109,12 +109,12 @@ function saveUserInfoAndRedirect() {
         document.getElementById('phone').style.borderColor = "green";
     };
 
-    if (!userCity.match(locationReg)){
+    if (!userCity.match(locationReg)) {
         document.getElementById('location').style.borderColor = "red";
         document.getElementById('location-error').innerHTML = "Please enter a valid address";
         document.getElementById('autocomplete-container').appendChild(document.getElementById('location-error'));
         locationValid = false;
-    }else {
+    } else {
         document.getElementById('location').style.borderColor = "green";
     };
 
@@ -130,14 +130,13 @@ function saveUserInfoAndRedirect() {
         number: userPhone,
         city: userCity
     })
-        .then(() => {
-            console.log("Document updated");
-            showSuccessModal({
-                onShow: () => {
-                  setTimeout(() => {
-                    window.location.href = 'profile';
-                  }, 1200)
-                }
-              },);
-        })
+
+    console.log("Document updated");
+    showSuccessModal({
+        onShow: () => {
+            setTimeout(() => {
+                window.location.href = 'profile';
+            }, 1200)
+        }
+    },);
 }
