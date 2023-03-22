@@ -191,11 +191,7 @@ const submitPost = async (data, requestType) => {
   const docID = await rest.postRequest(data);
 
   // update requests to user
-  if (requestType == REQUEST_TYPE.HELP) {
-    await rest.updateHelpRequest(docID);
-  } else {
-    await rest.updateVolunteerRequest(docID);
-  }
+  await rest.updateRequestCreated(docID);
 
   // show Success modal
   showSuccessModal({

@@ -84,6 +84,31 @@ const postRequest = (data, callback) => {
 
   return docID;
 };
+const updateRequestCreated = async (docID) => {
+  try {
+    const currentUserID = getUserID();
+
+    const userRef = db.collection("users").doc(currentUserID);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User does not exist");
+      return;
+    }
+
+    const userData = userDoc.data();
+    let requestsCreated = userData.requestsCreated || [];
+
+    if (!requestsCreated.includes(docID)) {
+      requestsCreated.push(docID);
+    }
+
+    await userRef.update({ requestsCreated });
+    console.log("User requests updated successfully");
+  } catch (error) {
+    console.error("Error updating user requests", error);
+  }
+};
 
 const updateHelpRequest = async (docID) => {
   try {
@@ -142,8 +167,8 @@ export default {
   getUserID,
   onAuthChanged,
   postRequest,
-  updateHelpRequest,
-  updateVolunteerRequest,
+  updateRequestCreated,
+
 };
 
 export {
@@ -151,7 +176,6 @@ export {
   getUserID,
   onAuthChanged,
   postRequest,
-  updateHelpRequest,
-  updateVolunteerRequest,
+  updateRequestCreated,
 };
 
