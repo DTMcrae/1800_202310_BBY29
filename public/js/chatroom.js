@@ -68,10 +68,6 @@ firebase.auth().onAuthStateChanged((user) => {
 
 });
 
-function test() {
-    console.log("What the fuck?");
-}
-
 async function SetLocalData(doc, recipientID)
 {
     var docID = doc.id;
@@ -95,6 +91,11 @@ async function SetLocalData(doc, recipientID)
     });
 }
 
+function OpenDetailPage(link)
+{
+    window.location.assign(link);
+}
+
 async function UpdateHeader(doc, recipientid, userid)
 {
     await SetLocalData(doc,recipientid);
@@ -106,10 +107,7 @@ async function UpdateHeader(doc, recipientid, userid)
     newcard.querySelector('.recipient').innerHTML = sessionStorage.getItem("recipientName");
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName");
     newcard.querySelector('.request-details').innerHTML = sessionStorage.getItem("requestDetails");
-    newcard.querySelector('.request-link').setAttribute("href","/html/request-details.html?docID="+doc.data().requestID);
-
-    newcard.querySelector(".request-link").setAttribute("onclick","test()");
-
+    newcard.querySelector('.request-link').setAttribute("onclick","OpenDetailPage(\"/html/request-details.html?docID="+doc.data().requestID + "\")");
 
     newcard.querySelector(".leave-chat").setAttribute("onclick","LeaveRoom(\"" + userid + "\")");
 
