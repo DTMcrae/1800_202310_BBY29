@@ -47,13 +47,7 @@ firebase.auth().onAuthStateChanged((user) => {
     db.collection("requests").doc(ID).get().then(doc => {
 
         let acceptButton = document.querySelector(".requestButton");
-        var creatorID = doc.data().user.uid;
-
-        if(creatorID == user.id && creatorID != null)
-        {
-            acceptButton.innerHTML = "Delete Request";
-            return;
-        }
+        let cancelButton = document.querySelector(".cancelButton");
 
         try
         {
@@ -64,6 +58,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 console.log("User is present in acceptedUsers");
                 acceptButton.innerHTML = "Open Chat";
 
+                cancelButton.setAttribute("onclick","AbandonRequest(\"" + user.uid + "\",\"" + ID + "\")");
                 try
                 {
                 db.collection("chatrooms").get().then(chatrooms => {
@@ -82,12 +77,19 @@ firebase.auth().onAuthStateChanged((user) => {
                 catch
                 {
                     //chatroom collection does not exist
-                    console.log("Chatroom collection does not exist")
+                    console.log("Chatroom collection does not exist!!!");
                 }
+            }
+
+            else if(doc.data().user.uid == user.uid)
+            {
+                if(cancelButton != null) cancelButton.remove();
+                acceptButton.innerHTML = "Delete Request";
             }
 
             else
             {
+                if(cancelButton != null) cancelButton.remove();
                 console.log("Assigning data");
                 acceptButton.setAttribute("onclick","AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
             }
@@ -102,6 +104,41 @@ firebase.auth().onAuthStateChanged((user) => {
     })
 
 });
+
+async function AbandonRequest(userid, requestid)
+{
+    //Remove requestID from user doc array
+    //Remove userid from request doc array
+
+    db.collection("users").doc(userid).update(
+    {
+        requestsAccepted: firebase.firestore.FieldValue.arrayRemove(requestid)
+    });
+    console.log("Removed requestID from user's accepted requests");
+    db.collection("requests").doc(requestid).update(
+    {
+        usersAccepted: firebase.firestore.FieldValue.arrayRemove(userid)
+    });
+    console.log("Removed userID from requests accepted users");
+
+    await db.collection("chatrooms").where("requestID","==",requestid).get().then(chatrooms => {
+        chatrooms.forEach(chatroom => {
+            if(chatroom.data().userID.includes(userid))
+            {
+                db.collection("chatrooms").doc(chatroom.id).collection("messages").add({ 
+                    message: "User has left the chat.",
+                    sender: userid,              
+                    time: new Date().toLocaleString()    
+                  }).then(newDoc => {
+                    db.collection("chatrooms").doc(chatroom.id).update({
+                        latestMessageID: newDoc.id
+                    })
+                  })
+            }
+
+        })
+    })
+}
 
 async function AcceptRequest(userid,requestid)
 {
