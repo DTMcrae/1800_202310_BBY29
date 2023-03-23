@@ -2,6 +2,8 @@ firebase.auth().onAuthStateChanged((user) => {
 
     if(!user) return;
 
+    sessionStorage.setItem("sendProcessing",false);
+
     let params = new URL( window.location.href ); //get URL of search bar
     let ID = params.searchParams.get( "docID" ); //get value for key "id"
     var userid = user.uid;
