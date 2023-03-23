@@ -5,9 +5,9 @@ var currentUser;
 var loadFile = function (event) {
   var image = document.getElementById("profile-image");
   file = event.target.files[0];
-  
-  if (file !== undefined && file.type === ("image/png" || "image/jpeg" || "image/jpg")) {
-
+  console.log(typeof file.type);
+  if (file !== undefined && file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png") {
+    
     image.src = URL.createObjectURL(event.target.files[0]);
     let fileName = file.name;
     firebase.auth().onAuthStateChanged(user => {
