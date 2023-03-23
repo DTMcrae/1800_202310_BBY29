@@ -11,10 +11,12 @@ function displayCardsDynamically(collection) {
                 var category = doc.data().category; // get value of the "category" key
                 var location = doc.data().location; // get value of the "location" key
                 var urgency = doc.data().urgency;   // get value of the "urgency" key
+                var image = doc.data().images?.[0];   // get value of the "urgency" key
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true);
 
                 //update title and text and image
+                newcard.querySelector('.img-thumbnail').setAttribute("src", image);
                 newcard.querySelector('.request-title').innerHTML = ApplyLimiter(40, title);
                 newcard.querySelector('.request-details').innerHTML = ApplyLimiter(40,details);
                 newcard.querySelector('.request-location').innerHTML = ApplyLimiter(40,location);
