@@ -2,9 +2,8 @@ function displayCardsDynamically(collection) {
     $('#requestTemplate').load("/html/requestTemplate.html");   //Load the template file
     let cardTemplate = document.getElementById("requestTemplate"); //Load the request card template
 
-    db.collection(collection).get()   //the collection called "hikes"
+    db.collection(collection).orderBy("createdDate", "desc").get()
         .then(requests=> {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
             requests.forEach(doc => { //iterate thru each doc
                 var title = doc.data().title;       // get value of the "title" key
                 var details = doc.data().detail;   // get value of the "details" key
@@ -22,7 +21,6 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.request-location').innerHTML = ApplyLimiter(40,location);
                 newcard.querySelector('.request-category').innerHTML = category;
                 newcard.querySelector('.request-urgency').innerHTML = urgency;
-                //newcard.querySelector('.request-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
                 newcard.querySelector('a').href = "/html/request-details.html?docID="+docID;
 
                 //attach to gallery
