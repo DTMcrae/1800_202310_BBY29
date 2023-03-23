@@ -1,8 +1,8 @@
-function displayCardsDynamically(collection) {
+firebase.auth().onAuthStateChanged((user) => {
     $('#requestTemplate').load("/html/requestTemplate.html");   //Load the template file
     let cardTemplate = document.getElementById("requestTemplate"); //Load the request card template
 
-    db.collection(collection).orderBy("createdDate", "desc").get()
+    db.collection("requests").orderBy("createdDate", "desc").get()
         .then(requests=> {
             requests.forEach(doc => { //iterate thru each doc
                 var title = doc.data().title;       // get value of the "title" key
@@ -23,13 +23,27 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.request-urgency').innerHTML = urgency;
                 newcard.querySelector('a').href = "/html/request-details.html?docID="+docID;
 
+                console.log(doc.data().user.uid + " vs " + user.uid);
+                if(doc.data().user.uid == user.uid)
+                {
+                    newcard.querySelector(".request-relation").innerHTML = "You Created This Request";
+                }
+
+                try
+                {
+                    if(doc.data().usersAccepted.includes(user.uid))
+                    {
+                        newcard.querySelector(".request-relation").innerHTML = "You Accepted This Request";
+                    }
+                } catch {
+                    //Wow nothing happens
+                }
+
                 //attach to gallery
-                document.getElementById(collection + "-go-here").appendChild(newcard);
+                document.getElementById("requests-go-here").appendChild(newcard);
             })
         })
-}
-
-displayCardsDynamically("requests");  //input param is the name of the collection
+});
 
 //Limits the number of characters in a string of text.
 //Cuts the text off at the end of the previous word if it is too large.
