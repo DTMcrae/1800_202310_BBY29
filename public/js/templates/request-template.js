@@ -11,7 +11,6 @@ export const createRequestTemplate = ({
   requestId,
   ...data
 }) => {
-  console.log('data',data)
   let box = document.createElement("div");
   box.setAttribute('class', "card-wrapper");
 
