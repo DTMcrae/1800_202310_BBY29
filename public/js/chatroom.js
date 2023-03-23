@@ -68,6 +68,10 @@ firebase.auth().onAuthStateChanged((user) => {
 
 });
 
+function test() {
+    console.log("What the fuck?");
+}
+
 async function SetLocalData(doc, recipientID)
 {
     var docID = doc.id;
@@ -80,7 +84,13 @@ async function SetLocalData(doc, recipientID)
 
     //Get the required user information from the dataBase;
     await db.collection("users").doc(recipientID).get().then(userDoc => {
-        sessionStorage.setItem("recipientName", userDoc.data().name);
+        try
+        {
+            sessionStorage.setItem("recipientName", userDoc.data().name);
+        }
+        catch {
+            sessionStorage.setItem("recipientName" + docID, "No Recipient");
+        }
         console.log("Recipient: " + sessionStorage.getItem("recipientName"));
     });
 }
@@ -98,6 +108,11 @@ async function UpdateHeader(doc, recipientid, userid)
     newcard.querySelector('.request-details').innerHTML = sessionStorage.getItem("requestDetails");
     newcard.querySelector('.request-link').setAttribute("href","/html/request-details.html?docID="+doc.data().requestID);
 
+    newcard.querySelector(".request-link").setAttribute("onclick","test()");
+
+
+    newcard.querySelector(".leave-chat").setAttribute("onclick","LeaveRoom(\"" + userid + "\")");
+
     document.querySelector(".send-message").setAttribute("onclick","SubmitMessage(\"" + userid + "\")");
     var input = document.getElementById("message");
 
@@ -113,6 +128,42 @@ async function UpdateHeader(doc, recipientid, userid)
         }
     })
     
+}
+
+async function LeaveRoom(userID) {
+    //remove user from the userID
+    //If no more users are present, delete the file
+
+    console.log("Function called");
+
+    let params = new URL( window.location.href ); //get URL of search bar
+    let ID = params.searchParams.get( "docID" ); //get value for key "id" 
+
+    await db.collection("chatrooms").doc(ID).update({
+        userID: firebase.firestore.FieldValue.arrayRemove(userID)
+    });
+
+    await db.collection("chatrooms").doc(ID).collection("messages").add({ 
+        message: "User has left the chat.",
+        sender: userID,              
+        time: new Date().toLocaleString()    
+    }).then(newDoc => {
+            db.collection("chatrooms").doc(ID).update({
+            latestMessageID: newDoc.id
+        });
+    });
+
+    await db.collection("chatrooms").doc(ID).get().then(chatroom => {
+        if(chatroom.data().userID.length <= 0)
+        {
+            db.collection("chatrooms").doc(ID).delete();
+        }
+    })
+
+    window.location.assign("/html/chat.html");
+
+    
+
 }
 
 function SubmitMessage(userID) {
