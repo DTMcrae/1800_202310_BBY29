@@ -78,6 +78,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 {
                     //chatroom collection does not exist
                     console.log("Chatroom collection does not exist!!!");
+                    if(cancelButton != null) cancelButton.remove();
                 }
             }
 
@@ -99,6 +100,7 @@ firebase.auth().onAuthStateChanged((user) => {
             //acceptedUsers field does not exist.
             console.log("Request's acceptedUsers field does not exist")
             console.log("Assigning data");
+            if(cancelButton != null) cancelButton.remove();
             acceptButton.setAttribute("onclick","AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
         }
     })
