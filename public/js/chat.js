@@ -70,7 +70,12 @@ async function SetLocalData(doc, userid)
 
     //Get the required user information from the database
     await db.collection("users").doc(recipientID).get().then(userDoc => {
+        try
+        {
         sessionStorage.setItem("recipientName" + docID, userDoc.data().name);
+        } catch {
+            sessionStorage.setItem("recipientName" + docID, "No Recipient");
+        }
         console.log("Recipient: " + sessionStorage.getItem("recipientName"));
     });
 
