@@ -32,6 +32,7 @@
 
   --color-text-gray: rgb(147, 147, 147);
   --color-placeholder: rgb(172, 172, 172);
+  --color-disabled:rgb(129, 129, 129);
 
   --height-header: 50px;
   --height-nav: 60px;
@@ -138,7 +139,7 @@ img {
 
 * {
   box-sizing: border-box !important;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 textarea {
@@ -219,6 +220,10 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 .btn-primary:focus {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
+}
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: var(--color-disabled);
+  border-color: var(--color-disabled);
 }
 
 .btn-highlight,

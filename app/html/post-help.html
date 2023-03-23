@@ -35,8 +35,8 @@
 </head>
 
 <body>
-  <!-- Header -->
   <form class="needs-validation" novalidate>
+    <!-- Header -->
     <nav class="navbar fixed-top navbar-back">
       <div class="container-fluid">
         <a href="/post-select-type">
@@ -46,7 +46,7 @@
             </span>
           </button>
         </a>
-        <button id="submit-help-post" type="submit" class="btn btn-primary">
+        <button id="submit-help-post" type="button" class="submit-post btn btn-primary">
           Submit
         </button>
       </div>
@@ -78,9 +78,12 @@
           </output>
         </div>
         <div class="container-padding-horizontal">
+          <p class="input-placeholder">Please select at least one image.</p>
+        </div>
+        <div class="container-padding-horizontal">
           <div class="item">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="10 ~ 80" min="10" max="80" pattern=".{10, 80}" required>
+            <input type="text" class="form-control" id="title" placeholder="10 ~ 80" min="10" max="80" pattern=".{10,80}" required>
             <div class="invalid-feedback">
               Please enter a title between 10 and 80 characters in length.
             </div>
@@ -91,25 +94,31 @@
           </div>
           <div class="item">
             <label for="urgency" class="form-label">Urgency</label>
-            <select class="form-select select-urgency" aria-label="urgency" id="urgency">
+            <select class="form-select select-urgency" aria-label="urgency" id="urgency" pattern=".{1,}" required>
               <option value="" disabled selected>Select the Urgency</option>
               <!-- options -->
             </select>
           </div>
           <div class="item">
             <label for="category" class="form-label">Category</label>
-            <select class="form-select select-category" aria-label="category" id="category">
+            <select class="form-select select-category" aria-label="category" id="category" pattern=".{1,}" required>
               <option value="" disabled selected>Select the Category</option>
               <!-- options -->
             </select>
           </div>
           <div class="item">
             <label for="detail" class="form-label">Describe detail</label>
-            <textarea class="form-control" id="detail" maxlength="800" rows="8" placeholder="20 ~ 800"></textarea>
+            <textarea class="form-control" id="detail" maxlength="800" rows="8" placeholder="20 ~ 800" minlength="20" maxlength="800" required></textarea>
+            <div class="invalid-feedback">
+              Please enter the detail for this request between 20 and 800 characters in length.
+            </div>
           </div>
           <div class="item">
             <label for="meetup" class="form-label">Describe where to meet</label>
-            <textarea class="form-control" id="meetup" maxlength="300" rows="4" placeholder="10 ~ 300"></textarea>
+            <textarea class="form-control" id="meetup" maxlength="300" rows="4" placeholder="10 ~ 300" minlength="10" maxlength="300" required></textarea>
+            <div class="invalid-feedback">
+              Please enter the detail about where to meet between 10 and 300 characters in length.
+            </div>
           </div>
         </div>
       </div>

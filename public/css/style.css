@@ -87,7 +87,6 @@
   background-color: var(--color-primary);
 }
 
-
 /* Browse */
 .detailNav {
   width: 50%;
@@ -159,7 +158,11 @@
   width: 100%;
   overflow: auto;
   padding: 10px 30px;
-  margin: 20px 0;
+  margin: 20px 0 0;
+}
+.input-placeholder {
+  color: var(--color-placeholder);
+  margin-bottom: 20px;
 }
 
 .btn-add-photo {

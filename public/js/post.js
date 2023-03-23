@@ -4,58 +4,28 @@ import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
 import { showSuccessModal } from "./app/modal.js";
 
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation');
-
-  const inputElement = document.createElement("input");
-  inputElement.setAttribute("type", "text");
-  inputElement.setAttribute("id", "location");
-  inputElement.setAttribute("class", "form-control");
-  inputElement.setAttribute("required", true);
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-
-
-
-
-
-
-
-
-
-
-
-
-
 // initializer
 const init = () => {
   // init select options html
   addOptions("select-urgency", URGENCY);
   addOptions("select-category", CATEGORY);
 
-  // document
-  //   .getElementById("submit-help-post")
-  //   ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.HELP));
-  // document
-  //   .getElementById("submit-volunteer-post")
-  //   ?.addEventListener("click", () => onClickSubmitPost(REQUEST_TYPE.VOLUNTEER));
+  // activeBootstrapValidation();
+
+  document
+    .getElementById("submit-help-post")
+    ?.addEventListener("click", (e) =>{
+      var form = document.querySelectorAll('.needs-validation')[0];
+      form.classList.add('was-validated');
+      onClickSubmitPost(REQUEST_TYPE.HELP);
+    });
+  document
+    .getElementById("submit-volunteer-post")
+    ?.addEventListener("click", (e) =>{
+      var form = document.querySelectorAll('.needs-validation')[0];
+      form.classList.add('was-validated');
+      onClickSubmitPost(REQUEST_TYPE.VOLUNTEER);
+    });
 
   initAddPhoto();
 }
@@ -63,7 +33,7 @@ window.addEventListener("load", init);
 
 
 // event function when clicks "Submit" button on the posting page.
-const onClickSubmitPost = async (requestType) => {
+const onClickSubmitPost = async (requestType,e) => {
   let data;
   try {
     const formDom = document.querySelector("form");
@@ -186,44 +156,43 @@ const checkValidation = ({
   detail = "",
   meetup = "",
 }) => {
-  let el = "";
+  let el;
   let isValid = true;
-  
-  if (images.length < 1) {
-    el = "images"
-    console.log(images)
-    isValid = false;
-  }
-  if (!isValidLength(title,10, 80)) {
-    el = "title"
-    isValid = false;
-  }
-  if (location.length < 1) {
-    el = "location"
-    isValid = false;
-  }
-  if (!urgency) {
-    el = "urgency"
-    isValid = false;
-  }
-  if (!category) {
-    el = "category";
-    isValid = false;
-  }
-  if (!isValidLength(detail, 20)) {
-    el = "detail"
-    isValid = false;
-  }
-  if (!isValidLength(meetup, 10)) {
-    el = "meetup"
-    isValid = false;
-  }
-  if (!isValid) {
-    console.warn(el);
-    return false;
-  }
+  const inputs = document.querySelectorAll('input');
+  try {
+    if (images.length < 1) {
+      el = {images: images};
+      throw(el);
+    }
+    if (!isValidLength(title,10, 80)) {
+      el = "title"
+      throw(el);
+    }
+    if (location.length < 1) {
+      el = "location"
+      throw(el);
+    }
+    if (!urgency) {
+      el = "urgency"
+      throw(el);
+    }
+    if (!category) {
+      el = "category";
+      throw(el);
+    }
+    if (!isValidLength(detail, 20)) {
+      el = "detail"
+      throw(el);
+    }
+    if (!isValidLength(meetup, 10)) {
+      el = "meetup";
+      throw(el);
+    }
 
-  return isValid;
+    return isValid;
+  } catch (e) {
+    console.warn("invalid field: ", el);
+  }
 };
 
 const submitPost = async (data, requestType) => {
@@ -232,6 +201,9 @@ const submitPost = async (data, requestType) => {
 
   // update requests to user
   await rest.updateRequestCreated(docID);
+
+  // disable submit button
+  $(".submit-post").attr("disabled", true);
 
   // show Success modal
   showSuccessModal({

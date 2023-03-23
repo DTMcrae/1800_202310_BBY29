@@ -13,6 +13,8 @@ function addressAutocomplete(containerElement, callback, options) {
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("id", "location");
     inputElement.setAttribute("placeholder", options.placeholder);
+    inputElement.setAttribute("class", "form-control");
+    inputElement.setAttribute("required", true);
     inputContainerElement.appendChild(inputElement);
 
     /* We will call the API with a timeout to prevent unneccessary API activity.*/
