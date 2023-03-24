@@ -9,8 +9,15 @@ firebase.auth().onAuthStateChanged((user) => {
     var userid = user.uid;
 
     db.collection("chatrooms").doc(ID).get().then(doc => {
+
         if(doc.data().userID.includes(userid))
                 {
+
+                    db.collection("chatrooms").doc(ID).set({
+                        "lastRead": {
+                            [userid]: new Date().toLocaleString()
+                        } 
+                    },{merge: true})
 
                 $('#sentTemplate').load("/html/templates/sentTemplate.html");   //Load the template file
                 let sentTemplate = document.getElementById("sentTemplate"); //Load the request card template
@@ -73,10 +80,16 @@ async function SetLocalData(doc, recipientID)
     var docID = doc.id;
 
     //Get the required request information from the database
-    await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
-        sessionStorage.setItem("requestName",requestDoc.data().title);
-        sessionStorage.setItem("requestDetails",requestDoc.data().detail);
-    });
+    try
+    {
+        await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
+            sessionStorage.setItem("requestName",requestDoc.data().title);
+            sessionStorage.setItem("requestDetails",requestDoc.data().detail);
+        });
+    } catch {
+        sessionStorage.setItem("requestName","No Related Request");
+            sessionStorage.setItem("requestDetails","Request has either been closed or deleted.");
+    }
 
     //Get the required user information from the dataBase;
     await db.collection("users").doc(recipientID).get().then(userDoc => {
