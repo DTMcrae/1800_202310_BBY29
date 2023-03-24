@@ -39,6 +39,17 @@
   margin-left: 1em;
   font-size: 1.2rem;
 }
+.accordion-button:focus {
+box-shadow: none;
+}
+
+.accordion-button:not(.collapsed){
+  background-color: white;
+}
+
+.accordion-button:hover{
+  background-color: #EB6424;
+}
 
 .request-tab-content .accordion>.card {
   border: 0;
@@ -241,7 +252,27 @@
   margin-left: 5px;
 }
 
+.request {
+  /* border-radius: 15px; */
+  transition: 0.5s;
+}
 /* Chat */
+.request:hover {
+background-color: rgb(245, 243, 243);
+}
+
+.card-container > .img {
+ margin: auto auto;
+}
+
+.card-container .img-thumbnail {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  margin: 5% auto;
+  /* border-radius: 15px; */
+}
+
 #message {
   width: 100%;
   margin-left: 5%;
@@ -262,7 +293,9 @@
 .sent-time {
   text-align: right;
 }
-
+.latest-message-time{
+  margin-right: 10px;
+}
 .sub-text {
   margin-left: 13%;
 }
@@ -270,12 +303,17 @@
 .received-message {
   width: 50%;
 }
-
+.msg-recipient {
+  font-weight: bold;
+}
 .recipient {
   position: relative;
   bottom: 20%;
 }
 
+.request-name{
+  font-weight: 500;
+}
 #message-details {
   padding-left: 5%;
   padding-right: 5%;

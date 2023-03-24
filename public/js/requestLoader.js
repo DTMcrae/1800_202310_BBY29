@@ -20,7 +20,15 @@ firebase.auth().onAuthStateChanged((user) => {
                 newcard.querySelector('.request-details').innerHTML = ApplyLimiter(40,details);
                 newcard.querySelector('.request-location').innerHTML = ApplyLimiter(40,location);
                 newcard.querySelector('.request-category').innerHTML = category;
-                newcard.querySelector('.request-urgency').innerHTML = urgency;
+                if (urgency === 'High'){
+                    newcard.querySelector('.request-urgency').innerHTML = urgency;
+                    newcard.querySelector('.request-urgency').style.color = 'red';
+                } else if (urgency === 'Medium'){
+                    newcard.querySelector('.request-urgency').innerHTML = urgency;
+                    newcard.querySelector('.request-urgency').style.color = 'orange';
+                } else {
+                    newcard.querySelector('.request-urgency').innerHTML = urgency;
+                }
                 newcard.querySelector('a').href = "/html/request-details.html?docID="+docID;
 
                 console.log(doc.data().user.uid + " vs " + user.uid);
