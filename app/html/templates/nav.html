@@ -35,7 +35,7 @@
 
 <script>
   function currentPage() {
-    var navLinks = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
+    var navLinks = document.getElementById('navigation').getElementsByTagName('a');
     for (var i = 0; i < navLinks.length; i++) {
       if (navLinks[i].pathname === window.location.pathname) {
         current = i;
