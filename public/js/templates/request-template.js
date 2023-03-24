@@ -7,12 +7,14 @@ export const createRequestTemplate = ({
   location,
   title,
   urgency,
-  type,
+  requestType,
   requestId,
   ...data
 }) => {
   let box = document.createElement("div");
   box.setAttribute('class', "card-wrapper");
+
+  console.log(requestType)
 
   box.innerHTML = `
   <a href="/html/request-details.html?docID=${requestId}" class="card request request-long requestPlaceholder mb-3 mt-3">
@@ -21,7 +23,7 @@ export const createRequestTemplate = ({
         <img src="${images?.[0]}" class="img-thumbnail request-image" alt="${title || 'NAN'}">
         <div class="card-type-icon">
           <span class="material-symbols-outlined">
-            ${type == REQUEST_TYPE.HELP ? 'volunteer_activism' : 'front_hand'}
+            ${requestType == REQUEST_TYPE.HELP ? 'volunteer_activism' : 'front_hand'}
           </span>
         </div>
       </div>
