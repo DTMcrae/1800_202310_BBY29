@@ -52,12 +52,14 @@ async function SetLocalData(doc, userid)
         sessionStorage.setItem("requestName" + docID,requestDoc.data().title);
         sessionStorage.setItem("location" + docID,requestDoc.data().location);
         sessionStorage.setItem("category" + docID,requestDoc.data().category);
+        sessionStorage.setItem("image" + docID, requestDoc.data().images?.[0] || '/img/default.png');
         }
         else
         {
             sessionStorage.setItem("requestName" + docID,"Request Closed");
             sessionStorage.setItem("location" + docID," ");
             sessionStorage.setItem("category" + docID," ");
+            sessionStorage.setItem("image" + docID, '/img/default.png');
         }
     });
     }
@@ -66,6 +68,7 @@ async function SetLocalData(doc, userid)
         sessionStorage.setItem("requestName" + docID,"Request Closed");
         sessionStorage.setItem("location" + docID," ");
         sessionStorage.setItem("category" + docID," ");
+        sessionStorage.setItem("image" + docID, '/img/default.png');
     }
 
     //Get the required user information from the database
@@ -103,6 +106,7 @@ async function CreateNode(doc, userid, cardTemplate)
     let newcard = cardTemplate.content.cloneNode(true);
 
     //update title and text
+    newcard.querySelector('.img-thumbnail').setAttribute("src", sessionStorage.getItem("image" + docID));
     newcard.querySelector('.msg-recipient').innerHTML = sessionStorage.getItem("recipientName" + docID);
     newcard.querySelector('.latest-message').innerHTML = ApplyLimiter(150,sessionStorage.getItem("latestMessage" + docID).toString());
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName" + docID);
