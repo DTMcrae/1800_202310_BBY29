@@ -517,6 +517,10 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   margin-bottom: 16px;
 }
 
+.current-page {
+  background-color: hsl(19, 83%, 43%);
+}
+
 @media only screen and (min-width : 580px) {
   .request {
     font-size: 1em;
