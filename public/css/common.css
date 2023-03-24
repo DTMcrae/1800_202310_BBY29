@@ -276,6 +276,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   text-overflow: ellipsis;
   height: 3em;
   margin-bottom: 5px;
+  word-break: break-all;
 }
 
 .request .card-body {
@@ -291,6 +292,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
   font-weight: 500;
 }
 
@@ -383,6 +385,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   overflow: hidden;
   text-overflow: ellipsis;
   height: 1.5em;
+  word-break: break-all;
 }
 .hidden {
   display: block;

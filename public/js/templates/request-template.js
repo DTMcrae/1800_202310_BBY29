@@ -31,7 +31,7 @@ export const createRequestTemplate = ({
         <div class="card-body">
           <h5 class="card-title request-title">${title || 'NAN'}</h5>
           <p class="card-text request-details">${detail?.split(0,20) || 'NAN'}</p>
-          <p class="card-text request-location" ellipsis-o1ne >Location: ${location || 'NAN'}</p>
+          <p class="card-text request-location ellipsis-1">Location: ${location || 'NAN'}</p>
           <p class="card-text request-category">Cateogry: ${category}</p>
           <p class="card-text request-urgency request-urgency-${urgency?.toLowerCase()}">
             Urgency: 
