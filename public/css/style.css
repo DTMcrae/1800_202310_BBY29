@@ -97,6 +97,16 @@ box-shadow: none;
   color: #fff;
   background-color: var(--color-primary);
 }
+.card-type-icon span {
+  text-shadow: 2px 0 10px rgba(0,0,0,0.5);
+}
+.card-type-icon {
+  position: absolute;
+  left: 5%;top: 5%;
+  z-index: 2;
+  font-size: 20px;
+  color: #fff;
+}
 
 /* Browse */
 .detailNav {
@@ -266,11 +276,7 @@ background-color: rgb(245, 243, 243);
 }
 
 .card-container .img-thumbnail {
-  width: 90%;
-  height: 90%;
   object-fit: cover;
-  margin: 5% auto;
-  /* border-radius: 15px; */
 }
 
 #message {
