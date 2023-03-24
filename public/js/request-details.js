@@ -21,7 +21,7 @@ function displayRequestInfo() {
             db.collection( "users" ).doc ( thisRequest.user.uid ).get().then(userDoc => {
                 const requestee = userDoc.data(); 
                 requesteeName = userDoc.data().name;
-                console.log(requestee)
+                // console.log(requestee)
                 document.getElementById("requestee-name").innerHTML = requestee.name;
                 if (!!requestee.pfpURL) {
                     document.getElementById("profile-image")?.setAttribute("src", requestee.pfpURL);

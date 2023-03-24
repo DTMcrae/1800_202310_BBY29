@@ -31,14 +31,15 @@ export const createRequestTemplate = ({
         <div class="card-body">
           <h5 class="card-title request-title">${title || 'NAN'}</h5>
           <p class="card-text request-details">${detail?.split(0,20) || 'NAN'}</p>
-          <p class="card-text request-location"><small class="text-muted">${location || 'NAN'}</small></p>
-          <p class="card-text request-category"><small class="text-muted">${category}</small></p>
-          <ul class="request-bottom d-flex justify-content-end list-unstyled mt-auto">
-            <li class="d-flex align-items-center me-3">
-                <span class="material-symbols-outlined">crisis_alert</span>
-              <small class="request-urgency">${urgency}</small>
-            </li>
-          </ul>
+          <p class="card-text request-location" ellipsis-o1ne >Location: ${location || 'NAN'}</p>
+          <p class="card-text request-category">Cateogry: ${category}</p>
+          <p class="card-text request-urgency request-urgency-${urgency?.toLowerCase()}">
+            Urgency: 
+            <svg height="20" width="20" class="request-urgency-svg">
+              <circle cx="10" cy="10" r="10" fill="#EEE" />
+            </svg>
+            <span class="request-urgency-text">${urgency}</span>
+          </p>
         </div>
       </div>
     </div>
