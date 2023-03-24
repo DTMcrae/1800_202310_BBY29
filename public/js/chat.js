@@ -105,6 +105,8 @@ async function CreateNode(doc, userid, cardTemplate)
     var docID = doc.id;
     let newcard = cardTemplate.content.cloneNode(true);
 
+    newcard.querySelector(".card-container").setAttribute("id", "chatroom-" + doc.id);
+
     //update title and text
     newcard.querySelector('.img-thumbnail').setAttribute("src", sessionStorage.getItem("image" + docID));
     newcard.querySelector('.msg-recipient').innerHTML = sessionStorage.getItem("recipientName" + docID);
@@ -117,6 +119,22 @@ async function CreateNode(doc, userid, cardTemplate)
 
     //attach to gallery
     document.getElementById("chatrooms-go-here").appendChild(newcard);
+
+    var lastRead = doc.data().lastRead[userid];
+    var latestMessageID = doc.data().latestMessageID;
+    var finishedCard = document.getElementById("chatroom-" + doc.id);
+
+    db.collection("chatrooms").doc(doc.id).collection("messages").doc(latestMessageID).get().then(message => {
+
+        console.log("chatroom-" + doc.id);
+
+        console.log(finishedCard);
+
+        if((message.data().time < lastRead && message.data().sender != userid) || message.data().sender == userid)
+        {
+            finishedCard.querySelector(".notification").remove();
+        }
+    })
 }
 
 //Limits the number of characters in a string of text.

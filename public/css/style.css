@@ -337,3 +337,10 @@ background-color: rgb(245, 243, 243);
 .send-button {
   width: 10%;
 }
+
+.notification {
+  position:relative;
+  bottom: 70%;
+  left: 90%;
+  color: red;
+}
