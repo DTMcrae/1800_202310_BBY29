@@ -9,10 +9,9 @@ function displayRequestInfo() {
         .get()
         .then( doc => {
             thisRequest = doc.data();
-            const {code, title, category, location, urgency, detail, images} = thisRequest;
 
             requestCode = thisRequest.code;
-
+            requestImage = thisRequest.images?.[0];
             requestTitle = thisRequest.title;
             requestCategory = thisRequest.category;
             requestLocation = thisRequest.location;
@@ -20,15 +19,18 @@ function displayRequestInfo() {
             requestDetails = thisRequest.detail;
 
             db.collection( "users" ).doc ( thisRequest.user.uid ).get().then(userDoc => {
-
+                const requestee = userDoc.data(); 
                 requesteeName = userDoc.data().name;
-
-                document.getElementById( "requestee-name" ).innerHTML = requesteeName;
+                console.log(requestee)
+                document.getElementById("requestee-name").innerHTML = requestee.name;
+                if (!!requestee.pfpURL) {
+                    document.getElementById("profile-image")?.setAttribute("src", requestee.pfpURL);
+                }
             });
             
             // only populate title, and image
             document.getElementById( "request-title" ).innerHTML = requestTitle;
-            document.getElementById( "request-image").setAttribute("src", images?.[0]);
+            document.getElementById( "request-image").setAttribute("src", requestImage);
             document.getElementById( "request-category" ).innerHTML = requestCategory;
             document.getElementById( "request-location" ).innerHTML = requestLocation;
             document.getElementById( "request-urgency" ).innerHTML = requestUrgency;
