@@ -130,13 +130,12 @@ function saveUserInfoAndRedirect() {
         number: userPhone,
         city: userCity
     })
-
-    console.log("Document updated");
-    showSuccessModal({
-        onShow: () => {
-            setTimeout(() => {
+    .then(() => {
+        console.log("Document updated");
+        showSuccessModal({
+            onClose: () => {
                 window.location.href = 'profile';
-            }, 1200)
-        }
-    },);
+            }
+        });
+    });
 }
