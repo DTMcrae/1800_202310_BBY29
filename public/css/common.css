@@ -269,7 +269,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 2.8em;
+  height: 3em;
   margin-bottom: 5px;
 }
 

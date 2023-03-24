@@ -36,10 +36,6 @@ export const createRequestTemplate = ({
                 <span class="material-symbols-outlined">crisis_alert</span>
               <small class="request-urgency">${urgency}</small>
             </li>
-            <li class="d-flex align-items-center">
-                <span class="material-symbols-outlined">chat</span>
-              <small> 8</small>
-            </li>
           </ul>
         </div>
       </div>
