@@ -14,10 +14,8 @@ export const createRequestTemplate = ({
   let box = document.createElement("div");
   box.setAttribute('class', "card-wrapper");
 
-  console.log(requestType)
-
   box.innerHTML = `
-  <a href="/html/request-details.html?docID=${requestId}" class="card request request-long requestPlaceholder mb-3 mt-3">
+  <a href="/html/request-details.html?docID=${requestId}" class="card request request-long requestPlaceholder">
     <div class="card-container">
       <div class="img">
         <img src="${images?.[0]}" class="img-thumbnail request-image" alt="${title || 'NAN'}">
