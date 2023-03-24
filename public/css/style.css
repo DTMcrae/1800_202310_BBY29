@@ -341,3 +341,14 @@ background-color: rgb(245, 243, 243);
   left: 90%;
   color: red;
 }
+
+.chat-notification {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 75%;
+  position: relative;
+  right: 39%;
+  top: 7%;
+}
