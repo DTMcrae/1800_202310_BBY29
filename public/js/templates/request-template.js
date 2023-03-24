@@ -23,7 +23,7 @@ export const createRequestTemplate = ({
         <img src="${images?.[0]}" class="img-thumbnail request-image" alt="${title || 'NAN'}">
         <div class="card-type-icon">
           <span class="material-symbols-outlined">
-            ${requestType == REQUEST_TYPE.HELP ? 'volunteer_activism' : 'front_hand'}
+            ${requestType == REQUEST_TYPE.HELP ? 'front_hand' : 'volunteer_activism'}
           </span>
         </div>
       </div>
