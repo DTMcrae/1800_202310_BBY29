@@ -44,7 +44,7 @@ firebase.auth().onAuthStateChanged((user) => {
                         if(segment != null) segment.remove();
 
                         //Create a received message card if the message is not from the user
-                        if(message.data().sender == recipientID)
+                        if(message.data().sender != userid)
                         {
                             let newcard = receivedTemplate.content.cloneNode(true);
 
