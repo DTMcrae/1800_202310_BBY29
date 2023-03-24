@@ -85,6 +85,7 @@ async function SetLocalData(doc, recipientID)
         await db.collection("requests").doc(doc.data().requestID).get().then(requestDoc => {
             sessionStorage.setItem("requestName",requestDoc.data().title);
             sessionStorage.setItem("requestDetails",requestDoc.data().detail);
+            sessionStorage.setItem("image", requestDoc.data().images?.[0])
         });
     } catch {
         sessionStorage.setItem("requestName","No Related Request");
@@ -121,9 +122,8 @@ async function UpdateHeader(doc, recipientid, userid)
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName");
     newcard.querySelector('.request-details').innerHTML = sessionStorage.getItem("requestDetails");
     newcard.querySelector('.request-link').setAttribute("onclick","OpenDetailPage(\"/html/request-details.html?docID="+doc.data().requestID + "\")");
-
+    newcard.querySelector('.img-thumbnail').setAttribute('src', sessionStorage.getItem("image"));
     newcard.querySelector(".leave-chat").setAttribute("onclick","LeaveRoom(\"" + userid + "\")");
-
     document.querySelector(".send-message").setAttribute("onclick","SubmitMessage(\"" + userid + "\")");
     var input = document.getElementById("message");
 
