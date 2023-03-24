@@ -28,6 +28,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     newcard.querySelector('.request-urgency').style.color = 'orange';
                 } else {
                     newcard.querySelector('.request-urgency').innerHTML = urgency;
+                    newcard.querySelector('.request-urgency').style.color = 'limegreen';
                 }
                 newcard.querySelector('a').href = "/html/request-details.html?docID="+docID;
 
