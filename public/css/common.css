@@ -28,6 +28,11 @@
   --color-darkblue: #27187E;
   --color-lightgray: rgb(220, 220, 220);
 
+  --color-high: #e62606;
+  --color-medium: #FFAB2E;
+  --color-log: #36CE45;
+
+
   --color-divider: #eee;
 
   --color-text-gray: rgb(147, 147, 147);
@@ -255,7 +260,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   display: block;
   font-size: 0.8rem;
   border: 0;
-  padding: 10px 0;
+  padding: 0 0 10px;
   border-bottom: 1px solid var(--color-divider);
 }
 
@@ -271,21 +276,24 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   text-overflow: ellipsis;
   height: 3em;
   margin-bottom: 5px;
+  word-break: break-all;
 }
 
 .request .card-body {
   position: relative;
   height: 100%;
-  padding: .5em 0 .5em 1em;
+  padding: .5em 0 1em 1.3em;
 }
 
 .request .card-title {
-  font-size: 1.2em;
+  font-size: 1.4em;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
+  font-weight: 500;
 }
 
 .request .img {
@@ -293,7 +301,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   position: relative;
   display: block;
   width: 30%;
-  min-width: 160px;
+  min-width: 140px;
   min-height: 100%;
 }
 
@@ -336,9 +344,49 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   right: 0;
   bottom: 5px;
 }
+.request-urgency{
+  margin-top: 8px;
+  text-align: right;
+}
+.request-urgency-medium svg{
+  margin-left: 5px;
+}
+.request-urgency-medium svg circle{
+  fill: var(--color-medium);
+}
+.request-urgency-medium .request-urgency-text{
+  color: var(--color-medium);
+}
+.request-urgency-high svg circle{
+  fill: var(--color-high);
+}
+.request-urgency-high .request-urgency-text{
+  color: var(--color-high);
+}
+
+.request-urgency-low svg circle{
+  fill: var(--color-low);
+}
+.request-urgency-low .request-urgency-text{
+  color: var(--color-low);
+}
+.request-location,
+.request-category {
+  color: var(--color-text-gray);
+}
+
 
 
 /* common classes */
+.ellipsis-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 1.5em;
+  word-break: break-all;
+}
 .hidden {
   display: block;
   position: absolute;
