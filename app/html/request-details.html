@@ -30,7 +30,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-  
+
   <!-- Link to styles -->
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -55,8 +55,50 @@
 
   <!-- Main -->
   <div id="container">
-    <div>
+    <!-- <div>
       <img src="/img/default.png" class="bd-placeholder-img card-img-top" id="request-image" width="100%" height="10%">
+    </div> -->
+    <div id="image-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+      <div class="indicators carousel-indicators">
+        <button type="button" class="active carousel-indicator" data-bs-target="#image-carousel"
+          data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" disabled></button>
+        <button type="button" class="carousel-indicator" data-bs-target="#image-carousel"
+          data-bs-slide-to="1" aria-label="Slide 2" disabled></button>
+        <button type="button" class="carousel-indicator" data-bs-target="#image-carousel"
+          data-bs-slide-to="2" aria-label="Slide 3" disabled></button>
+        <button type="button" class="carousel-indicator" data-bs-target="#image-carousel"
+          data-bs-slide-to="3" aria-label="Slide 4" disabled></button>
+        <button type="button" class="carousel-indicator" data-bs-target="#image-carousel"
+          data-bs-slide-to="4" aria-label="Slide 5" disabled></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/img/default.png" class="request-image" alt="User-uploaded image #1" width="100%" height="10%">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/default.png" class="request-image" alt="User-uploaded image #2" width="100%" height="10%">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/default.png" class="request-image" alt="User-uploaded image #3" width="100%" height="10%">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/default.png" class="request-image" alt="User-uploaded image #4" width="100%" height="10%">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/default.png" class="request-image" alt="User-uploaded image #5" width="100%" height="10%">
+        </div>
+
+      </div>
+      <button class="carousel-control-prev" id="prev-image" type="button" data-bs-target="#image-carousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" id="next-image" type="button" data-bs-target="#image-carousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
 
     <a href="#" class="list-group-item d-flex gap-3 py-3" aria-current="true">
@@ -65,7 +107,7 @@
           <div id="requestee-avatar" class="profile-pic">
             <img src="/img/default.png" alt="profile image" id="profile-image">
           </div>
-          
+
         </div>
       </div>
 
@@ -78,7 +120,7 @@
           <p class="mb-0 opacity-75 pt-1">Category: <span id="request-category"></span></p>
           <p class="mb-0 opacity-75 pt-1">Location: <span id="request-location"></span></p>
           <p class="mb-0 opacity-75 pt-1">
-            Urgency: 
+            Urgency:
             <svg height="24" width="24">
               <circle cx="12" cy="12" r="10" fill="limegreen" />
             </svg>
@@ -95,7 +137,8 @@
       <div class="d-flex gap-2 w-100 justify-content-between">
         <div>
           <h6 class="mb-0">Description</h6>
-          <p class="pt-2" id="request-details">This is the description of the request. What happened, what may need to be done, how it could
+          <p class="pt-2" id="request-details">This is the description of the request. What happened, what may need to
+            be done, how it could
             be done. Should be detailed, but concise.</p>
         </div>
       </div>
