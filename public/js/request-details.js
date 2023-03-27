@@ -65,22 +65,31 @@ function displayRequestInfo() {
 }
 displayRequestInfo();
 
+
 firebase.auth().onAuthStateChanged((user) => {
 
     if (!user) return;
 
-    let params = new URL(window.location.href); //get URL of search bar
-    let ID = params.searchParams.get("docID"); //get value for key "id"
+    const params = new URL(window.location.href); //get URL of search bar
+    const ID = params.searchParams.get("docID"); //get value for key "id"
 
     db.collection("requests").doc(ID).get().then(doc => {
-
-        let acceptButton = document.querySelector(".requestButton");
-        let cancelButton = document.querySelector(".cancelButton");
+        const acceptButton = document.querySelector(".requestButton");
+        const cancelButton = document.querySelector(".cancelButton");
 
         try {
             var acceptedUsers = doc.data().usersAccepted;
 
-            if (acceptedUsers.includes(user.uid)) {
+            // If this is my request
+            if (doc.data().user.uid == user.uid) {
+                showSetting();
+
+                if (cancelButton != null) cancelButton.remove();
+                acceptButton.innerHTML = "Delete Request";
+            }
+
+            // If this is an others' request I accepted
+            else if (acceptedUsers.includes(user.uid)) {
                 console.log("User is present in acceptedUsers");
                 acceptButton.innerHTML = "Open Chat";
 
@@ -106,12 +115,10 @@ firebase.auth().onAuthStateChanged((user) => {
                 }
             }
 
-            else if (doc.data().user.uid == user.uid) {
-                if (cancelButton != null) cancelButton.remove();
-                acceptButton.innerHTML = "Delete Request";
-            }
-
+            // If this is an others' request I didn't accept
             else {
+                removeSetting();
+                
                 if (cancelButton != null) cancelButton.remove();
                 console.log("Assigning data");
                 acceptButton.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
@@ -119,6 +126,8 @@ firebase.auth().onAuthStateChanged((user) => {
         }
         catch
         {
+            removeSetting();
+
             //acceptedUsers field does not exist.
             console.log("Request's acceptedUsers field does not exist")
             console.log("Assigning data");
@@ -128,6 +137,33 @@ firebase.auth().onAuthStateChanged((user) => {
     })
 
 });
+
+const showSetting = () => {
+    const settingNode = document.getElementById("detail-setting");
+    const archieveNode = document.getElementById("btn-archieve-request");
+    const deleteNode = document.getElementById("btn-delete-request");
+
+    archieveNode.addEventListener("click",onClickArchieve);
+    deleteNode.addEventListener("click",onClickDelete);
+
+    settingNode.style.display = "block";
+    
+}
+const removeSetting = () => {
+    const settingNode = document.getElementById("detail-setting");
+    settingNode.remove();
+}
+const onClickArchieve = () =>{
+    const archieveNode = document.getElementById("btn-archieve-request");
+    alert("archieve",archieveNode);
+}
+const onClickDelete = () =>{
+    const deleteNode = document.getElementById("btn-delete-request");
+    alert("delete",deleteNode);
+}
+
+
+
 
 async function AbandonRequest(userid, requestid) {
     //Remove requestID from user doc array

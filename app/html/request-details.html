@@ -104,10 +104,8 @@
           <div id="requestee-avatar" class="profile-pic">
             <img src="/img/default.png" alt="profile image" id="profile-image">
           </div>
-
         </div>
       </div>
-
 
       <div class="d-flex gap-2 w-100 detail-requestee">
         <div>
@@ -123,6 +121,25 @@
             <span id="request-urgency-text" class="request-urgency-text"></span>
           </p>
         </div>
+      </div>
+      <!-- Setting -->
+      <div id="detail-setting" class="dropdown detail-setting">
+        <button class="btn btn-detail-setting" type="button" id="setting" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="material-icons">settings</span>
+        </button>
+        
+        <ul class="dropdown-menu" aria-labelledby="setting">
+          <li>
+            <button type="button" id="btn-archieve-request" class="dropdown-item">
+              Archieve this request
+            </button>
+          </li>
+          <li>
+            <button type="button" id="btn-delete-request" class="dropdown-item">
+              Delete this request
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
 

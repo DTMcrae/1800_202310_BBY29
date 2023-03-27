@@ -374,5 +374,23 @@ background-color: rgb(245, 243, 243);
   padding-bottom: 80px;
 }
 .detail-requestee .opacity-75{
-  font-size: 0.9em;
+  font-size: 0.8em;
+}
+.detail-setting{
+  display: none;
+}
+.btn-detail-setting {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  color: #666 !important;
+  padding: 0.3em;
+}
+.detail-setting .dropdown-item {
+  line-height: 2;
+}
+.detail-setting .dropdown-item:hover,
+.detail-setting .dropdown-item:focus{
+  color:#fff;
+  background-color: var(--color-primary);
 }
