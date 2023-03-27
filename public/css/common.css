@@ -344,10 +344,6 @@ hr{
   right: 0;
   bottom: 5px;
 }
-.request-urgency{
-  margin-top: 8px;
-  text-align: right;
-}
 .request-urgency,
 #requestee-urgency{
   display: flex;
@@ -383,7 +379,9 @@ hr{
   color: var(--color-low);
 }
 .request-location,
-.request-category {
+.request-category,
+.request-urgency {
+  line-height: 1.5em;
   color: var(--color-text-gray);
 }
 
