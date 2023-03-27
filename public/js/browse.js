@@ -1,9 +1,6 @@
 import { createRequestTemplate } from "/js/templates/request-template.js";
 
 firebase.auth().onAuthStateChanged((user) => {
-  $("#requestTemplate").load("/html/requestTemplate.html"); //Load the template file
-  let cardTemplate = document.getElementById("requestTemplate"); //Load the request card template
-
   db.collection("requests")
     .orderBy("createdDate", "desc")
     .get()
@@ -11,7 +8,6 @@ firebase.auth().onAuthStateChanged((user) => {
       requests.forEach((doc) => {
         const docID = doc.id;
         const docData = doc.data();
-        console.log(docData)
         const card = createRequestTemplate({
           ...docData,
           title: ApplyLimiter(40, docData.title),
@@ -47,7 +43,6 @@ function ApplyLimiter(maxChar, text = "") {
     result.length >= Number(Number(maxChar) - Number(3)) ||
     result.length <= 0
   ) {
-    console.log("too long");
     return text.substring(0, Number(Number(maxChar) - Number(3))) + "...";
   }
 

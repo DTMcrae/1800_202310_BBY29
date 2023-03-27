@@ -88,8 +88,8 @@ firebase.auth().onAuthStateChanged((user) => {
                 try {
                     db.collection("chatrooms").get().then(chatrooms => {
                         chatrooms.forEach(chatroom => {
-                            console.log(user.uid);
-                            console.log(chatroom.data().userID);
+                            // console.log(user.uid);
+                            // console.log(chatroom.data().userID);
 
                             if (chatroom.data().userID.includes(user.uid)) {
                                 acceptButton.setAttribute("href", "/html/chatroom.html?docID=" + chatroom.id);

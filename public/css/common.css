@@ -385,22 +385,6 @@ hr{
   color: var(--color-text-gray);
 }
 
-/* Request Details */
-
-.request-image {
-  object-fit: cover;
-  object-position: center;
-  height: 500px;
-  width: 800px;
-}
-
-.carousel-indicator {
-  background-clip: border-box !important;
-  border-top: 2px solid transparent !important;
-  border-bottom: 2px solid transparent !important;
-  display: none;
-}
-
 /* common classes */
 .text-gray{
   color: var(--color-text-gray) !important;

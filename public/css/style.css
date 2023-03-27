@@ -353,7 +353,23 @@ background-color: rgb(245, 243, 243);
   top: 7%;
 }
 
-/* reuqest detail */
+
+/* Request Details */
+
+.request-image {
+  object-fit: cover;
+  object-position: center;
+  width: 100vw;
+  height: 70vw;
+}
+
+.carousel-indicator {
+  background-clip: border-box !important;
+  border-top: 2px solid transparent !important;
+  border-bottom: 2px solid transparent !important;
+  display: none;
+}
+
 .container-reques-detail{
   padding-bottom: 80px;
 }
