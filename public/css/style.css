@@ -372,6 +372,7 @@ background-color: rgb(245, 243, 243);
 
 .container-reques-detail{
   padding-bottom: 80px;
+  overflow: hidden;
 }
 .detail-requestee .opacity-75{
   font-size: 0.8em;

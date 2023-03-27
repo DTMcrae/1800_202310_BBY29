@@ -69,27 +69,35 @@ displayRequestInfo();
 firebase.auth().onAuthStateChanged((user) => {
 
     if (!user) return;
-
+    
     const params = new URL(window.location.href); //get URL of search bar
     const ID = params.searchParams.get("docID"); //get value for key "id"
 
     db.collection("requests").doc(ID).get().then(doc => {
+
         const acceptButton = document.querySelector(".requestButton");
         const cancelButton = document.querySelector(".cancelButton");
 
         try {
-            var acceptedUsers = doc.data().usersAccepted;
+            const acceptedUsers = doc.data().usersAccepted;
 
+            /* My request */
             // If this is my request
             if (doc.data().user.uid == user.uid) {
+                cancelButton?.remove();
+                acceptButton?.remove();
+
                 showSetting();
 
-                if (cancelButton != null) cancelButton.remove();
-                acceptButton.innerHTML = "Delete Request";
+                return;
             }
 
+            /* Others' request */
+            document.getElementById("box-buttons").classList.remove("hide");
+            removeSetting();
+            
             // If this is an others' request I accepted
-            else if (acceptedUsers.includes(user.uid)) {
+            if (acceptedUsers.includes(user.uid)) {
                 console.log("User is present in acceptedUsers");
                 acceptButton.innerHTML = "Open Chat";
 
@@ -113,26 +121,21 @@ firebase.auth().onAuthStateChanged((user) => {
                     console.log("Chatroom collection does not exist!!!");
                     if (cancelButton != null) cancelButton.remove();
                 }
+
+                return;
             }
 
             // If this is an others' request I didn't accept
-            else {
-                removeSetting();
-                
-                if (cancelButton != null) cancelButton.remove();
-                console.log("Assigning data");
-                acceptButton.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
-            }
+            
+            cancelButton?.remove();
+            acceptButton.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
         }
-        catch
-        {
-            removeSetting();
-
+        catch (e) {
+            console.warn(e);
             //acceptedUsers field does not exist.
             console.log("Request's acceptedUsers field does not exist")
-            console.log("Assigning data");
-            if (cancelButton != null) cancelButton.remove();
-            acceptButton.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
+            cancelButton?.remove();
+            acceptButton?.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
         }
     })
 
@@ -161,9 +164,6 @@ const onClickDelete = () =>{
     const deleteNode = document.getElementById("btn-delete-request");
     alert("delete",deleteNode);
 }
-
-
-
 
 async function AbandonRequest(userid, requestid) {
     //Remove requestID from user doc array

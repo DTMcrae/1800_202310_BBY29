@@ -386,6 +386,9 @@ hr{
 }
 
 /* common classes */
+.hide{
+  display: none;
+}
 .text-gray{
   color: var(--color-text-gray) !important;
 }

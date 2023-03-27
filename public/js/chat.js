@@ -112,8 +112,8 @@ async function CreateNode(doc, userid, cardTemplate)
     newcard.querySelector('.msg-recipient').innerHTML = sessionStorage.getItem("recipientName" + docID);
     newcard.querySelector('.latest-message').innerHTML = ApplyLimiter(150,sessionStorage.getItem("latestMessage" + docID).toString());
     newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName" + docID);
-    newcard.querySelector('.request-location').innerHTML = sessionStorage.getItem("location" + docID);
-    newcard.querySelector('.category').innerHTML = sessionStorage.getItem("category" + docID);
+    newcard.querySelector('.request-location').innerHTML = "Location: " + sessionStorage.getItem("location" + docID);
+    newcard.querySelector('.category').innerHTML = "Category: " + sessionStorage.getItem("category" + docID);
     newcard.querySelector('.latest-message-time').innerHTML = sessionStorage.getItem("latestMessageTime" + docID);
     newcard.querySelector('a').href = "/html/chatroom.html?docID="+doc.id;
 
