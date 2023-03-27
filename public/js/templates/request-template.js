@@ -9,13 +9,14 @@ export const createRequestTemplate = ({
   urgency,
   requestType,
   requestId,
+  docID,
   ...data
 }) => {
   let box = document.createElement("div");
   box.setAttribute('class', "card-wrapper");
 
   box.innerHTML = `
-  <a href="/html/request-details.html?docID=${requestId}" class="card request request-long requestPlaceholder">
+  <a href="/html/request-details.html?docID=${requestId || docID}" class="card request request-long requestPlaceholder">
     <div class="card-container">
       <div class="img">
         <img src="${images?.[0]}" class="img-thumbnail request-image" alt="${title || 'NAN'}">
@@ -33,8 +34,8 @@ export const createRequestTemplate = ({
           <p class="card-text request-category">Cateogry: ${category}</p>
           <p class="card-text request-urgency request-urgency-${urgency?.toLowerCase()}">
             Urgency: 
-            <svg height="20" width="20" class="request-urgency-svg">
-              <circle cx="10" cy="10" r="10" fill="#EEE" />
+            <svg height="18" width="18">
+              <circle cx="9" cy="9" r="8" fill="#CCC" />
             </svg>
             <span class="request-urgency-text">${urgency}</span>
           </p>

@@ -54,10 +54,7 @@
   </nav>
 
   <!-- Main -->
-  <div id="container">
-    <!-- <div>
-      <img src="/img/default.png" class="bd-placeholder-img card-img-top" id="request-image" width="100%" height="10%">
-    </div> -->
+  <div id="container" class="container-reques-detail">
     <div id="image-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
       <div class="indicators carousel-indicators">
         <button type="button" class="active carousel-indicator" data-bs-target="#image-carousel"
@@ -101,7 +98,7 @@
       </button>
     </div>
 
-    <a href="#" class="list-group-item d-flex gap-3 py-3" aria-current="true">
+    <div class="list-group-item d-flex gap-3 py-3" aria-current="true">
       <div class="creater-detail">
         <div class="avatar">
           <div id="requestee-avatar" class="profile-pic">
@@ -112,35 +109,36 @@
       </div>
 
 
-
-
-      <div class="d-flex gap-2 w-100 justify-content-between">
+      <div class="d-flex gap-2 w-100 detail-requestee">
         <div>
           <h6 class="mb-0" id="requestee-name"> - </h6>
           <p class="mb-0 opacity-75 pt-1">Category: <span id="request-category"></span></p>
           <p class="mb-0 opacity-75 pt-1">Location: <span id="request-location"></span></p>
-          <p class="mb-0 opacity-75 pt-1">
-            Urgency:
-            <svg height="24" width="24">
-              <circle cx="12" cy="12" r="10" fill="limegreen" />
+
+          <p id="requestee-urgency" class="mb-0 pt-1 opacity-75 card-text ">
+            Urgency: 
+            <svg height="18" width="18">
+              <circle cx="9" cy="9" r="8" fill="#CCC" />
             </svg>
-            <span id="request-urgency"></span>
+            <span id="request-urgency-text" class="request-urgency-text"></span>
           </p>
         </div>
+      </div>
+    </div>
 
-        <div class="d-flex align-items-center">
+    <div class="list-group-item gap-3 py-3" aria-current="true">
+      <div class="d-flex gap-2 w-100">
+        <div>
+          <h6 class="mb-0"><b>Description</b></h6>
+          <p class="pt-2" id="request-details"></p>
         </div>
       </div>
-    </a>
+    </div>
 
-    <div class="list-group-item d-flex gap-3 py-3" aria-current="true">
-      <div class="d-flex gap-2 w-100 justify-content-between">
-        <div>
-          <h6 class="mb-0">Description</h6>
-          <p class="pt-2" id="request-details">This is the description of the request. What happened, what may need to
-            be done, how it could
-            be done. Should be detailed, but concise.</p>
-        </div>
+    <div class="list-group-item gap-3 py-3" aria-current="true">
+      <div>
+        <h6 class="mb-0"><b>Location Detail</b></h6>
+        <p class="pt-2" id="request-meetup"></p>
       </div>
     </div>
 
@@ -159,8 +157,8 @@
 
   <!-- scripts -->
   <script src="/js/firebaseAPI_BBY29.js"></script>
-  <script src="/js/request-details.js"></script>
   <script src="/js/common.js" type="module"></script>
+  <script src="/js/request-details.js"></script>
 
 </body>
 

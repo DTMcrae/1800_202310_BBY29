@@ -110,7 +110,7 @@ box-shadow: none;
 
 /* Browse */
 .detailNav {
-  width: 50%;
+  width: 70%;
   margin: auto;
 }
 
@@ -351,4 +351,12 @@ background-color: rgb(245, 243, 243);
   position: relative;
   right: 39%;
   top: 7%;
+}
+
+/* reuqest detail */
+.container-reques-detail{
+  padding-bottom: 80px;
+}
+.detail-requestee .opacity-75{
+  font-size: 0.9em;
 }

@@ -348,8 +348,20 @@ hr{
   margin-top: 8px;
   text-align: right;
 }
-.request-urgency-medium svg{
-  margin-left: 5px;
+.request-urgency,
+#requestee-urgency{
+  display: flex;
+  align-items: center;
+}
+.request-urgency svg{
+  position: relative;
+  top: 1px;
+  margin:0 5px;
+}
+#requestee-urgency svg{
+  position: relative;
+  top: 1px;
+  margin:0 5px;
 }
 .request-urgency-medium svg circle{
   fill: var(--color-medium);

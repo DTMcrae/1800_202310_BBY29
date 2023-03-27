@@ -17,6 +17,7 @@ function displayRequestInfo() {
             requestLocation = thisRequest.location;
             requestUrgency = thisRequest.urgency;
             requestDetails = thisRequest.detail;
+            requestMeetup = thisRequest.meetup;
 
             db.collection("users").doc(thisRequest.user.uid).get().then(userDoc => {
                 const requestee = userDoc.data();
@@ -32,8 +33,10 @@ function displayRequestInfo() {
             document.getElementById("request-title").innerHTML = requestTitle;
             document.getElementById("request-category").innerHTML = requestCategory;
             document.getElementById("request-location").innerHTML = requestLocation;
-            document.getElementById("request-urgency").innerHTML = requestUrgency;
+            document.getElementById("request-urgency-text").innerHTML = requestUrgency;
+            document.getElementById("requestee-urgency").classList.add("request-urgency-"+requestUrgency?.toLowerCase());
             document.getElementById("request-details").innerHTML = requestDetails;
+            document.getElementById("request-meetup").innerHTML = requestMeetup;
 
             var images = document.getElementsByClassName("request-image");
             var indicators = document.getElementsByClassName("carousel-indicator");
