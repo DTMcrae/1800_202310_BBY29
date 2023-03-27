@@ -11,8 +11,12 @@ firebase.auth().onAuthStateChanged((user) => {
       requests.forEach((doc) => {
         const docID = doc.id;
         const docData = doc.data();
+        console.log(docData)
         const card = createRequestTemplate({
           ...docData,
+          title: ApplyLimiter(40, docData.title),
+          details: ApplyLimiter(40, docData.details),
+          location: ApplyLimiter(40, docData.location),
           docID: docID,
         });
 
@@ -23,9 +27,9 @@ firebase.auth().onAuthStateChanged((user) => {
 
 //Limits the number of characters in a string of text.
 //Cuts the text off at the end of the previous word if it is too large.
-function ApplyLimiter(maxChar, text) {
+function ApplyLimiter(maxChar, text = "") {
   var result = "";
-  var segments = text.split(" ");
+  var segments = text?.split(" ");
   var i = 0;
 
   while (result.length < Number(Number(maxChar) - Number(3))) {
