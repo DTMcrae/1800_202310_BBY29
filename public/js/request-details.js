@@ -91,7 +91,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
         // If this is an others' request I didn't accept
         cancelButton?.remove();
-        acceptButton.setAttribute("click", () => {
+        acceptButton.addEventListener("click", () => {
           AcceptRequest(user.uid, ID);
         });
       } catch (e) {
@@ -99,7 +99,7 @@ firebase.auth().onAuthStateChanged((user) => {
         //acceptedUsers field does not exist.
         console.log("Request's acceptedUsers field does not exist");
         cancelButton?.remove();
-        acceptButton.setAttribute("click", () => {
+        acceptButton.addEventListener("click", () => {
           AcceptRequest(user.uid, ID);
         });
       }
@@ -136,7 +136,7 @@ function displayRequestInfo() {
           if (!!requestee.pfpURL) {
             document
               .getElementById("profile-image")
-              ?.setAttribute("src", requestee.pfpURL);
+              ?.setAttribute("src", requestee.pfpURL || "/img/default.png");
           }
         });
 
