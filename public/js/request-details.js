@@ -59,10 +59,9 @@ firebase.auth().onAuthStateChanged((user) => {
           console.log("User is present in acceptedUsers");
           acceptButton.innerHTML = "Open Chat";
 
-          cancelButton.setAttribute(
-            "onclick",
-            'AbandonRequest("' + user.uid + '","' + ID + '")'
-          );
+          cancelButton.addEventListener("click", () => {
+            AbandonRequest(user.uid, ID)
+          });
           try {
             db.collection("chatrooms")
               .get()
@@ -92,19 +91,17 @@ firebase.auth().onAuthStateChanged((user) => {
 
         // If this is an others' request I didn't accept
         cancelButton?.remove();
-        acceptButton.setAttribute(
-          "onclick",
-          'AcceptRequest("' + user.uid + '","' + ID + '")'
-        );
+        acceptButton.setAttribute("click", () => {
+          AcceptRequest(user.uid, ID);
+        });
       } catch (e) {
         console.error(e);
         //acceptedUsers field does not exist.
         console.log("Request's acceptedUsers field does not exist");
         cancelButton?.remove();
-        acceptButton?.setAttribute(
-          "onclick",
-          'AcceptRequest("' + user.uid + '","' + ID + '")'
-        );
+        acceptButton.setAttribute("click", () => {
+          AcceptRequest(user.uid, ID);
+        });
       }
     });
 });
@@ -195,10 +192,6 @@ const onClickArchieve = async () => {
   const docID = params.searchParams.get("docID"); //get value for key "id"
 
   try {
-    // const currentUserID = getUserID();
-    // const userRef = db.collection("users").doc(currentUserID);
-    // const userDoc = await userRef.get();
-    // const userData = userDoc.data();
 
     const requestRef = db.collection("requests").doc(docID);
     const requestDoc = await requestRef.get();
@@ -225,15 +218,11 @@ const onClickArchieve = async () => {
   }
 };
 
-const onClickDelete = () => {
-  const deleteNode = document.getElementById("btn-delete-request");
-  alert("delete", deleteNode);
-
-  db.collection("users")
-    .doc(userid)
-    .update({
-      requestsAccepted: firebase.firestore.FieldValue.arrayRemove(requestid),
-    });
+const onClickDelete = async () => {
+  const currentUserID = getUserID();
+  const userRef = db.collection("users").doc(currentUserID);
+  const userDoc = await userRef.get();
+  const userData = userDoc.data();
 };
 
 async function AbandonRequest(userid, requestid) {
