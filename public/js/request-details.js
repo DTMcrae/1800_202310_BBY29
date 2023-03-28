@@ -1,3 +1,84 @@
+
+// Displays content
+displayRequestInfo();
+
+// Activate or deactivate settings and buttons
+firebase.auth().onAuthStateChanged((user) => {
+
+    if (!user) return;
+    
+    const params = new URL(window.location.href); //get URL of search bar
+    const ID = params.searchParams.get("docID"); //get value for key "id"
+
+    db.collection("requests").doc(ID).get().then(doc => {
+
+        const acceptButton = document.querySelector(".requestButton");
+        const cancelButton = document.querySelector(".cancelButton");
+
+        try {
+            const acceptedUsers = doc.data().usersAccepted;
+
+            /* My request */
+            // If this is my request
+            if (doc.data().user.uid == user.uid) {
+                cancelButton?.remove();
+                acceptButton?.remove();
+
+                showSetting();
+
+                return;
+            }
+
+            /* Others' request */
+            document.getElementById("box-buttons").classList.remove("hide");
+            removeSetting();
+            
+            // If this is an others' request I accepted
+            if (acceptedUsers.includes(user.uid)) {
+                console.log("User is present in acceptedUsers");
+                acceptButton.innerHTML = "Open Chat";
+
+                cancelButton.setAttribute("onclick", "AbandonRequest(\"" + user.uid + "\",\"" + ID + "\")");
+                try {
+                    db.collection("chatrooms").get().then(chatrooms => {
+                        chatrooms.forEach(chatroom => {
+                            // console.log(user.uid);
+                            // console.log(chatroom.data().userID);
+
+                            if (chatroom.data().userID.includes(user.uid)) {
+                                acceptButton.setAttribute("href", "/html/chatroom.html?docID=" + chatroom.id);
+                                return;
+                            }
+                        });
+                    });
+                }
+                catch (e)
+                {
+                    console.error(e);
+                    //chatroom collection does not exist
+                    console.log("Chatroom collection does not exist!!!");
+                    if (cancelButton != null) cancelButton.remove();
+                }
+
+                return;
+            }
+
+            // If this is an others' request I didn't accept
+            
+            cancelButton?.remove();
+            acceptButton.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
+        }
+        catch (e) {
+            console.warn(e);
+            //acceptedUsers field does not exist.
+            console.log("Request's acceptedUsers field does not exist")
+            cancelButton?.remove();
+            acceptButton?.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
+        }
+    })
+
+});
+
 function displayRequestInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     let ID = params.searchParams.get("docID"); //get value for key "id"
@@ -63,83 +144,6 @@ function displayRequestInfo() {
             }
         });
 }
-displayRequestInfo();
-
-
-firebase.auth().onAuthStateChanged((user) => {
-
-    if (!user) return;
-    
-    const params = new URL(window.location.href); //get URL of search bar
-    const ID = params.searchParams.get("docID"); //get value for key "id"
-
-    db.collection("requests").doc(ID).get().then(doc => {
-
-        const acceptButton = document.querySelector(".requestButton");
-        const cancelButton = document.querySelector(".cancelButton");
-
-        try {
-            const acceptedUsers = doc.data().usersAccepted;
-
-            /* My request */
-            // If this is my request
-            if (doc.data().user.uid == user.uid) {
-                cancelButton?.remove();
-                acceptButton?.remove();
-
-                showSetting();
-
-                return;
-            }
-
-            /* Others' request */
-            document.getElementById("box-buttons").classList.remove("hide");
-            removeSetting();
-            
-            // If this is an others' request I accepted
-            if (acceptedUsers.includes(user.uid)) {
-                console.log("User is present in acceptedUsers");
-                acceptButton.innerHTML = "Open Chat";
-
-                cancelButton.setAttribute("onclick", "AbandonRequest(\"" + user.uid + "\",\"" + ID + "\")");
-                try {
-                    db.collection("chatrooms").get().then(chatrooms => {
-                        chatrooms.forEach(chatroom => {
-                            // console.log(user.uid);
-                            // console.log(chatroom.data().userID);
-
-                            if (chatroom.data().userID.includes(user.uid)) {
-                                acceptButton.setAttribute("href", "/html/chatroom.html?docID=" + chatroom.id);
-                                return;
-                            }
-                        });
-                    });
-                }
-                catch
-                {
-                    //chatroom collection does not exist
-                    console.log("Chatroom collection does not exist!!!");
-                    if (cancelButton != null) cancelButton.remove();
-                }
-
-                return;
-            }
-
-            // If this is an others' request I didn't accept
-            
-            cancelButton?.remove();
-            acceptButton.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
-        }
-        catch (e) {
-            console.warn(e);
-            //acceptedUsers field does not exist.
-            console.log("Request's acceptedUsers field does not exist")
-            cancelButton?.remove();
-            acceptButton?.setAttribute("onclick", "AcceptRequest(\"" + user.uid + "\",\"" + ID + "\")");
-        }
-    })
-
-});
 
 const showSetting = () => {
     const settingNode = document.getElementById("detail-setting");
@@ -214,8 +218,9 @@ async function AcceptRequest(userid, requestid) {
                 sessionStorage.setItem("accepted", false);
             }
         }
-        catch
+        catch (e)
         {
+            console.error(e);
             sessionStorage.setItem("accepted", false);
         }
     });
