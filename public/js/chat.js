@@ -5,29 +5,32 @@ firebase.auth().onAuthStateChanged((user) => {
     $('#chatTemplate').load("/html/templates/chatroomTemplate.html");   //Load the template file
     let cardTemplate = document.getElementById("chatTemplate"); //Load the request card template
     var userid = user.uid;
-
-    db.collection("chatrooms").get()
-        .then(chatrooms=> {
-            chatrooms.forEach(doc => { //iterate thru each doc
-
-                //Check if the user is a part of the chatroom.
-                //Possible switch to saving the chatID's to the user at some point for high-traffic performance.
-                if(doc.data().userID.includes(userid))
-                {
-
-                    let segment = document.querySelector(".no-chatrooms");
-                    if(segment != null) segment.remove();
-
-                var recipientID = doc.data().userID[0];
-                if(recipientID == userid) recipientID = doc.data().userID[1];
-
-                var docID = doc.id;
-
-                if(doc == null || userid == null) return;
-                CreateNode(doc, userid, cardTemplate);
-            }
+    try {
+        db.collection("chatrooms").get()
+            .then(chatrooms=> {
+                chatrooms.forEach(doc => { //iterate thru each doc
+    
+                    //Check if the user is a part of the chatroom.
+                    //Possible switch to saving the chatID's to the user at some point for high-traffic performance.
+                    if(doc.data().userID.includes(userid))
+                    {
+    
+                        let segment = document.querySelector(".no-chatrooms");
+                        if(segment != null) segment.remove();
+    
+                    var recipientID = doc.data().userID[0];
+                    if(recipientID == userid) recipientID = doc.data().userID[1];
+    
+                    var docID = doc.id;
+    
+                    if(doc == null || userid == null) return;
+                    CreateNode(doc, userid, cardTemplate);
+                }
+                })
             })
-        })
+    } catch(e) {
+        console.error(e);
+    }
 
 });
 
@@ -42,7 +45,7 @@ async function SetLocalData(doc, userid)
     if(recipientID == userid) recipientID = doc.data().userID[1];
 
     //Get the required request information from the database
-    console.log("Chatroom for request: " + doc.data().requestID);
+    // console.log("Chatroom for request: " + doc.data().requestID);
 
     try
     {
@@ -63,8 +66,9 @@ async function SetLocalData(doc, userid)
         }
     });
     }
-    catch
+    catch (e)
     {
+        console.error(e);
         sessionStorage.setItem("requestName" + docID,"Request Closed");
         sessionStorage.setItem("location" + docID," ");
         sessionStorage.setItem("category" + docID," ");
@@ -76,10 +80,11 @@ async function SetLocalData(doc, userid)
         try
         {
         sessionStorage.setItem("recipientName" + docID, userDoc.data().name);
-        } catch {
+        } catch (e){
+            console.error(e);
             sessionStorage.setItem("recipientName" + docID, "No Recipient");
         }
-        console.log("Recipient: " + sessionStorage.getItem("recipientName"));
+        // console.log("Recipient: " + sessionStorage.getItem("recipientName"));
     });
 
     //Get the required message information from the database
@@ -91,8 +96,9 @@ async function SetLocalData(doc, userid)
         sessionStorage.setItem("latestMessageTime" + docID, messageDoc.data().time);
     });
     }
-    catch
+    catch (e)
     {
+        console.error(e);
         sessionStorage.setItem("latestMessage" + docID, "No Messages");
         sessionStorage.setItem("latestMessageTime" + docID, " ");
     }
@@ -100,41 +106,46 @@ async function SetLocalData(doc, userid)
 
 async function CreateNode(doc, userid, cardTemplate)
 {
-    await SetLocalData(doc,userid);
+    try {
+        await SetLocalData(doc,userid);
+    
+        var docID = doc.id;
+        let newcard = cardTemplate.content.cloneNode(true);
+    
+        newcard.querySelector(".card-container").setAttribute("id", "chatroom-" + doc.id);
+    
+        //update title and text
+        newcard.querySelector('.img-thumbnail').setAttribute("src", sessionStorage.getItem("image" + docID));
+        newcard.querySelector('.msg-recipient').innerHTML = sessionStorage.getItem("recipientName" + docID);
+        newcard.querySelector('.latest-message').innerHTML = ApplyLimiter(150,sessionStorage.getItem("latestMessage" + docID).toString());
+        newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName" + docID);
+        newcard.querySelector('.request-location').innerHTML = "Location: " + sessionStorage.getItem("location" + docID);
+        newcard.querySelector('.category').innerHTML = "Category: " + sessionStorage.getItem("category" + docID);
+        newcard.querySelector('.latest-message-time').innerHTML = sessionStorage.getItem("latestMessageTime" + docID);
+        newcard.querySelector('a').href = "/html/chatroom.html?docID="+doc.id;
+    
+        //attach to gallery
+        document.getElementById("chatrooms-go-here").appendChild(newcard);
+    
+        var lastRead = doc.data().lastRead[userid];
+        var latestMessageID = doc.data().latestMessageID;
+        var finishedCard = document.getElementById("chatroom-" + doc.id);
+    
+        db.collection("chatrooms").doc(doc.id).collection("messages").doc(latestMessageID).get().then(message => {
+    
+            // console.log("chatroom-" + doc.id);
+    
+            // console.log(finishedCard);
+    
+            if((message.data().time < lastRead && message.data().sender != userid) || message.data().sender == userid)
+            {
+                finishedCard.querySelector(".notification").remove();
+            }
+        })
 
-    var docID = doc.id;
-    let newcard = cardTemplate.content.cloneNode(true);
-
-    newcard.querySelector(".card-container").setAttribute("id", "chatroom-" + doc.id);
-
-    //update title and text
-    newcard.querySelector('.img-thumbnail').setAttribute("src", sessionStorage.getItem("image" + docID));
-    newcard.querySelector('.msg-recipient').innerHTML = sessionStorage.getItem("recipientName" + docID);
-    newcard.querySelector('.latest-message').innerHTML = ApplyLimiter(150,sessionStorage.getItem("latestMessage" + docID).toString());
-    newcard.querySelector('.request-name').innerHTML = "Request: " + sessionStorage.getItem("requestName" + docID);
-    newcard.querySelector('.request-location').innerHTML = "Location: " + sessionStorage.getItem("location" + docID);
-    newcard.querySelector('.category').innerHTML = "Category: " + sessionStorage.getItem("category" + docID);
-    newcard.querySelector('.latest-message-time').innerHTML = sessionStorage.getItem("latestMessageTime" + docID);
-    newcard.querySelector('a').href = "/html/chatroom.html?docID="+doc.id;
-
-    //attach to gallery
-    document.getElementById("chatrooms-go-here").appendChild(newcard);
-
-    var lastRead = doc.data().lastRead[userid];
-    var latestMessageID = doc.data().latestMessageID;
-    var finishedCard = document.getElementById("chatroom-" + doc.id);
-
-    db.collection("chatrooms").doc(doc.id).collection("messages").doc(latestMessageID).get().then(message => {
-
-        console.log("chatroom-" + doc.id);
-
-        console.log(finishedCard);
-
-        if((message.data().time < lastRead && message.data().sender != userid) || message.data().sender == userid)
-        {
-            finishedCard.querySelector(".notification").remove();
-        }
-    })
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 //Limits the number of characters in a string of text.
