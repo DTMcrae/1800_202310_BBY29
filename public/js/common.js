@@ -1,6 +1,5 @@
 import { loadSkeleton } from './requestSkeleton.js'
-import { loadNav, loadHeader1} from "./standardized.js";
-import { loadHeader2 } from "./standardized.js";
+import { loadNav, loadHeader1, loadHeader2} from "./standardized.js";
 
 function loginCheck (){ 
   var path = window.location.href.split('/').pop();

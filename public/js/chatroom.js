@@ -87,7 +87,8 @@ async function SetLocalData(doc, recipientID)
             sessionStorage.setItem("requestDetails",requestDoc.data().detail);
             sessionStorage.setItem("image", requestDoc.data().images?.[0])
         });
-    } catch {
+    } catch (e) {
+        console.error(e);
         sessionStorage.setItem("requestName","No Related Request");
             sessionStorage.setItem("requestDetails","Request has either been closed or deleted.");
     }
@@ -98,7 +99,8 @@ async function SetLocalData(doc, recipientID)
         {
             sessionStorage.setItem("recipientName", userDoc.data().name);
         }
-        catch {
+        catch (e){
+            console.error(e);
             sessionStorage.setItem("recipientName" + docID, "No Recipient");
         }
         console.log("Recipient: " + sessionStorage.getItem("recipientName"));

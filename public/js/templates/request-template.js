@@ -1,4 +1,4 @@
-import { REQUEST_TYPE } from "../app/request.js";
+import { REQUEST_STATUS, REQUEST_TYPE } from "../app/request.js";
 
 export const createRequestTemplate = ({
   category,
@@ -10,13 +10,19 @@ export const createRequestTemplate = ({
   requestType,
   requestId,
   docID,
+  status="active",
   ...data
 }) => {
   let box = document.createElement("div");
   box.setAttribute('class', "card-wrapper");
 
   box.innerHTML = `
-  <a href="/html/request-details.html?docID=${requestId || docID}" class="card request request-long requestPlaceholder">
+  <a 
+    href="${status !== REQUEST_STATUS.ACTIVE 
+            ? "#none" : "/html/request-details.html?docID=" 
+            + (requestId || docID)}"
+    class="card request request-long requestPlaceholder request-${status}"
+  >
     <div class="card-container">
       <div class="img">
         <img src="${images?.[0]}" class="img-thumbnail request-image" alt="${title || 'NAN'}">
