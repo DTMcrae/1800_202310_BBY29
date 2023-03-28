@@ -26,3 +26,9 @@ export const REQUEST_TYPE = {
   HELP: 'help',
   VOLUNTEER: 'volunteer'
 }
+
+export const REQUEST_STATUS = {
+  ACTIVE: "active",
+  ARCHIEVED: "archived",
+  CANCELED: "canceled"
+}

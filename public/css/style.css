@@ -395,3 +395,24 @@ background-color: rgb(245, 243, 243);
   color:#fff;
   background-color: var(--color-primary);
 }
+.modal-indicator{
+  position: fixed;
+  left: 0;right: 0;top: 0;bottom: 0;
+  z-index: 1020;
+  background-color: rgba(0,0,0,0.5);
+}
+.indicator-container {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 300px;
+  height: 140px;
+  font-size: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+}

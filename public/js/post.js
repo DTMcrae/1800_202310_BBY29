@@ -1,5 +1,5 @@
 import { addOptions, isValidLength } from "./app/form.js";
-import { CATEGORY, URGENCY, REQUEST_TYPE } from "./app/request.js";
+import { CATEGORY, URGENCY, REQUEST_TYPE, REQUEST_STATUS } from "./app/request.js";
 import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
 import { showSuccessModal } from "./app/modal.js";
@@ -51,7 +51,8 @@ const onClickSubmitPost = async (requestType,e) => {
       detail: formDom.elements["detail"]?.value,
       meetup: formDom.elements["meetup"]?.value,
       createdDate: new Date().toLocaleString(),
-      requestType: requestType
+      requestType: requestType,
+      status: REQUEST_STATUS.ACTIVE
     };
   
     const isValid = checkValidation(data);
@@ -97,7 +98,6 @@ let imagesArray = [];
 // initializes photo-related functions to attatch required events to buttons
 const initAddPhoto = () => {
   if (!input || !output) {
-    console.warn("initAddPhoto: ", input, output);
     return false;
   }
   const container = document.getElementsByClassName("add-photo");

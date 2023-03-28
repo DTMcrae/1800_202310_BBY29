@@ -257,6 +257,7 @@ hr{
 }
 
 .request {
+  position: relative;
   display: block;
   font-size: 0.8rem;
   border: 0;
@@ -384,6 +385,32 @@ hr{
   line-height: 1.5em;
   color: var(--color-text-gray);
 }
+
+.request-archived {
+  pointer-events: none;
+ }
+ .request-archived:before{
+   position: absolute;
+   display: block;
+   z-index: 5;
+   content:'';
+   /* left: -10px; right: -10px; */
+   left: 0;right: 0;
+   top: 0;bottom: 0;
+   background-color: rgba(0,0,0,0.2);
+ }
+ .request-archived:after {
+  position: absolute;
+  left: 0;right: 0;top: 0;bottom: 0;
+  z-index: 10;
+  content:'Closed';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+ }
 
 /* common classes */
 .hide{

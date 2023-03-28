@@ -1,5 +1,12 @@
-// Displays content
-displayRequestInfo();
+import { showSuccessModal } from "./app/modal.js";
+import { REQUEST_STATUS } from "./app/request.js";
+
+// initializer
+const init = () => {
+  // Displays content
+  displayRequestInfo();
+};
+window.addEventListener("load", init);
 
 // Activate or deactivate settings and buttons
 firebase.auth().onAuthStateChanged((user) => {
@@ -15,6 +22,15 @@ firebase.auth().onAuthStateChanged((user) => {
       const acceptButton = document.querySelector(".requestButton");
       const cancelButton = document.querySelector(".cancelButton");
 
+      console.log(doc.data());
+
+      if (doc.data().status === REQUEST_STATUS.ARCHIEVED 
+        || doc.data().status === REQUEST_STATUS.CANCELED){
+            showClosed();
+            removeSetting();
+        return;      
+      }
+
       try {
         const acceptedUsers = doc.data().usersAccepted;
 
@@ -23,8 +39,13 @@ firebase.auth().onAuthStateChanged((user) => {
         if (doc.data().user.uid == user.uid) {
           cancelButton?.remove();
           acceptButton?.remove();
-
           showSetting();
+
+          const archieveNode = document.getElementById("btn-archieve-request");
+          const deleteNode = document.getElementById("btn-delete-request");
+
+          archieveNode.addEventListener("click", onClickArchieve);
+          deleteNode.addEventListener("click", onClickDelete);
 
           return;
         }
@@ -70,14 +91,13 @@ firebase.auth().onAuthStateChanged((user) => {
         }
 
         // If this is an others' request I didn't accept
-
         cancelButton?.remove();
         acceptButton.setAttribute(
           "onclick",
           'AcceptRequest("' + user.uid + '","' + ID + '")'
         );
       } catch (e) {
-        console.warn(e);
+        console.error(e);
         //acceptedUsers field does not exist.
         console.log("Request's acceptedUsers field does not exist");
         cancelButton?.remove();
@@ -99,23 +119,21 @@ function displayRequestInfo() {
     .doc(ID)
     .get()
     .then((doc) => {
-      thisRequest = doc.data();
+      const thisRequest = doc.data();
 
-      requestCode = thisRequest.code;
-      requestImage = thisRequest.images;
-      requestTitle = thisRequest.title;
-      requestCategory = thisRequest.category;
-      requestLocation = thisRequest.location;
-      requestUrgency = thisRequest.urgency;
-      requestDetails = thisRequest.detail;
-      requestMeetup = thisRequest.meetup;
+      const requestImage = thisRequest.images;
+      const requestTitle = thisRequest.title;
+      const requestCategory = thisRequest.category;
+      const requestLocation = thisRequest.location;
+      const requestUrgency = thisRequest.urgency;
+      const requestDetails = thisRequest.detail;
+      const requestMeetup = thisRequest.meetup;
 
       db.collection("users")
         .doc(thisRequest.user.uid)
         .get()
         .then((userDoc) => {
           const requestee = userDoc.data();
-          requesteeName = userDoc.data().name;
           // console.log(requestee)
           document.getElementById("requestee-name").innerHTML = requestee.name;
           if (!!requestee.pfpURL) {
@@ -165,11 +183,6 @@ function displayRequestInfo() {
 
 const showSetting = () => {
   const settingNode = document.getElementById("detail-setting");
-  const archieveNode = document.getElementById("btn-archieve-request");
-  const deleteNode = document.getElementById("btn-delete-request");
-
-  archieveNode.addEventListener("click", onClickArchieve);
-  deleteNode.addEventListener("click", onClickDelete);
 
   settingNode.style.display = "block";
 };
@@ -177,13 +190,50 @@ const removeSetting = () => {
   const settingNode = document.getElementById("detail-setting");
   settingNode.remove();
 };
-const onClickArchieve = () => {
-  const archieveNode = document.getElementById("btn-archieve-request");
-  alert("archieve", archieveNode);
+const onClickArchieve = async () => {
+  const params = new URL(window.location.href); //get URL of search bar
+  const docID = params.searchParams.get("docID"); //get value for key "id"
+
+  try {
+    // const currentUserID = getUserID();
+    // const userRef = db.collection("users").doc(currentUserID);
+    // const userDoc = await userRef.get();
+    // const userData = userDoc.data();
+
+    const requestRef = db.collection("requests").doc(docID);
+    const requestDoc = await requestRef.get();
+    if (!requestDoc.exists) {
+      console.error("Cannot find doc information");
+      return;
+    }
+    const requestData = requestDoc.data();
+
+    let requestsStatus = requestData.status || "";
+    if (requestsStatus == REQUEST_STATUS.ARCHIEVED) {
+      return;
+    }
+    await requestRef.update({status: REQUEST_STATUS.ARCHIEVED });
+
+    showSuccessModal({
+        message: "Archived",
+        onClose: () => {
+            location.reload();
+        }
+    });
+  } catch (e) {
+    console.error(e);
+  }
 };
+
 const onClickDelete = () => {
   const deleteNode = document.getElementById("btn-delete-request");
   alert("delete", deleteNode);
+
+  db.collection("users")
+    .doc(userid)
+    .update({
+      requestsAccepted: firebase.firestore.FieldValue.arrayRemove(requestid),
+    });
 };
 
 async function AbandonRequest(userid, requestid) {
@@ -226,6 +276,7 @@ async function AbandonRequest(userid, requestid) {
         }
       });
     });
+    
 }
 
 async function AcceptRequest(userid, requestid) {
@@ -286,4 +337,21 @@ async function AcceptRequest(userid, requestid) {
           window.location.assign("/html/chatroom.html?docID=" + chatdoc.id);
         });
     });
+}
+
+const showClosed = () => {
+    const div = document.createElement("div");
+    div.setAttribute("id", "modal-indicator-closed")
+    div.setAttribute("class", "modal-indicator")
+    const template = `
+        <div class="indicator-container">
+            <div>
+                <strong>This request was closed.</strong>
+            </div>
+        </div>
+    `;
+    div.innerHTML = template;
+    document.body.style.height = "100vh";
+    document.body.style.overflow = "hidden";
+    document.body.appendChild(div);
 }
