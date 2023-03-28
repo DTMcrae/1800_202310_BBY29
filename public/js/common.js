@@ -7,7 +7,7 @@ function loginCheck (){
 
 firebase.auth().onAuthStateChanged(user => {
   // Check if user is signed in:
-  if ((!user) && path !== 'login' && path !== 'index') {
+  if ((!user) && path !== 'login' && path !== 'index' && path !== '') {
     console.log("not logged in");
     window.location.href = "login";
   console.log(path);
