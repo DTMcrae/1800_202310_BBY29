@@ -50,7 +50,7 @@ const onClickSubmitPost = async (requestType,e) => {
       category: formDom.elements["category"]?.value,
       detail: formDom.elements["detail"]?.value,
       meetup: formDom.elements["meetup"]?.value,
-      createdDate: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString('en-US', {hour12: false}),
       requestType: requestType,
       status: REQUEST_STATUS.ACTIVE
     };
