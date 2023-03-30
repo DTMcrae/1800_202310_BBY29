@@ -119,6 +119,15 @@ box-shadow: none;
   color: white;
 }
 
+/* Map */
+.hide-view{
+  display: none;
+}
+
+#map {
+  width: 500px;
+  height: 500px;
+}
 
 /* Add requests */
 .container-post-step1 {
