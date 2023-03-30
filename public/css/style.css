@@ -425,3 +425,7 @@ background-color: rgb(245, 243, 243);
   background-color: #fff;
   border-radius: 20px;
 }
+
+#filterMenu {
+    display: none;
+}
