@@ -34,7 +34,7 @@ function populateUserInfo() {
           }
           if (userPicURL != null){
             var image = document.getElementById("profile-image");
-            image.setAttribute('src', userPicURL);
+            image.setAttribute('src', userPicURL || "/img/placeholder-profile.png");
           }
         })
     } else {

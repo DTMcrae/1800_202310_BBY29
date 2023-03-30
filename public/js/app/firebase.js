@@ -80,7 +80,6 @@ const add = async (
 const postRequest = (data, callback) => {
   // save docID to return
   const docID = add("requests", data);
-  console.log('sfsfs',docID)
 
   return docID;
 };

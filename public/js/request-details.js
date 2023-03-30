@@ -1,3 +1,4 @@
+import { getUserID } from "./app/firebase.js";
 import { showSuccessModal } from "./app/modal.js";
 import { REQUEST_STATUS } from "./app/request.js";
 
@@ -8,6 +9,7 @@ const init = () => {
 };
 window.addEventListener("load", init);
 
+console.log(sessionStorage)
 // Activate or deactivate settings and buttons
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) return;
@@ -55,7 +57,7 @@ firebase.auth().onAuthStateChanged((user) => {
         removeSetting();
 
         // If this is an others' request I accepted
-        if (acceptedUsers.includes(user.uid)) {
+        if (acceptedUsers?.includes(user.uid)) {
           console.log("User is present in acceptedUsers");
           acceptButton.innerHTML = "Open Chat";
 
@@ -209,8 +211,10 @@ const onClickArchieve = async () => {
 
     showSuccessModal({
         message: "Archived",
-        onClose: () => {
+        onShow: () => {
+          setTimeout(() => {
             location.reload();
+          }, 1200)
         }
     });
   } catch (e) {
@@ -219,10 +223,54 @@ const onClickArchieve = async () => {
 };
 
 const onClickDelete = async () => {
-  const currentUserID = getUserID();
-  const userRef = db.collection("users").doc(currentUserID);
-  const userDoc = await userRef.get();
-  const userData = userDoc.data();
+  try {
+    const currentUserID = getUserID();
+    // const userRef = db.collection("users").doc(currentUserID);
+    // const userDoc = await userRef.get();
+    // const userData = userDoc.data();
+  
+    const params = new URL(window.location.href); //get URL of search bar
+    const docID = params.searchParams.get("docID"); //get value for key "id"
+  
+  
+    // remove 
+    await db.collection("users")
+      .doc(currentUserID)
+      .update({
+        requestsCreated: firebase.firestore.FieldValue.arrayRemove(docID),
+      });
+  
+    await db.collection("requests")
+      .doc(docID)
+      .get()
+      .then((doc) => {
+        const usersAccepted = doc.data().usersAccepted || [];
+        usersAccepted.forEach((userID) => {
+  
+          db.collection("users")
+            .doc(userID)
+            .update({
+              requestsAccepted: firebase.firestore.FieldValue.arrayRemove(docID),
+            });
+        })
+      });
+  
+    await db.collection("requests")
+      .doc(docID)
+      .delete();
+
+    showSuccessModal({
+        message: "Deleted",
+        onShow: () => {
+          setTimeout(() => {
+            window.location.href = `/main`;
+          }, 1200)
+        }
+    });
+  } catch (e) {
+    console.error(e);
+  }
+
 };
 
 async function AbandonRequest(userid, requestid) {
