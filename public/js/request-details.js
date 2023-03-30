@@ -9,7 +9,6 @@ const init = () => {
 };
 window.addEventListener("load", init);
 
-console.log(sessionStorage)
 // Activate or deactivate settings and buttons
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) return;
@@ -24,9 +23,9 @@ firebase.auth().onAuthStateChanged((user) => {
       const acceptButton = document.querySelector(".requestButton");
       const cancelButton = document.querySelector(".cancelButton");
 
-      console.log(doc.data());
+      // console.log(doc.data());
 
-      if (doc.data().status === REQUEST_STATUS.ARCHIEVED 
+      if (doc.data().status === REQUEST_STATUS.ARCHIVED 
         || doc.data().status === REQUEST_STATUS.CANCELED){
             showClosed();
             removeSetting();
@@ -46,8 +45,8 @@ firebase.auth().onAuthStateChanged((user) => {
           const archiveNode = document.getElementById("btn-archive-request");
           const deleteNode = document.getElementById("btn-delete-request");
 
-          archiveNode.addEventListener("click", onClickArchive);
-          deleteNode.addEventListener("click", onClickDelete);
+          archiveNode?.addEventListener("click", onClickArchive);
+          deleteNode?.addEventListener("click", onClickDelete);
 
           return;
         }
@@ -58,10 +57,10 @@ firebase.auth().onAuthStateChanged((user) => {
 
         // If this is an others' request I accepted
         if (acceptedUsers?.includes(user.uid)) {
-          console.log("User is present in acceptedUsers");
+          // console.log("User is present in acceptedUsers");
           acceptButton.innerHTML = "Open Chat";
 
-          cancelButton.addEventListener("click", () => {
+          cancelButton?.addEventListener("click", () => {
             AbandonRequest(user.uid, ID)
           });
           try {
@@ -93,15 +92,15 @@ firebase.auth().onAuthStateChanged((user) => {
 
         // If this is an others' request I didn't accept
         cancelButton?.remove();
-        acceptButton.addEventListener("click", () => {
+        acceptButton?.addEventListener("click", () => {
           AcceptRequest(user.uid, ID);
         });
       } catch (e) {
         console.error(e);
         //acceptedUsers field does not exist.
-        console.log("Request's acceptedUsers field does not exist");
+        // console.log("Request's acceptedUsers field does not exist");
         cancelButton?.remove();
-        acceptButton.addEventListener("click", () => {
+        acceptButton?.addEventListener("click", () => {
           AcceptRequest(user.uid, ID);
         });
       }
@@ -111,7 +110,7 @@ firebase.auth().onAuthStateChanged((user) => {
 function displayRequestInfo() {
   let params = new URL(window.location.href); //get URL of search bar
   let ID = params.searchParams.get("docID"); //get value for key "id"
-  console.log(ID);
+  // console.log(ID);
 
   // doublecheck: is your collection called "Reviews" or "reviews"?
   db.collection("requests")
@@ -189,7 +188,7 @@ const removeSetting = () => {
   const settingNode = document.getElementById("detail-setting");
   settingNode.remove();
 };
-const onClickArchieve = async () => {
+const onClickArchive = async () => {
   const params = new URL(window.location.href); //get URL of search bar
   const docID = params.searchParams.get("docID"); //get value for key "id"
 
@@ -204,10 +203,10 @@ const onClickArchieve = async () => {
     const requestData = requestDoc.data();
 
     let requestsStatus = requestData.status || "";
-    if (requestsStatus == REQUEST_STATUS.ARCHIEVED) {
+    if (requestsStatus == REQUEST_STATUS.ARCHIVED) {
       return;
     }
-    await requestRef.update({status: REQUEST_STATUS.ARCHIEVED });
+    await requestRef.update({status: REQUEST_STATUS.ARCHIVED });
 
     showSuccessModal({
         message: "Archived",
@@ -225,9 +224,6 @@ const onClickArchieve = async () => {
 const onClickDelete = async () => {
   try {
     const currentUserID = getUserID();
-    // const userRef = db.collection("users").doc(currentUserID);
-    // const userDoc = await userRef.get();
-    // const userData = userDoc.data();
   
     const params = new URL(window.location.href); //get URL of search bar
     const docID = params.searchParams.get("docID"); //get value for key "id"

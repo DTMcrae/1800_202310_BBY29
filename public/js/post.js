@@ -17,14 +17,14 @@ const init = () => {
     ?.addEventListener("click", (e) =>{
       var form = document.querySelectorAll('.needs-validation')[0];
       form.classList.add('was-validated');
-      onClickSubmitPost(REQUEST_TYPE.HELP);
+      onClickSubmitPost(REQUEST_TYPE.HELP, e);
     });
   document
     .getElementById("submit-volunteer-post")
     ?.addEventListener("click", (e) =>{
       var form = document.querySelectorAll('.needs-validation')[0];
       form.classList.add('was-validated');
-      onClickSubmitPost(REQUEST_TYPE.VOLUNTEER);
+      onClickSubmitPost(REQUEST_TYPE.VOLUNTEER, e);
     });
 
   initAddPhoto();
@@ -34,6 +34,12 @@ window.addEventListener("load", init);
 
 // event function when clicks "Submit" button on the posting page.
 const onClickSubmitPost = async (requestType,e) => {
+  e.preventDefault();
+
+  // disable submit button
+  $(".submit-post").attr("disabled", true);
+
+
   let data;
   try {
     const formDom = document.querySelector("form");
@@ -74,12 +80,16 @@ const onClickSubmitPost = async (requestType,e) => {
 
       submitPost(data, requestType);
     } else {
-      // alert("check validation : in dev")
+      // enable submit button
+      $(".submit-post").attr("disabled", false);
     }
 
   } catch(e) {
     console.error(e);
-  } 
+
+    // enable submit button
+    $(".submit-post").attr("disabled", false);
+  }
 };
 
 /* post images
@@ -103,7 +113,7 @@ const initAddPhoto = () => {
   const container = document.getElementsByClassName("add-photo");
   const btn = document.getElementById("btn-add-photo");
 
-  input.addEventListener("change", () => {
+  input?.addEventListener("change", () => {
     // Update imagesArray from selected images data
     imagesArray = [...imagesArray, ...input.files].slice(0, 5);
 
@@ -134,7 +144,7 @@ function displayImages() {
   // Bind click events to remove selected preview item.
   const doms = output.getElementsByClassName("thumbnail");
   [...doms].forEach((dom, index) => {
-    dom.addEventListener("click", () => {
+    dom?.addEventListener("click", () => {
       deleteImage(index);
     });
   });
@@ -201,9 +211,6 @@ const submitPost = async (data, requestType) => {
 
   // update requests to user
   await rest.updateRequestCreated(docID);
-
-  // disable submit button
-  $(".submit-post").attr("disabled", true);
 
   // show Success modal
   showSuccessModal({
