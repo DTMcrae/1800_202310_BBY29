@@ -25,6 +25,7 @@ function onSuccess(position) { //callback function
     //set map to be around current location
     //set a marker at the current location
     map = L.map('map').setView([latitude, longitude], 13);
+    if(!map) return;
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -87,7 +88,8 @@ function placeMarker(addr) {
                 popupAnchor: [1, -34],
                 shadowSize: [41, 41]
             });
-
+            
+            if(!map) return;
             // create a marker based on the found address geolocation
             // use a customized icon called "greenIcon"
             // place this marker on the map, with Popup when clicked
