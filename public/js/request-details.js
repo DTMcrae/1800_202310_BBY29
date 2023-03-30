@@ -43,10 +43,10 @@ firebase.auth().onAuthStateChanged((user) => {
           acceptButton?.remove();
           showSetting();
 
-          const archieveNode = document.getElementById("btn-archieve-request");
+          const archiveNode = document.getElementById("btn-archive-request");
           const deleteNode = document.getElementById("btn-delete-request");
 
-          archieveNode.addEventListener("click", onClickArchieve);
+          archiveNode.addEventListener("click", onClickArchive);
           deleteNode.addEventListener("click", onClickDelete);
 
           return;

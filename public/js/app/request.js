@@ -29,6 +29,6 @@ export const REQUEST_TYPE = {
 
 export const REQUEST_STATUS = {
   ACTIVE: "active",
-  ARCHIEVED: "archived",
+  ARCHIVED: "archived",
   CANCELED: "canceled"
 }
