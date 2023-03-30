@@ -8,7 +8,7 @@ var loadFile = function (event) {
   console.log(typeof file.type);
   if (file !== undefined && file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png") {
     
-    image.src = URL.createObjectURL(event.target.files[0]);
+    image.src = URL.createObjectURL(event.target.files[0]) || "/img/placeholder-profile.png";
     let fileName = file.name;
     firebase.auth().onAuthStateChanged(user => {
       // Check if user is signed in:
