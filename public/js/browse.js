@@ -18,6 +18,12 @@ firebase.auth().onAuthStateChanged((user) => {
 
         document.getElementById("requests-go-here").appendChild(card);
       });
+
+      let cards = document.getElementsByClassName("request-archived");
+      for(var i = 0; i < cards.length; i++)
+      {
+        cards[i].style.display = "none";
+      }
     });
 });
 
