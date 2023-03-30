@@ -70,7 +70,7 @@ firebase.auth().onAuthStateChanged((user) => {
                   // console.log(user.uid);
                   // console.log(chatroom.data().userID);
 
-                  if (chatroom.data().userID.includes(user.uid)) {
+                  if (chatroom.data().requestID == ID && chatroom.data().userID.includes(user.uid)) {
                     acceptButton.setAttribute(
                       "href",
                       "/html/chatroom.html?docID=" + chatroom.id
