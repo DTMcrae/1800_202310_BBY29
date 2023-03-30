@@ -52,49 +52,23 @@
   <div class="main-header"></div>
 
   <!-- Main -->
-  <div id="container" class="container-padding-horizontal">
-    <div id="title" class="container-post-select-type container-padding flex-center pb-5">
-      <h2>Active Requests</h2>
-      <button onclick="toggleView()">Toggle View</button>
-    </div>
-
-    <!-- List view  -->
-    <div id="list-view">
-      <div class="input-group mb-2">
-        <input type="text" class="form-control" id="search" placeholder="Request Search" aria-label="Request Search"
-          aria-describedby="basic-addon2">
-      </div>
-      <div id="requests-go-here">
+  <main id="container" class="container-padding-vertical">
+    <div id="message"></div>
+    <div id="map">
+      <div class="auto-complete-panel">
+        <div id="autocomplete" class="autocomplete-container"></div>
       </div>
     </div>
-
-    <!-- Map View -->
-    <div id="map-view" class ="hide-view">
-      <div id="message"></div>
-      <div id="map">
-        <div class="auto-complete-panel">
-          <div id="autocomplete" class="autocomplete-container"></div>
-        </div>
-      </div>
-      <div id="status"></div>
-    </div>
-    
-  </div>
-
-
-
-  <template id="requestTemplate">
-  </template>
+    <div id="status"></div>
+  </main>
 
   <!-- Navigation -->
   <div class="main-nav"></div>
 
   <!-- scripts -->
   <script src="/js/firebaseAPI_BBY29.js"></script>
-  <script type="module" src="/js/browse.js"></script>
-  <script src="/js/common.js" type="module"></script>
-  <script src="/js/search.js"></script>
-  <script src="/js/map.js"></script>
+  <script type="module" src="/js/common.js"></script>
+  <script src="js/map.js"></script>
 
 </body>
 
