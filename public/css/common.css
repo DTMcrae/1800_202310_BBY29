@@ -182,6 +182,22 @@ hr{
   margin: .5em !important;
 }
 
+/* Index */
+
+.lead {
+  font-size: 14pt;
+  color: rgb(107, 107, 107);
+}
+
+#sign-in:hover {
+background-color: white;
+color:#EB6424;
+}
+
+#learn-more:hover{
+  color: #5c636a;
+  background-color: white;
+}
 /* Header */
 .navbar {
   border-bottom: 1px solid var(--color-divider);
