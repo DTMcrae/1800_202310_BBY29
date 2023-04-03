@@ -1,11 +1,11 @@
 const addOptions = (selectClassName, optionsArray) => {
   const dom = document.getElementsByClassName(selectClassName);
   if (dom?.length < 1) {
-    // console.warn("addOptions: Can not find class name " + selectClassName)
+    console.error("addOptions: Can not find class name " + selectClassName)
     return false;
   }
   if (optionsArray.length < 0) {
-    // console.warn("addOptions: Can not find optionsArray " + optionsArray)
+    console.error("addOptions: Can not find optionsArray " + optionsArray)
     return false;
   }
   for(let i = 0; i < dom.length; i++) {
@@ -22,7 +22,6 @@ const isValidLength = (x, min, max) => {
   if (!x || x.length === 0) return null;
   return !(x.length > max || x.length < min);
 };
-
 
 export {
   addOptions,

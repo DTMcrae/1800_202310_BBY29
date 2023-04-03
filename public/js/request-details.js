@@ -25,11 +25,13 @@ firebase.auth().onAuthStateChanged((user) => {
 
       // console.log(doc.data());
 
-      if (doc.data().status === REQUEST_STATUS.ARCHIVED 
-        || doc.data().status === REQUEST_STATUS.CANCELED){
-            showClosed();
-            removeSetting();
-        return;      
+      if (
+        doc.data().status === REQUEST_STATUS.ARCHIVED ||
+        doc.data().status === REQUEST_STATUS.CANCELED
+      ) {
+        showClosed();
+        removeSetting();
+        return;
       }
 
       try {
@@ -61,7 +63,7 @@ firebase.auth().onAuthStateChanged((user) => {
           acceptButton.innerHTML = "Open Chat";
 
           cancelButton?.addEventListener("click", () => {
-            AbandonRequest(user.uid, ID)
+            AbandonRequest(user.uid, ID);
           });
           try {
             db.collection("chatrooms")
@@ -71,7 +73,10 @@ firebase.auth().onAuthStateChanged((user) => {
                   // console.log(user.uid);
                   // console.log(chatroom.data().userID);
 
-                  if (chatroom.data().requestID == ID && chatroom.data().userID.includes(user.uid)) {
+                  if (
+                    chatroom.data().requestID == ID &&
+                    chatroom.data().userID.includes(user.uid)
+                  ) {
                     acceptButton.setAttribute(
                       "href",
                       "/html/chatroom.html?docID=" + chatroom.id
@@ -193,7 +198,6 @@ const onClickArchive = async () => {
   const docID = params.searchParams.get("docID"); //get value for key "id"
 
   try {
-
     const requestRef = db.collection("requests").doc(docID);
     const requestDoc = await requestRef.get();
     if (!requestDoc.exists) {
@@ -206,15 +210,15 @@ const onClickArchive = async () => {
     if (requestsStatus == REQUEST_STATUS.ARCHIVED) {
       return;
     }
-    await requestRef.update({status: REQUEST_STATUS.ARCHIVED });
+    await requestRef.update({ status: REQUEST_STATUS.ARCHIVED });
 
     showSuccessModal({
-        message: "Archived",
-        onShow: () => {
-          setTimeout(() => {
-            location.reload();
-          }, 1200)
-        }
+      message: "Archived",
+      onShow: () => {
+        setTimeout(() => {
+          location.reload();
+        }, 1200);
+      },
     });
   } catch (e) {
     console.error(e);
@@ -224,49 +228,47 @@ const onClickArchive = async () => {
 const onClickDelete = async () => {
   try {
     const currentUserID = getUserID();
-  
+
     const params = new URL(window.location.href); //get URL of search bar
     const docID = params.searchParams.get("docID"); //get value for key "id"
-  
-  
-    // remove 
-    await db.collection("users")
+
+    // remove
+    await db
+      .collection("users")
       .doc(currentUserID)
       .update({
         requestsCreated: firebase.firestore.FieldValue.arrayRemove(docID),
       });
-  
-    await db.collection("requests")
+
+    await db
+      .collection("requests")
       .doc(docID)
       .get()
       .then((doc) => {
         const usersAccepted = doc.data().usersAccepted || [];
         usersAccepted.forEach((userID) => {
-  
           db.collection("users")
             .doc(userID)
             .update({
-              requestsAccepted: firebase.firestore.FieldValue.arrayRemove(docID),
+              requestsAccepted:
+                firebase.firestore.FieldValue.arrayRemove(docID),
             });
-        })
+        });
       });
-  
-    await db.collection("requests")
-      .doc(docID)
-      .delete();
+
+    await db.collection("requests").doc(docID).delete();
 
     showSuccessModal({
-        message: "Deleted",
-        onShow: () => {
-          setTimeout(() => {
-            window.location.href = `/main`;
-          }, 1200)
-        }
+      message: "Deleted",
+      onShow: () => {
+        setTimeout(() => {
+          window.location.href = `/main`;
+        }, 1200);
+      },
     });
   } catch (e) {
     console.error(e);
   }
-
 };
 
 async function AbandonRequest(userid, requestid) {
@@ -278,13 +280,13 @@ async function AbandonRequest(userid, requestid) {
     .update({
       requestsAccepted: firebase.firestore.FieldValue.arrayRemove(requestid),
     });
-  console.log("Removed requestID from user's accepted requests");
+  // console.log("Removed requestID from user's accepted requests");
   db.collection("requests")
     .doc(requestid)
     .update({
       usersAccepted: firebase.firestore.FieldValue.arrayRemove(userid),
     });
-  console.log("Removed userID from requests accepted users");
+  // console.log("Removed userID from requests accepted users");
 
   await db
     .collection("chatrooms")
@@ -309,7 +311,6 @@ async function AbandonRequest(userid, requestid) {
         }
       });
     });
-    
 }
 
 async function AcceptRequest(userid, requestid) {
@@ -373,18 +374,18 @@ async function AcceptRequest(userid, requestid) {
 }
 
 const showClosed = () => {
-    const div = document.createElement("div");
-    div.setAttribute("id", "modal-indicator-closed")
-    div.setAttribute("class", "modal-indicator")
-    const template = `
+  const div = document.createElement("div");
+  div.setAttribute("id", "modal-indicator-closed");
+  div.setAttribute("class", "modal-indicator");
+  const template = `
         <div class="indicator-container">
             <div>
                 <strong>This request was closed.</strong>
             </div>
         </div>
     `;
-    div.innerHTML = template;
-    document.body.style.height = "100vh";
-    document.body.style.overflow = "hidden";
-    document.body.appendChild(div);
-}
+  div.innerHTML = template;
+  document.body.style.height = "100vh";
+  document.body.style.overflow = "hidden";
+  document.body.appendChild(div);
+};

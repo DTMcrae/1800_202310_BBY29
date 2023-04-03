@@ -1,12 +1,3 @@
-// let request = {
-//   title: "",
-//   location: "",
-//   urgency: "",
-//   categoty: "",
-//   detail: "",
-//   meetup: ""
-// };
-
 export const URGENCY = [
   "Low",
   "Medium",

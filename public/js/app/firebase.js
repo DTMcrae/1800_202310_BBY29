@@ -12,7 +12,7 @@ const getUser = () => {
 
     onAuthChanged((user) => {
       currentUser = user;
-      console.log(user.uid);
+      // console.log(user.uid);
     });
   } catch (e) {
     console.error(e);
@@ -39,7 +39,7 @@ const onAuthChanged = (
       callback(user);
     } else {
       // User is signed out
-        console.log("No user is signed in");
+        console.warn("No user is signed in");
     }
   });
   
@@ -103,7 +103,7 @@ const updateRequestCreated = async (docID) => {
     }
 
     await userRef.update({ requestsCreated });
-    console.log("User requests updated successfully");
+    // console.log("User requests updated successfully");
   } catch (error) {
     console.error("Error updating user requests", error);
   }
@@ -129,7 +129,7 @@ const updateHelpRequest = async (docID) => {
     }
 
     await userRef.update({ helpRequests });
-    console.log("User requests updated successfully");
+    // console.log("User requests updated successfully");
   } catch (error) {
     console.error("Error updating user requests", error);
   }
@@ -154,7 +154,7 @@ const updateVolunteerRequest = async (docID) => {
     }
 
     await userRef.update({ volunteerRequests });
-    console.log("User requests updated successfully");
+    // console.log("User requests updated successfully");
   } catch (error) {
     console.error("Error updating user requests", error);
   }

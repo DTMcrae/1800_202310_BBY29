@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged((user) => {
     .get()
     .then((userdoc) => {
       const acceptedList = userdoc.data().requestsAccepted || [];
-      for(let i = 0; i < acceptedList.length; i++) {
+      for (let i = 0; i < acceptedList.length; i++) {
         const requestID = acceptedList[acceptedList.length - i - 1];
         db.collection("requests")
           .doc(requestID)
@@ -31,28 +31,28 @@ firebase.auth().onAuthStateChanged((user) => {
             }
           });
       }
-      
-    const createdLists = userdoc.data().requestsCreated || [];
-    for(let i = 0; i < createdLists.length; i++) {
-      const requestID = createdLists[createdLists.length - i - 1];
-      db.collection("requests")
-        .doc(requestID)
-        .get()
-        .then((requestDoc) => {
-          if (requestDoc.data() == null) return;
 
-          const docData = requestDoc.data();
-          const card = createRequestTemplate({
-            ...docData,
-            requestId: requestID,
+      const createdLists = userdoc.data().requestsCreated || [];
+      for (let i = 0; i < createdLists.length; i++) {
+        const requestID = createdLists[createdLists.length - i - 1];
+        db.collection("requests")
+          .doc(requestID)
+          .get()
+          .then((requestDoc) => {
+            if (requestDoc.data() == null) return;
+
+            const docData = requestDoc.data();
+            const card = createRequestTemplate({
+              ...docData,
+              requestId: requestID,
+            });
+
+            if (requestDoc.data().requestType == "help") {
+              document.getElementById("list-my-help").appendChild(card);
+            } else {
+              document.getElementById("list-my-volunteer").appendChild(card);
+            }
           });
-
-          if (requestDoc.data().requestType == "help") {
-            document.getElementById("list-my-help").appendChild(card);
-          } else {
-            document.getElementById("list-my-volunteer").appendChild(card);
-          }
-        });
       }
     });
 });

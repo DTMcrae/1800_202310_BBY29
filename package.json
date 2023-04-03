@@ -1,8 +1,8 @@
 {
   "name": "1800_202310_bby29",
   "version": "1.0.0",
-  "description": "## 1. Project Description State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.   This browser based web application to ...",
-  "main": "index.js",
+  "description": "Our team, BBY-29,  is developing an app that connects people with their local communities for help with extreme weather-related events. ",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js -- chrome"
