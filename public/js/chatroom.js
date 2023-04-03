@@ -23,11 +23,11 @@ firebase.auth().onAuthStateChanged((user) => {
             { merge: true }
           );
 
-        $("#sentTemplate").load("/html/templates/sentTemplate.html"); //Load the template file
-        let sentTemplate = document.getElementById("sentTemplate"); //Load the request card template
+        $("#sent-template").load("/html/templates/sent-template.html"); //Load the template file
+        let sentTemplate = document.getElementById("sent-template"); //Load the request card template
 
-        $("#receivedTemplate").load("/html/templates/receivedTemplate.html"); //Load the template file
-        let receivedTemplate = document.getElementById("receivedTemplate"); //Load the request card template
+        $("#received-template").load("/html/templates/received-template.html"); //Load the template file
+        let receivedTemplate = document.getElementById("received-template"); //Load the request card template
 
         var recipientID = doc.data().userID[0];
         if (recipientID == userid) recipientID = doc.data().userID[1];

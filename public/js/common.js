@@ -1,4 +1,4 @@
-import { loadSkeleton } from "./requestSkeleton.js";
+import { loadSkeleton } from "./request-skeleton.js";
 import { loadNav, loadHeader1, loadHeader2 } from "./standardized.js";
 
 function loginCheck() {

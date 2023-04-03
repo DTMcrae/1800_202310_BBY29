@@ -1,8 +1,8 @@
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) return;
 
-  $("#chatTemplate").load("/html/templates/chatroomTemplate.html"); //Load the template file
-  let cardTemplate = document.getElementById("chatTemplate"); //Load the request card template
+  $("#chat-template").load("/html/templates/chatroom-emplate.html"); //Load the template file
+  let cardTemplate = document.getElementById("chat-template"); //Load the request card template
   var userid = user.uid;
   try {
     db.collection("chatrooms")

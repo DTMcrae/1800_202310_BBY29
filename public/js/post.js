@@ -1,5 +1,10 @@
 import { addOptions, isValidLength } from "./app/form.js";
-import { CATEGORY, URGENCY, REQUEST_TYPE, REQUEST_STATUS } from "./app/request.js";
+import {
+  CATEGORY,
+  URGENCY,
+  REQUEST_TYPE,
+  REQUEST_STATUS,
+} from "./app/request.js";
 import rest from "./app/firebase.js";
 import { uploadImage } from "./app/image.js";
 import { showSuccessModal } from "./app/modal.js";
@@ -14,37 +19,35 @@ const init = () => {
 
   document
     .getElementById("submit-help-post")
-    ?.addEventListener("click", (e) =>{
-      var form = document.querySelectorAll('.needs-validation')[0];
-      form.classList.add('was-validated');
+    ?.addEventListener("click", (e) => {
+      var form = document.querySelectorAll(".needs-validation")[0];
+      form.classList.add("was-validated");
       onClickSubmitPost(REQUEST_TYPE.HELP, e);
     });
   document
     .getElementById("submit-volunteer-post")
-    ?.addEventListener("click", (e) =>{
-      var form = document.querySelectorAll('.needs-validation')[0];
-      form.classList.add('was-validated');
+    ?.addEventListener("click", (e) => {
+      var form = document.querySelectorAll(".needs-validation")[0];
+      form.classList.add("was-validated");
       onClickSubmitPost(REQUEST_TYPE.VOLUNTEER, e);
     });
 
   initAddPhoto();
-}
+};
 window.addEventListener("load", init);
 
-
 // event function when clicks "Submit" button on the posting page.
-const onClickSubmitPost = async (requestType,e) => {
+const onClickSubmitPost = async (requestType, e) => {
   e.preventDefault();
 
   // disable submit button
   $(".submit-post").attr("disabled", true);
 
-
   let data;
   try {
     const formDom = document.querySelector("form");
     const uid = rest.getUserID();
-  
+
     data = {
       images: imagesArray,
       user: {
@@ -56,11 +59,11 @@ const onClickSubmitPost = async (requestType,e) => {
       category: formDom.elements["category"]?.value,
       detail: formDom.elements["detail"]?.value,
       meetup: formDom.elements["meetup"]?.value,
-      createdDate: new Date().toLocaleString('en-US', {hour12: false}),
+      createdDate: new Date().toLocaleString("en-US", { hour12: false }),
       requestType: requestType,
-      status: REQUEST_STATUS.ACTIVE
+      status: REQUEST_STATUS.ACTIVE,
     };
-  
+
     const isValid = checkValidation(data);
 
     if (isValid) {
@@ -76,15 +79,14 @@ const onClickSubmitPost = async (requestType,e) => {
         );
       }
 
-      data = {...data, images: newImagesArray};
+      data = { ...data, images: newImagesArray };
 
       submitPost(data, requestType);
     } else {
       // enable submit button
       $(".submit-post").attr("disabled", false);
     }
-
-  } catch(e) {
+  } catch (e) {
     console.error(e);
 
     // enable submit button
@@ -123,7 +125,6 @@ const initAddPhoto = () => {
     // Update added photos number
     document.getElementsByClassName("add-photo-number")[0].innerHTML =
       imagesArray.length;
-
   });
 };
 
@@ -168,35 +169,35 @@ const checkValidation = ({
 }) => {
   let el;
   let isValid = true;
-  const inputs = document.querySelectorAll('input');
+  const inputs = document.querySelectorAll("input");
   try {
     if (images.length < 1) {
-      el = {images: images};
-      throw(el);
+      el = { images: images };
+      throw el;
     }
-    if (!isValidLength(title,10, 80)) {
-      el = "title"
-      throw(el);
+    if (!isValidLength(title, 10, 80)) {
+      el = "title";
+      throw el;
     }
     if (location.length < 1) {
-      el = "location"
-      throw(el);
+      el = "location";
+      throw el;
     }
     if (!urgency) {
-      el = "urgency"
-      throw(el);
+      el = "urgency";
+      throw el;
     }
     if (!category) {
       el = "category";
-      throw(el);
+      throw el;
     }
     if (!isValidLength(detail, 20)) {
-      el = "detail"
-      throw(el);
+      el = "detail";
+      throw el;
     }
     if (!isValidLength(meetup, 10)) {
       el = "meetup";
-      throw(el);
+      throw el;
     }
 
     return isValid;
@@ -217,7 +218,7 @@ const submitPost = async (data, requestType) => {
     onShow: () => {
       setTimeout(() => {
         window.location.href = `/request-details?docID=${docID}`;
-      }, 1200)
-    }
+      }, 1200);
+    },
   });
 };

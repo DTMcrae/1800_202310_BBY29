@@ -60,7 +60,7 @@ const add = async (
         db.collection(collection).add(data)
           .then((docRef) => {
             const refID = docRef.id;
-            console.log("Document written with ID: ", refID);
+            // console.log("Document written with ID: ", refID);
             resolve(refID);
           })
           .catch((error) => {
