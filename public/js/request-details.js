@@ -196,6 +196,7 @@ const removeSetting = () => {
 const onClickArchive = async () => {
   const params = new URL(window.location.href); //get URL of search bar
   const docID = params.searchParams.get("docID"); //get value for key "id"
+  const currentUserID = getUserID(); //get the user's id
 
   try {
     const requestRef = db.collection("requests").doc(docID);
@@ -211,6 +212,32 @@ const onClickArchive = async () => {
       return;
     }
     await requestRef.update({ status: REQUEST_STATUS.ARCHIVED });
+
+        //Closes the chatroom
+        await db
+        .collection("chatrooms")
+        .where("requestID", "==", docID)
+        .get()
+        .then((chatrooms) => {
+          chatrooms.forEach((chatroom) => {
+            if (chatroom.data().userID.includes(currentUserID)) {
+              db.collection("chatrooms")
+                .doc(chatroom.id)
+                .collection("messages")
+                .add({
+                  message: "This request has been closed.",
+                  sender: currentUserID,
+                  time: new Date().toLocaleString(),
+                })
+                .then((newDoc) => {
+                  db.collection("chatrooms").doc(chatroom.id).update({
+                    latestMessageID: newDoc.id,
+                    userID: firebase.firestore.FieldValue.arrayRemove(currentUserID)
+                  });
+                });
+            }
+          });
+        });
 
     showSuccessModal({
       message: "Archived",
@@ -239,6 +266,32 @@ const onClickDelete = async () => {
       .update({
         requestsCreated: firebase.firestore.FieldValue.arrayRemove(docID),
       });
+
+    //Closes the chatroom
+    await db
+    .collection("chatrooms")
+    .where("requestID", "==", docID)
+    .get()
+    .then((chatrooms) => {
+      chatrooms.forEach((chatroom) => {
+        if (chatroom.data().userID.includes(currentUserID)) {
+          db.collection("chatrooms")
+            .doc(chatroom.id)
+            .collection("messages")
+            .add({
+              message: "This request has been deleted.",
+              sender: currentUserID,
+              time: new Date().toLocaleString(),
+            })
+            .then((newDoc) => {
+              db.collection("chatrooms").doc(chatroom.id).update({
+                latestMessageID: newDoc.id,
+                userID: firebase.firestore.FieldValue.arrayRemove(currentUserID)
+              });
+            });
+        }
+      });
+    });
 
     await db
       .collection("requests")
