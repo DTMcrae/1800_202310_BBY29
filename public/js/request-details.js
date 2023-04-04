@@ -306,10 +306,20 @@ async function AbandonRequest(userid, requestid) {
             .then((newDoc) => {
               db.collection("chatrooms").doc(chatroom.id).update({
                 latestMessageID: newDoc.id,
+                userID: firebase.firestore.FieldValue.arrayRemove(userid)
               });
             });
         }
       });
+    });
+
+    showSuccessModal({
+      message: "Cancelled",
+      onShow: () => {
+        setTimeout(() => {
+          location.reload();
+        }, 1200);
+      },
     });
 }
 
