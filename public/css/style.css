@@ -370,6 +370,7 @@ background-color: rgb(245, 243, 243);
   object-position: center;
   width: 100vw;
   height: 70vw;
+  max-height: 70vh;
 }
 
 .carousel-indicator {
