@@ -13,7 +13,7 @@ var loadFile = function (event) {
   ) {
     image.src =
       URL.createObjectURL(event.target.files[0]) ||
-      "/img/placeholder-profile.png";
+      "./public/img/placeholder-profile.png";
     let fileName = file.name;
     firebase.auth().onAuthStateChanged((user) => {
       // Check if user is signed in:

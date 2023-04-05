@@ -1,4 +1,4 @@
-import { onAuthChanged } from "/js/app/firebase.js";
+import { onAuthChanged } from "./firebase.js";
 var storageRef = storage.ref();
 
 // Uploads image on Firebase and returns response.

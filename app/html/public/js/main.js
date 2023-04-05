@@ -16,7 +16,7 @@ function insertNameFromFirestore() {
           var image = document.getElementById("profile-image");
           image.setAttribute(
             "src",
-            userPicURL || "/img/placeholder-profile.png"
+            userPicURL || "./public/img/placeholder-profile.png"
           );
         }
       });

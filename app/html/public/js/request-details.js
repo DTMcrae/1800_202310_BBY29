@@ -79,7 +79,7 @@ firebase.auth().onAuthStateChanged((user) => {
                   ) {
                     acceptButton.setAttribute(
                       "href",
-                      "/html/chatroom.html?docID=" + chatroom.id
+                      "./chatroom.html?docID=" + chatroom.id
                     );
                     return;
                   }
@@ -142,7 +142,7 @@ function displayRequestInfo() {
           if (!!requestee.pfpURL) {
             document
               .getElementById("profile-image")
-              ?.setAttribute("src", requestee.pfpURL || "/img/default.png");
+              ?.setAttribute("src", requestee.pfpURL || "./public/img/default.png");
           }
         });
 
@@ -315,7 +315,7 @@ const onClickDelete = async () => {
       message: "Deleted",
       onShow: () => {
         setTimeout(() => {
-          window.location.href = `/main`;
+          window.location.href = `./main.html`;
         }, 1200);
       },
     });
@@ -431,7 +431,7 @@ async function AcceptRequest(userid, requestid) {
             sender: "",
             time: new Date().toLocaleString(),
           });
-          window.location.assign("/html/chatroom.html?docID=" + chatdoc.id);
+          window.location.assign("./chatroom.html?docID=" + chatdoc.id);
         });
     });
 }

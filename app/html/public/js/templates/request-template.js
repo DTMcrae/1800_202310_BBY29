@@ -19,7 +19,7 @@ export const createRequestTemplate = ({
   box.innerHTML = `
   <a 
     href="${status !== REQUEST_STATUS.ACTIVE 
-            ? "#none" : "/html/request-details.html?docID=" 
+            ? "#none" : "request-details.html?docID=" 
             + (requestId || docID)}"
     class="card request request-long requestPlaceholder request-${status}"
   >

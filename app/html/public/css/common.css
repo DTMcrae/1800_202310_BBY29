@@ -1,21 +1,21 @@
 /* fonts */
 @font-face {
   font-family: 'Open Sans';
-  src: url("/font/OpenSans/OpenSans-Regular.ttf");
+  src: url("../font/OpenSans/OpenSans-Regular.ttf");
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url("/font/OpenSans/OpenSans-Medium.ttf");
+  src: url("../font/OpenSans/OpenSans-Medium.ttf");
   font-style: normal;
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url("/font/OpenSans/OpenSans-Bold.ttf");
+  src: url("../font/OpenSans/OpenSans-Bold.ttf");
   font-style: normal;
   font-weight: 700;
 }

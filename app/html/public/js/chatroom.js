@@ -23,10 +23,10 @@ firebase.auth().onAuthStateChanged((user) => {
             { merge: true }
           );
 
-        $("#sent-template").load("/html/templates/sent-template.html"); //Load the template file
+        $("#sent-template").load("./templates/sent-template.html"); //Load the template file
         let sentTemplate = document.getElementById("sent-template"); //Load the request card template
 
-        $("#received-template").load("/html/templates/received-template.html"); //Load the template file
+        $("#received-template").load("./templates/received-template.html"); //Load the template file
         let receivedTemplate = document.getElementById("received-template"); //Load the request card template
 
         var recipientID = doc.data().userID[0];
@@ -150,7 +150,7 @@ async function UpdateHeader(doc, recipientid, userid) {
     .querySelector(".request-link")
     .setAttribute(
       "onclick",
-      'OpenDetailPage("/html/request-details.html?docID=' +
+      'OpenDetailPage("./request-details.html?docID=' +
         doc.data().requestID +
         '")'
     );
@@ -220,7 +220,7 @@ async function LeaveRoom(userID) {
       }
     });
 
-  window.location.assign("/html/chat.html");
+  window.location.assign("./chat.html");
 }
 
 function SubmitMessage(userID) {

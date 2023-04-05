@@ -1,7 +1,7 @@
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) return;
 
-  $("#chat-template").load("/html/templates/chatroom-template.html"); //Load the template file
+  $("#chat-template").load("./templates/chatroom-template.html"); //Load the template file
   let cardTemplate = document.getElementById("chat-template"); //Load the request card template
   var userid = user.uid;
   try {
@@ -62,13 +62,13 @@ async function SetLocalData(doc, userid) {
           );
           sessionStorage.setItem(
             "image" + docID,
-            requestDoc.data().images?.[0] || "/img/default.png"
+            requestDoc.data().images?.[0] || "./public/img/default.png"
           );
         } else {
           sessionStorage.setItem("requestName" + docID, "Request Closed");
           sessionStorage.setItem("location" + docID, " ");
           sessionStorage.setItem("category" + docID, " ");
-          sessionStorage.setItem("image" + docID, "/img/default.png");
+          sessionStorage.setItem("image" + docID, "./public/img/default.png");
         }
       });
   } catch (e) {
@@ -76,7 +76,7 @@ async function SetLocalData(doc, userid) {
     sessionStorage.setItem("requestName" + docID, "Request Closed");
     sessionStorage.setItem("location" + docID, " ");
     sessionStorage.setItem("category" + docID, " ");
-    sessionStorage.setItem("image" + docID, "/img/default.png");
+    sessionStorage.setItem("image" + docID, "./public/img/default.png");
   }
 
   //Get the required user information from the database
@@ -113,9 +113,7 @@ async function SetLocalData(doc, userid) {
         );
       });
   } catch (e) {
-    console.error(e);
-    sessionStorage.setItem("latestMessage" + docID, "No Messages");
-    sessionStorage.setItem("latestMessageTime" + docID, " ");
+    console.log("Unable to find messages.");
   }
 }
 
@@ -149,7 +147,7 @@ async function CreateNode(doc, userid, cardTemplate) {
       "Category: " + sessionStorage.getItem("category" + docID);
     newcard.querySelector(".latest-message-time").innerHTML =
       sessionStorage.getItem("latestMessageTime" + docID);
-    newcard.querySelector("a").href = "/html/chatroom.html?docID=" + doc.id;
+    newcard.querySelector("a").href = "./chatroom.html?docID=" + doc.id;
 
     //attach to gallery
     document.getElementById("chatrooms-go-here").appendChild(newcard);
@@ -176,7 +174,7 @@ async function CreateNode(doc, userid, cardTemplate) {
         }
       });
   } catch (e) {
-    console.error(e);
+    console.log("Unable to find latest message.");
   }
 }
 

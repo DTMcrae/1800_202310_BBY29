@@ -25,7 +25,7 @@ var uiConfig = {
             firebase
               .auth()
               .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-            window.location.assign("main"); //re-direct to main.html after signup
+            window.location.assign("main.html"); //re-direct to main.html after signup
           })
           .catch(function (error) {
             console.error("Error adding new user: " + error);
@@ -44,7 +44,7 @@ var uiConfig = {
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: "popup",
-  signInSuccessUrl: "main",
+  signInSuccessUrl: "main.html",
   signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
   // Terms of service url.
   tosUrl: "<your-tos-url>",

@@ -1,4 +1,4 @@
-import { createRequestTemplate } from "/js/templates/request-template.js";
+import { createRequestTemplate } from "./templates/request-template.js";
 
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) return;

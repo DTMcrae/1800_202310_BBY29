@@ -217,7 +217,7 @@ const submitPost = async (data, requestType) => {
   showSuccessModal({
     onShow: () => {
       setTimeout(() => {
-        window.location.href = `/request-details?docID=${docID}`;
+        window.location.href = `request-details.html?docID=${docID}`;
       }, 1200);
     },
   });

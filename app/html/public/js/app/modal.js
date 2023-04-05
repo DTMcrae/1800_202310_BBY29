@@ -13,7 +13,7 @@ const createSuccessModal = (message) => {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="img">
-            <img src="/img/complete.png" />
+            <img src="./public/img/complete.png" />
           </div>
           <p class="msg">${message || 'Complete'}</p>
         </div>
