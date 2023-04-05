@@ -32,7 +32,7 @@ or
 ```
 node server.js
 ```
-2. open 8000 server in your browser
+2. open 8000 server in your browser (localhost:8000 for Windows)
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:

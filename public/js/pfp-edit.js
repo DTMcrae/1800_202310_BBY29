@@ -5,11 +5,12 @@ var currentUser;
 var loadFile = function (event) {
   var image = document.getElementById("profile-image");
   file = event.target.files[0];
-
+ console.log(file);
   if (
     (file !== undefined && file.type === "image/jpeg") ||
     file.type === "image/jpg" ||
-    file.type === "image/png"
+    file.type === "image/png" ||
+    file.type === "image/gif" 
   ) {
     image.src =
       URL.createObjectURL(event.target.files[0]) ||
