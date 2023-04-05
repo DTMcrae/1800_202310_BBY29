@@ -5,7 +5,7 @@ var currentUser;
 var loadFile = function (event) {
   var image = document.getElementById("profile-image");
   file = event.target.files[0];
- console.log(file);
+
   if (
     (file !== undefined && file.type === "image/jpeg") ||
     file.type === "image/jpg" ||
