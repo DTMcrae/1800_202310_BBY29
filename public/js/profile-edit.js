@@ -46,12 +46,13 @@ var btn = document.getElementById("save-changes");
 btn.addEventListener("click", saveUserInfoAndRedirect);
 
 function saveUserInfoAndRedirect() {
-  //enter code here
+
+  //Regex for name, email, phone, location are declared here
   var nameReg = /^[A-Za-z',-]+$/;
   var emailReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
   var phoneReg = /^([0-9]{3})+\-([0-9]{3})+\-([0-9]{4})$/;
   var locationReg = /^[A-Za-z0-9',-\s]+$/;
-  //a) get user entered values
+  // get user entered values
   let userFirstName = document.getElementById("first-name").value;
   let userLastName = document.getElementById("last-name").value;
   let userEmail = document.getElementById("email").value;
@@ -64,6 +65,9 @@ function saveUserInfoAndRedirect() {
   var phoneValid = true;
   var locationValid = true;
 
+  //Validates user input for each field in profile-edit
+  // If condition is not met, boolean is set to false and border of field
+  // is set to red
   if (userFirstName.length < 2) {
     document.getElementById("first-name").style.borderColor = "red";
     document.getElementById("first-name-error").innerHTML =
@@ -126,7 +130,7 @@ function saveUserInfoAndRedirect() {
   } else {
     document.getElementById("location").style.borderColor = "green";
   }
-
+// If any of the conditions are not met, the data will not be submitted
   if (
     !firstNameValid ||
     !lastNameValid ||

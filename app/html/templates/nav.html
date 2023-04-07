@@ -35,11 +35,18 @@
 
 <script>
   function currentPage() {
+
+    //grabs an array containing all anchor elements inside the element with id 'navigation'
     var navLinks = document.getElementById('navigation').getElementsByTagName('a');
+
+    //Current is set to -1 so no buttons are highlighted by default
     let current = -1;
+
+    //Each anchor element is cycled through to see which button is to be highlighted
     for (var i = 0; i < navLinks.length; i++) {
       if (navLinks[i].pathname === window.location.pathname) {
         current = i;
+        //Basic if functions that highlight button corresponding to these pages
       } else if (window.location.pathname === '/post-help' || window.location.pathname === '/post-volunteer') {
         current = 1;
       } else if (window.location.href.indexOf('request-details') > -1) {
@@ -48,6 +55,7 @@
         current = 3;
       }
     }
+    //Adds the class to the page that the user is currently on.
     navLinks[current].className = 'current-page';
   }
   currentPage();

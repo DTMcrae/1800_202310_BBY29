@@ -6,12 +6,14 @@ var loadFile = function (event) {
   var image = document.getElementById("profile-image");
   file = event.target.files[0];
 
+  //Validates the file type being uploaded
   if (
     (file !== undefined && file.type === "image/jpeg") ||
     file.type === "image/jpg" ||
     file.type === "image/png" ||
     file.type === "image/gif" 
   ) {
+    //Changes the current image to uploaded image
     image.src =
       URL.createObjectURL(event.target.files[0]) ||
       "/img/placeholder-profile.png";

@@ -1,5 +1,7 @@
 function addressAutocomplete(containerElement, callback, options) {
+  //Minimum characters in the address field to trigger autocomplete
   const MIN_ADDRESS_LENGTH = 6;
+  //Delay after a user stops typing before the autocomplete appears
   const DEBOUNCE_DELAY = 300;
 
   // create container for input element
